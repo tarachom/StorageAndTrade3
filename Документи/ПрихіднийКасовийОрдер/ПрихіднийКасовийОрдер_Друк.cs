@@ -18,9 +18,9 @@ namespace StorageAndTrade
 {
     static class ПрихіднийКасовийОрдер_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            ПрихіднийКасовийОрдер_Objest? Обєкт = await new ПрихіднийКасовийОрдер_Pointer(unigueID).GetDocumentObject();
+            ПрихіднийКасовийОрдер_Objest? Обєкт = await new ПрихіднийКасовийОрдер_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 await Обєкт.Організація.GetPresentation();

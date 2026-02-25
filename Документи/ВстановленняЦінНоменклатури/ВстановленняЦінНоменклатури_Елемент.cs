@@ -145,7 +145,7 @@ namespace StorageAndTrade
                 bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UniqueID);
 
                 return isSpend;
             }
@@ -156,14 +156,14 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ВстановленняЦінНоменклатури_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ВстановленняЦінНоменклатури_Pointer(uniqueID));
         }
 
-        protected override async ValueTask InJournal(UnigueID unigueID)
+        protected override async ValueTask InJournal(UniqueID uniqueID)
         {
-            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури() { SelectPointerItem = unigueID };
+            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури() { SelectPointerItem = uniqueID };
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ВстановленняЦінНоменклатури_Const.FULLNAME, () => page);
             await page.SetValue();
         }

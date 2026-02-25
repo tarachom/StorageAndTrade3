@@ -17,9 +17,9 @@ namespace StorageAndTrade
 {
     static class ВнутрішнєСпоживанняТоварів_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            ВнутрішнєСпоживанняТоварів_Objest? Обєкт = await new ВнутрішнєСпоживанняТоварів_Pointer(unigueID).GetDocumentObject();
+            ВнутрішнєСпоживанняТоварів_Objest? Обєкт = await new ВнутрішнєСпоживанняТоварів_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 await Обєкт.Організація.GetPresentation();

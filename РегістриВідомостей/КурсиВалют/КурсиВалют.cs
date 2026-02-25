@@ -33,10 +33,10 @@ namespace StorageAndTrade.РегістриВідомостей
         {
             ТабличніСписки.КурсиВалют_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
+            if (!ВалютаВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.КурсиВалют_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UnigueID.UGuid));
+                    new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UniqueID.UGuid));
             }
 
             await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
@@ -46,10 +46,10 @@ namespace StorageAndTrade.РегістриВідомостей
         {
             ТабличніСписки.КурсиВалют_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
+            if (!ВалютаВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.КурсиВалют_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UnigueID.UGuid));
+                    new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UniqueID.UGuid));
             }
 
             //period
@@ -64,7 +64,7 @@ namespace StorageAndTrade.РегістриВідомостей
             await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
             КурсиВалют_Елемент page = new КурсиВалют_Елемент
             {
@@ -73,7 +73,7 @@ namespace StorageAndTrade.РегістриВідомостей
 
             if (IsNew)
                 page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;
@@ -84,24 +84,24 @@ namespace StorageAndTrade.РегістриВідомостей
             page.SetValue();
         }
 
-        protected override async ValueTask Delete(UnigueID unigueID)
+        protected override async ValueTask Delete(UniqueID uniqueID)
         {
             КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-            if (await КурсиВалют_Objest.Read(unigueID))
+            if (await КурсиВалют_Objest.Read(uniqueID))
                 await КурсиВалют_Objest.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
             КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-            if (await КурсиВалют_Objest.Read(unigueID))
+            if (await КурсиВалют_Objest.Read(uniqueID))
             {
                 КурсиВалют_Objest КурсиВалют_Objest_Новий = КурсиВалют_Objest.Copy();
                 await КурсиВалют_Objest_Новий.Save();
 
-                return КурсиВалют_Objest_Новий.UnigueID;
+                return КурсиВалют_Objest_Новий.UniqueID;
             }
             else
             {

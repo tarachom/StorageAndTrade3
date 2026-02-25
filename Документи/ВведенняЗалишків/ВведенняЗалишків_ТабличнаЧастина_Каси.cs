@@ -219,14 +219,14 @@ namespace StorageAndTrade
                     {
                         Каси_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Каса.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Каса.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Каса = new Каси_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Каса(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {

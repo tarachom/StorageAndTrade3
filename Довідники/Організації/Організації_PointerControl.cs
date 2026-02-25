@@ -47,9 +47,9 @@ namespace StorageAndTrade
             Організації_ШвидкийВибір page = new Організації_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new Організації_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

@@ -42,7 +42,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Товари на складах", treeView);
 
                             ТабличніСписки.ТовариНаСкладах_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.ТовариНаСкладах_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.ТовариНаСкладах_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.ТовариНаСкладах_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Партії товарів", treeView);
 
                             ТабличніСписки.ПартіїТоварів_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.ПартіїТоварів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.ПартіїТоварів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.ПартіїТоварів_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -62,7 +62,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Замовлення клієнтів", treeView);
 
                             ТабличніСписки.ЗамовленняКлієнтів_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.ЗамовленняКлієнтів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.ЗамовленняКлієнтів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.ЗамовленняКлієнтів_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -72,7 +72,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Розрахунки з клієнтами", treeView);
 
                             ТабличніСписки.РозрахункиЗКлієнтами_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.РозрахункиЗКлієнтами_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.РозрахункиЗКлієнтами_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.РозрахункиЗКлієнтами_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -82,7 +82,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Вільні залишки", treeView);
 
                             ТабличніСписки.ВільніЗалишки_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.ВільніЗалишки_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.ВільніЗалишки_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.ВільніЗалишки_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -92,7 +92,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Замовлення постачальникам", treeView);
 
                             ТабличніСписки.ЗамовленняПостачальникам_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.ЗамовленняПостачальникам_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.ЗамовленняПостачальникам_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.ЗамовленняПостачальникам_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -102,7 +102,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Розрахунки з постачальниками", treeView);
 
                             ТабличніСписки.РозрахункиЗПостачальниками_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.РозрахункиЗПостачальниками_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.РозрахункиЗПостачальниками_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.РозрахункиЗПостачальниками_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -112,7 +112,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Рух коштів", treeView);
 
                             ТабличніСписки.РухКоштів_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.РухКоштів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.РухКоштів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.РухКоштів_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -122,7 +122,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Рух коштів ККМ", treeView);
 
                             ТабличніСписки.РухКоштівККМ_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.РухКоштівККМ_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.РухКоштівККМ_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.РухКоштівККМ_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -132,7 +132,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Закупівлі", treeView);
 
                             ТабличніСписки.Закупівлі_Записи.AddColumns(treeView, ["period", "owner", "income"]);
-                            ТабличніСписки.Закупівлі_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.Закупівлі_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.Закупівлі_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -142,7 +142,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Продажі", treeView);
 
                             ТабличніСписки.Продажі_Записи.AddColumns(treeView, ["period", "owner", "income"]);
-                            ТабличніСписки.Продажі_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.Продажі_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.Продажі_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
@@ -152,7 +152,7 @@ namespace StorageAndTrade
                             ДодатиБлокНаФорму("Товари в комірках", treeView);
 
                             ТабличніСписки.ТовариВКомірках_Записи.AddColumns(treeView, ["period", "owner"]);
-                            ТабличніСписки.ТовариВКомірках_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            ТабличніСписки.ТовариВКомірках_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UniqueID.UGuid);
                             await ТабличніСписки.ТовариВКомірках_Записи.LoadRecords(treeView, null, false, false);
 
                             break;

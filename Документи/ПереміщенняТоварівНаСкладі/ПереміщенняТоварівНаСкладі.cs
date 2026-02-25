@@ -56,24 +56,24 @@ namespace StorageAndTrade
             ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ПереміщенняТоварівНаСкладі_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+            await ПереміщенняТоварівНаСкладі_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ПереміщенняТоварівНаСкладі_Функції.SetDeletionLabel(unigueID);
+            await ПереміщенняТоварівНаСкладі_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await ПереміщенняТоварівНаСкладі_Функції.Copy(unigueID);
+            return await ПереміщенняТоварівНаСкладі_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ПереміщенняТоварівНаСкладі_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ПереміщенняТоварівНаСкладі_Pointer(uniqueID).GetBasis());
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ПереміщенняТоварівНаСкладі";
@@ -90,28 +90,28 @@ namespace StorageAndTrade
             await BeforeLoadRecords();
         }
 
-        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
         {
-            ПереміщенняТоварівНаСкладі_Objest? Обєкт = await new ПереміщенняТоварівНаСкладі_Pointer(unigueID).GetDocumentObject(true);
+            ПереміщенняТоварівНаСкладі_Objest? Обєкт = await new ПереміщенняТоварівНаСкладі_Pointer(uniqueID).GetDocumentObject(true);
             if (Обєкт == null) return;
 
             if (spendDoc)
             {
                 if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
             }
             else
                 await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПереміщенняТоварівНаСкладі_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПереміщенняТоварівНаСкладі_Pointer(uniqueID));
         }
 
-        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportXML(UniqueID uniqueID, string pathToFolder)
         {
-            ПереміщенняТоварівНаСкладі_Pointer Вказівник = new ПереміщенняТоварівНаСкладі_Pointer(unigueID);
+            ПереміщенняТоварівНаСкладі_Pointer Вказівник = new ПереміщенняТоварівНаСкладі_Pointer(uniqueID);
             await Вказівник.GetPresentation();
 
             await ПереміщенняТоварівНаСкладі_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));

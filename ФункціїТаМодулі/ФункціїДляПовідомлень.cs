@@ -17,7 +17,7 @@ namespace StorageAndTrade
         public static async void ДодатиПовідомлення(UuidAndText? basis, string НазваОбєкту, Exception exception)
         {
             await Config.Kernel.MessageErrorAdd("Запис", basis?.Uuid, basis?.Text, НазваОбєкту, exception.Message);
-            ПоказатиПовідомлення(basis?.UnigueID());
+            ПоказатиПовідомлення(basis?.UniqueID());
         }
 
         public static async void ДодатиІнформаційнеПовідомлення(UuidAndText? basis, string НазваОбєкту, string Повідомлення)
@@ -33,7 +33,7 @@ namespace StorageAndTrade
             await page.LoadRecords();
         }
 
-        public static async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
+        public static async void ПоказатиПовідомлення(UniqueID? ВідбірПоОбєкту = null, int? limit = null)
         {
             СпільніФорми_ВивідПовідомленняПроПомилки page = new();
 

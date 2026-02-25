@@ -33,9 +33,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ЗбереженіЗвіти_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!Власник.Pointer.UnigueID.IsEmpty())
+            if (!Власник.Pointer.UniqueID.IsEmpty())
                 ТабличніСписки.ЗбереженіЗвіти_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ЗбереженіЗвіти_Const.Користувач, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
+                    new Where(ЗбереженіЗвіти_Const.Користувач, Comparison.EQ, Власник.Pointer.UniqueID.UGuid));
 
             await ТабличніСписки.ЗбереженіЗвіти_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
@@ -44,9 +44,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ЗбереженіЗвіти_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!Власник.Pointer.UnigueID.IsEmpty())
+            if (!Власник.Pointer.UniqueID.IsEmpty())
                 ТабличніСписки.ЗбереженіЗвіти_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ЗбереженіЗвіти_Const.Користувач, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
+                    new Where(ЗбереженіЗвіти_Const.Користувач, Comparison.EQ, Власник.Pointer.UniqueID.UGuid));
 
             //Відбори
             ТабличніСписки.ЗбереженіЗвіти_Записи.ДодатиВідбір(TreeViewGrid, ЗбереженіЗвіти_Функції.Відбори(searchText));
@@ -69,24 +69,24 @@ namespace StorageAndTrade
             ТабличніСписки.ЗбереженіЗвіти_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ЗбереженіЗвіти_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            await ЗбереженіЗвіти_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, null);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ЗбереженіЗвіти_Функції.SetDeletionLabel(unigueID);
+            await ЗбереженіЗвіти_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await ЗбереженіЗвіти_Функції.Copy(unigueID);
+            return await ЗбереженіЗвіти_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ЗбереженіЗвіти_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ЗбереженіЗвіти_Pointer(uniqueID).GetBasis());
         }
 
         protected override async ValueTask BeforeSetValue()

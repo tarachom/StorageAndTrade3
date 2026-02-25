@@ -49,9 +49,9 @@ namespace StorageAndTrade
             ЗбереженіЗвіти_ШвидкийВибір page = new ЗбереженіЗвіти_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new ЗбереженіЗвіти_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

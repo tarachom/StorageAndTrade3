@@ -31,10 +31,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
+            if (!КонтрагентВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
-                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
+                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UniqueID.UGuid));
             }
 
             await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
@@ -44,10 +44,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
+            if (!КонтрагентВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
-                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
+                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UniqueID.UGuid));
             }
 
             //Відбори
@@ -56,7 +56,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageList(UniqueID? uniqueID = null)
         {
             ДоговориКонтрагентів page = new ДоговориКонтрагентів()
             {
@@ -73,7 +73,7 @@ namespace StorageAndTrade
             await page.SetValue();
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
             ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
             {
@@ -85,7 +85,7 @@ namespace StorageAndTrade
                 await page.Елемент.New();
                 page.КонтрагентиДляНового = КонтрагентВласник.Pointer;
             }
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;
@@ -96,9 +96,9 @@ namespace StorageAndTrade
             page.SetValue();
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ДоговориКонтрагентів_Функції.SetDeletionLabel(unigueID);
+            await ДоговориКонтрагентів_Функції.SetDeletionLabel(uniqueID);
 
         }
     }

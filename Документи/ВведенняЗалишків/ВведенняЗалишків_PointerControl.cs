@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             ВведенняЗалишків page = new ВведенняЗалишків
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ВведенняЗалишків_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new ВведенняЗалишків_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ВведенняЗалишків_Const.FULLNAME}", () => page);

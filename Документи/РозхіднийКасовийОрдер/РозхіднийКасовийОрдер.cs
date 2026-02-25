@@ -55,24 +55,24 @@ namespace StorageAndTrade
             ТабличніСписки.РозхіднийКасовийОрдер_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await РозхіднийКасовийОрдер_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+            await РозхіднийКасовийОрдер_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await РозхіднийКасовийОрдер_Функції.SetDeletionLabel(unigueID);
+            await РозхіднийКасовийОрдер_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await РозхіднийКасовийОрдер_Функції.Copy(unigueID);
+            return await РозхіднийКасовийОрдер_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new РозхіднийКасовийОрдер_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new РозхіднийКасовийОрдер_Pointer(uniqueID).GetBasis());
         }
 
         const string КлючНалаштуванняКористувача = "Документи.РозхіднийКасовийОрдер";
@@ -89,36 +89,36 @@ namespace StorageAndTrade
             await BeforeLoadRecords();
         }
 
-        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
         {
-            РозхіднийКасовийОрдер_Objest? Обєкт = await new РозхіднийКасовийОрдер_Pointer(unigueID).GetDocumentObject(true);
+            РозхіднийКасовийОрдер_Objest? Обєкт = await new РозхіднийКасовийОрдер_Pointer(uniqueID).GetDocumentObject(true);
             if (Обєкт == null) return;
 
             if (spendDoc)
             {
                 if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
             }
             else
                 await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозхіднийКасовийОрдер_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозхіднийКасовийОрдер_Pointer(uniqueID));
         }
 
-        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportXML(UniqueID uniqueID, string pathToFolder)
         {
-            РозхіднийКасовийОрдер_Pointer Вказівник = new РозхіднийКасовийОрдер_Pointer(unigueID);
+            РозхіднийКасовийОрдер_Pointer Вказівник = new РозхіднийКасовийОрдер_Pointer(uniqueID);
             await Вказівник.GetPresentation();
 
             await РозхіднийКасовийОрдер_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));
         }
 
-        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        protected override async ValueTask PrintingDoc(UniqueID uniqueID)
         {
-            await РозхіднийКасовийОрдер_Друк.PDF(unigueID);
+            await РозхіднийКасовийОрдер_Друк.PDF(uniqueID);
         }
 
         #endregion
@@ -147,9 +147,9 @@ namespace StorageAndTrade
 
         async void НаОснові_РозхіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                РозхіднийКасовийОрдер_Objest? Обєкт = await new РозхіднийКасовийОрдер_Pointer(unigueID).GetDocumentObject(false);
+                РозхіднийКасовийОрдер_Objest? Обєкт = await new РозхіднийКасовийОрдер_Pointer(uniqueID).GetDocumentObject(false);
                 if (Обєкт == null) continue;
 
                 //
@@ -169,15 +169,15 @@ namespace StorageAndTrade
 
                 await Новий.Save();
 
-                await РозхіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UnigueID);
+                await РозхіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 
         async void НаОснові_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                РозхіднийКасовийОрдер_Objest? Обєкт = await new РозхіднийКасовийОрдер_Pointer(unigueID).GetDocumentObject(false);
+                РозхіднийКасовийОрдер_Objest? Обєкт = await new РозхіднийКасовийОрдер_Pointer(uniqueID).GetDocumentObject(false);
                 if (Обєкт == null) continue;
 
                 //
@@ -197,7 +197,7 @@ namespace StorageAndTrade
 
                 await Новий.Save();
 
-                await ПрихіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UnigueID);
+                await ПрихіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 

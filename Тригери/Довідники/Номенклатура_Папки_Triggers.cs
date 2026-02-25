@@ -41,7 +41,7 @@ namespace GeneratedCode.Довідники
                 //Елементи помічаються на видалення
                 {
                     Номенклатура_Select select = new Номенклатура_Select();
-                    select.QuerySelect.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                    select.QuerySelect.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                     select.QuerySelect.Where.Add(new Where(Номенклатура_Const.DELETION_LABEL, Comparison.NOT, true));
                     await select.Select();
 
@@ -57,7 +57,7 @@ namespace GeneratedCode.Довідники
                 //Вкладені папки помічаються на видалення
                 {
                     Номенклатура_Папки_Select select = new Номенклатура_Папки_Select();
-                    select.QuerySelect.Where.Add(new Where(Номенклатура_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                    select.QuerySelect.Where.Add(new Where(Номенклатура_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                     await select.Select();
 
                     while (select.MoveNext())
@@ -77,7 +77,7 @@ namespace GeneratedCode.Довідники
             //Елементи переносяться на верхній рівень
             {
                 Номенклатура_Select select = new Номенклатура_Select();
-                select.QuerySelect.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                select.QuerySelect.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                 await select.Select();
 
                 while (select.MoveNext())
@@ -98,7 +98,7 @@ namespace GeneratedCode.Довідники
             //Вкладені папки видяляються. Для кожної папки буде викликана функція BeforeDelete
             {
                 Номенклатура_Папки_Select select = new Номенклатура_Папки_Select();
-                select.QuerySelect.Where.Add(new Where(Номенклатура_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                select.QuerySelect.Where.Add(new Where(Номенклатура_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                 await select.Select();
 
                 while (select.MoveNext())

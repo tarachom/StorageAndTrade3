@@ -47,9 +47,9 @@ namespace StorageAndTrade
             ВидиЦін_ШвидкийВибір page = new ВидиЦін_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new ВидиЦін_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

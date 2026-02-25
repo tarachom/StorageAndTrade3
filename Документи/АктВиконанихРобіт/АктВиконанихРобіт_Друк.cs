@@ -17,9 +17,9 @@ namespace StorageAndTrade
 {
     static class АктВиконанихРобіт_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(unigueID).GetDocumentObject();
+            АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 await Обєкт.Організація.GetPresentation();

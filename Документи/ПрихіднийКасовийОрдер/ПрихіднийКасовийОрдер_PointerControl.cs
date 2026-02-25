@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПрихіднийКасовийОрдер_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new ПрихіднийКасовийОрдер_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПрихіднийКасовийОрдер_Const.FULLNAME}", () => page);

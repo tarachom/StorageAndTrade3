@@ -41,7 +41,7 @@ namespace StorageAndTrade.РегістриВідомостей
             await ТабличніСписки.ФайлиДокументів_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
             // ФайлиДокументів_Елемент page = new ФайлиДокументів_Елемент
             // {
@@ -51,7 +51,7 @@ namespace StorageAndTrade.РегістриВідомостей
 
             // if (IsNew)
             //     await page.Елемент.New();
-            // else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            // else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
             // {
             //     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
             //     return;
@@ -61,23 +61,23 @@ namespace StorageAndTrade.РегістриВідомостей
             // page.SetValue();
             await ValueTask.FromResult(true);
         }
-        protected override async ValueTask Delete(UnigueID unigueID)
+        protected override async ValueTask Delete(UniqueID uniqueID)
         {
             ФайлиДокументів_Objest Обєкт = new ФайлиДокументів_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(uniqueID))
                 await Обєкт.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
             ФайлиДокументів_Objest Обєкт = new ФайлиДокументів_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(uniqueID))
             {
                 ФайлиДокументів_Objest Новий = Обєкт.Copy();
                 await Новий.Save();
-                return Новий.UnigueID;
+                return Новий.UniqueID;
             }
             else
             {

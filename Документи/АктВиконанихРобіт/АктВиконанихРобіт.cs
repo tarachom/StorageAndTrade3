@@ -56,24 +56,24 @@ namespace StorageAndTrade
             ТабличніСписки.АктВиконанихРобіт_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await АктВиконанихРобіт_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+            await АктВиконанихРобіт_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await АктВиконанихРобіт_Функції.SetDeletionLabel(unigueID);
+            await АктВиконанихРобіт_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await АктВиконанихРобіт_Функції.Copy(unigueID);
+            return await АктВиконанихРобіт_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new АктВиконанихРобіт_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new АктВиконанихРобіт_Pointer(uniqueID).GetBasis());
         }
 
         const string КлючНалаштуванняКористувача = "Документи.АктВиконанихРобіт";
@@ -90,30 +90,30 @@ namespace StorageAndTrade
             await BeforeLoadRecords();
         }
 
-        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
         {
-            АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(unigueID).GetDocumentObject(true);
+            АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(uniqueID).GetDocumentObject(true);
             if (Обєкт == null) return;
 
             if (spendDoc)
             {
                 if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
             }
             else
                 await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new АктВиконанихРобіт_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new АктВиконанихРобіт_Pointer(uniqueID));
         }
 
         protected override bool IsExportXML() { return true; } //Дозволити експорт документу
 
-        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportXML(UniqueID uniqueID, string pathToFolder)
         {
-            АктВиконанихРобіт_Pointer Вказівник = new АктВиконанихРобіт_Pointer(unigueID);
+            АктВиконанихРобіт_Pointer Вказівник = new АктВиконанихРобіт_Pointer(uniqueID);
             await Вказівник.GetPresentation();
             string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml");
 
@@ -123,9 +123,9 @@ namespace StorageAndTrade
 
         protected override bool IsExportExcel() { return true; } //Дозволити експорт документу
 
-        protected override async ValueTask ExportExcel(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportExcel(UniqueID uniqueID, string pathToFolder)
         {
-            АктВиконанихРобіт_Pointer Вказівник = new АктВиконанихРобіт_Pointer(unigueID);
+            АктВиконанихРобіт_Pointer Вказівник = new АктВиконанихРобіт_Pointer(uniqueID);
             await Вказівник.GetPresentation();
             string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xslx");
 
@@ -141,9 +141,9 @@ namespace StorageAndTrade
             ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
         }
 
-        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        protected override async ValueTask PrintingDoc(UniqueID uniqueID)
         {
-            await АктВиконанихРобіт_Друк.PDF(unigueID);
+            await АктВиконанихРобіт_Друк.PDF(uniqueID);
         }
 
         #endregion
@@ -167,9 +167,9 @@ namespace StorageAndTrade
 
         async void НаОснові_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(unigueID).GetDocumentObject(false);
+                АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(uniqueID).GetDocumentObject(false);
                 if (Обєкт == null) continue;
 
                 //
@@ -188,7 +188,7 @@ namespace StorageAndTrade
 
                 await Новий.Save();
 
-                await ПрихіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UnigueID);
+                await ПрихіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
     }

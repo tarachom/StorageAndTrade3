@@ -40,7 +40,7 @@ namespace GeneratedCode.Довідники
             if (label)
             {
                 ДоговориКонтрагентів_Select select = new ДоговориКонтрагентів_Select();
-                select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                 select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.DELETION_LABEL, Comparison.NOT, true));
                 await select.Select();
 

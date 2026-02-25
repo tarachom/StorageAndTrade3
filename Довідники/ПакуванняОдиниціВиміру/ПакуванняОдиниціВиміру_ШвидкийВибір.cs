@@ -36,7 +36,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageList(UniqueID? uniqueID = null)
         {
             ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру()
             {
@@ -50,14 +50,14 @@ namespace StorageAndTrade
             await page.SetValue();
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ПакуванняОдиниціВиміру_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
+            await ПакуванняОдиниціВиміру_Функції.OpenPageElement(IsNew, uniqueID, null, CallBack_OnSelectPointer);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ПакуванняОдиниціВиміру_Функції.SetDeletionLabel(unigueID);
+            await ПакуванняОдиниціВиміру_Функції.SetDeletionLabel(uniqueID);
         }
     }
 }

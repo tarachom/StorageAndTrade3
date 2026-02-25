@@ -49,9 +49,9 @@ namespace StorageAndTrade
             ДоговориКонтрагентів_ШвидкийВибір page = new ДоговориКонтрагентів_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new ДоговориКонтрагентів_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

@@ -42,7 +42,7 @@ namespace StorageAndTrade
             BeforeClickOpenFunc?.Invoke();
             ЧекККМ page = new ЧекККМ
             {
-                DocumentPointerItem = Pointer.UnigueID,
+                DocumentPointerItem = Pointer.UniqueID,
                 CallBack_OnSelectPointer = selectPointer =>
                 {
                     Pointer = new ЧекККМ_Pointer(selectPointer);

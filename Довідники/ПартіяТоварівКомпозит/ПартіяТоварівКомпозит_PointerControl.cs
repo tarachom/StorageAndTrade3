@@ -47,9 +47,9 @@ namespace StorageAndTrade
             ПартіяТоварівКомпозит_ШвидкийВибір page = new ПартіяТоварівКомпозит_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new ПартіяТоварівКомпозит_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

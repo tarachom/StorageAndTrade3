@@ -17,9 +17,9 @@ namespace StorageAndTrade
 {
     static class РахунокФактура_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(unigueID).GetDocumentObject();
+            РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 await Обєкт.Організація.GetPresentation();

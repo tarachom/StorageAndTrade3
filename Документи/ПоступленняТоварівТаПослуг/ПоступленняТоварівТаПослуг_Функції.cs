@@ -29,8 +29,8 @@ namespace StorageAndTrade
             ];
         }
 
-        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null,
-            Action<UnigueID?>? сallBack_LoadRecords = null)
+        public static async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null,
+            Action<UniqueID?>? сallBack_LoadRecords = null)
         {
             ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
             {
@@ -39,7 +39,7 @@ namespace StorageAndTrade
 
             if (IsNew)
                 await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;
@@ -51,24 +51,24 @@ namespace StorageAndTrade
             page.SetValue();
         }
 
-        public static async ValueTask SetDeletionLabel(UnigueID unigueID)
+        public static async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            ПоступленняТоварівТаПослуг_Pointer Вказівник = new(unigueID);
+            ПоступленняТоварівТаПослуг_Pointer Вказівник = new(uniqueID);
             bool? label = await Вказівник.GetDeletionLabel();
             if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
-        public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        public static async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
             ПоступленняТоварівТаПослуг_Objest Обєкт = new ПоступленняТоварівТаПослуг_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(uniqueID))
             {
                 ПоступленняТоварівТаПослуг_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
 
                 await Новий.Товари_TablePart.Save(false); // Таблична частина "Товари"
 
-                return Новий.UnigueID;
+                return Новий.UniqueID;
             }
             else
             {

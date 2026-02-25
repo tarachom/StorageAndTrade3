@@ -56,24 +56,24 @@ namespace StorageAndTrade
             ТабличніСписки.ВстановленняЦінНоменклатури_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ВстановленняЦінНоменклатури_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+            await ВстановленняЦінНоменклатури_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ВстановленняЦінНоменклатури_Функції.SetDeletionLabel(unigueID);
+            await ВстановленняЦінНоменклатури_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await ВстановленняЦінНоменклатури_Функції.Copy(unigueID);
+            return await ВстановленняЦінНоменклатури_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ВстановленняЦінНоменклатури_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ВстановленняЦінНоменклатури_Pointer(uniqueID).GetBasis());
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ВстановленняЦінНоменклатури";
@@ -90,28 +90,28 @@ namespace StorageAndTrade
             await BeforeLoadRecords();
         }
 
-        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
         {
-            ВстановленняЦінНоменклатури_Objest? Обєкт = await new ВстановленняЦінНоменклатури_Pointer(unigueID).GetDocumentObject(true);
+            ВстановленняЦінНоменклатури_Objest? Обєкт = await new ВстановленняЦінНоменклатури_Pointer(uniqueID).GetDocumentObject(true);
             if (Обєкт == null) return;
 
             if (spendDoc)
             {
                 if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
             }
             else
                 await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ВстановленняЦінНоменклатури_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ВстановленняЦінНоменклатури_Pointer(uniqueID));
         }
 
-        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportXML(UniqueID uniqueID, string pathToFolder)
         {
-            ВстановленняЦінНоменклатури_Pointer Вказівник = new ВстановленняЦінНоменклатури_Pointer(unigueID);
+            ВстановленняЦінНоменклатури_Pointer Вказівник = new ВстановленняЦінНоменклатури_Pointer(uniqueID);
             await Вказівник.GetPresentation();
 
             await ВстановленняЦінНоменклатури_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));

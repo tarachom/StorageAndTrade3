@@ -17,9 +17,9 @@ namespace StorageAndTrade
 {
     static class ЗамовленняКлієнта_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            ЗамовленняКлієнта_Objest? Обєкт = await new ЗамовленняКлієнта_Pointer(unigueID).GetDocumentObject();
+            ЗамовленняКлієнта_Objest? Обєкт = await new ЗамовленняКлієнта_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 await Обєкт.Організація.GetPresentation();

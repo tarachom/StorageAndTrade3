@@ -71,8 +71,8 @@ namespace StorageAndTrade
             {
                 if (DirectoryPointerItem != null || SelectPointerItem != null)
                 {
-                    Номенклатура_Objest? Обєкт = await new Номенклатура_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
-                    if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
+                    Номенклатура_Objest? Обєкт = await new Номенклатура_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UniqueID()).GetDirectoryObject();
+                    if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UniqueID;
                 }
 
                 await ДеревоПапок.LoadRecords();
@@ -87,7 +87,7 @@ namespace StorageAndTrade
 
             if (IsHierarchy.Active)
                 ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
+                    new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UniqueID().UGuid));
 
             await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
@@ -117,24 +117,24 @@ namespace StorageAndTrade
             ТабличніСписки.Номенклатура_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await Номенклатура_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            await Номенклатура_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, null);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await Номенклатура_Функції.SetDeletionLabel(unigueID);
+            await Номенклатура_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await Номенклатура_Функції.Copy(unigueID);
+            return await Номенклатура_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new Номенклатура_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new Номенклатура_Pointer(uniqueID).GetBasis());
         }
 
         protected override async ValueTask BeforeSetValue()

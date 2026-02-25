@@ -300,7 +300,7 @@ WHERE
                 isExistParent = true;
 
                 query += $@"
-Довідник_Організації.uid = '{Фільтр.Організація.UnigueID}'
+Довідник_Організації.uid = '{Фільтр.Організація.UniqueID}'
 ";
             }
 
@@ -317,7 +317,7 @@ WHERE
     (
         SELECT uid
         FROM {Склади_Папки_Const.TABLE}
-        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Склади_Папки_Const.TABLE}.uid
         FROM {Склади_Папки_Const.TABLE}
@@ -334,7 +334,7 @@ WHERE
                 isExistParent = true;
 
                 query += $@"
-Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UnigueID.UGuid))}')
+Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -351,7 +351,7 @@ WHERE
     (
         SELECT uid
         FROM {Контрагенти_Папки_Const.TABLE}
-        WHERE {Контрагенти_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Контрагент_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Контрагенти_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Контрагент_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Контрагенти_Папки_Const.TABLE}.uid
         FROM {Контрагенти_Папки_Const.TABLE}
@@ -368,7 +368,7 @@ WHERE
                 isExistParent = true;
 
                 query += $@"
-Довідник_Контрагенти.uid IN ('{string.Join("', '", Фільтр.Контрагент.Select(x => x.UnigueID.UGuid))}')
+Довідник_Контрагенти.uid IN ('{string.Join("', '", Фільтр.Контрагент.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -379,7 +379,7 @@ WHERE
                 isExistParent = true;
 
                 query += $@"
-Довідник_ДоговориКонтрагентів.uid = '{Фільтр.ДоговірКонтрагента.UnigueID}'
+Довідник_ДоговориКонтрагентів.uid = '{Фільтр.ДоговірКонтрагента.UniqueID}'
 ";
             }
 
@@ -396,7 +396,7 @@ WHERE
     (
         SELECT uid
         FROM {Номенклатура_Папки_Const.TABLE}
-        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Номенклатура_Папки_Const.TABLE}.uid
         FROM {Номенклатура_Папки_Const.TABLE}
@@ -413,7 +413,7 @@ WHERE
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UnigueID.UGuid))}')
+Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -424,7 +424,7 @@ WHERE
                 isExistParent = true;
 
                 query += $@"
-Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UnigueID.UGuid))}')
+Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -435,7 +435,7 @@ WHERE
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.{Номенклатура_Const.ВидНоменклатури} = '{Фільтр.ВидНоменклатури.UnigueID}'
+Довідник_Номенклатура.{Номенклатура_Const.ВидНоменклатури} = '{Фільтр.ВидНоменклатури.UniqueID}'
 ";
             }
 

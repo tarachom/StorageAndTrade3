@@ -73,7 +73,7 @@ namespace StorageAndTrade
         {
             //Відбір по користувачу
             Налаштування_TablePart.QuerySelect.Where.Add(
-                new Where(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Користувач, Comparison.EQ, Program.Користувач.UnigueID.UGuid));
+                new Where(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Користувач, Comparison.EQ, Program.Користувач.UniqueID.UGuid));
 
             //Відбір по журналу
             Налаштування_TablePart.QuerySelect.Where.Add(

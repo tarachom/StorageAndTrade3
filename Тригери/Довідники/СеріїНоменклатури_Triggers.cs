@@ -27,7 +27,7 @@ namespace GeneratedCode.Довідники
         {
             СеріїНоменклатури_Select select = new СеріїНоменклатури_Select();
             select.QuerySelect.Where.Add(new Where(СеріїНоменклатури_Const.Номер, Comparison.EQ, ДовідникОбєкт.Номер));
-            select.QuerySelect.Where.Add(new Where("uid", Comparison.NOT, ДовідникОбєкт.UnigueID.UGuid));
+            select.QuerySelect.Where.Add(new Where("uid", Comparison.NOT, ДовідникОбєкт.UniqueID.UGuid));
 
             if (await select.SelectSingle())
             {

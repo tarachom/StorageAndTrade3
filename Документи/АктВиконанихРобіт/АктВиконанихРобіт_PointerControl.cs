@@ -45,8 +45,8 @@ namespace StorageAndTrade
             BeforeClickOpenFunc?.Invoke();
             АктВиконанихРобіт page = new АктВиконанихРобіт
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new АктВиконанихРобіт_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

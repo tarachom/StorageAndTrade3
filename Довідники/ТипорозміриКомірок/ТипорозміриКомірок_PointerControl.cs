@@ -47,9 +47,9 @@ namespace StorageAndTrade
             ТипорозміриКомірок_ШвидкийВибір page = new ТипорозміриКомірок_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new ТипорозміриКомірок_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

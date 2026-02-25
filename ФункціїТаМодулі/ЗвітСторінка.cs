@@ -23,14 +23,14 @@ namespace StorageAndTrade
     {
         public ЗвітСторінка() : base(Config.Kernel) { }
 
-        protected override void ВідкритиДокументВідповідноДоВиду(string name, UnigueID? unigueID, string keyForSetting = "", ФункціїДляДинамічногоВідкриття.TypeForm typeForm = ФункціїДляДинамічногоВідкриття.TypeForm.Journal)
+        protected override void ВідкритиДокументВідповідноДоВиду(string name, UniqueID? uniqueID, string keyForSetting = "", ФункціїДляДинамічногоВідкриття.TypeForm typeForm = ФункціїДляДинамічногоВідкриття.TypeForm.Journal)
         {
-            new ФункціїДляДинамічногоВідкриття().ВідкритиДокументВідповідноДоВиду(name, unigueID, keyForSetting, typeForm);
+            new ФункціїДляДинамічногоВідкриття().ВідкритиДокументВідповідноДоВиду(name, uniqueID, keyForSetting, typeForm);
         }
 
-        protected override void ВідкритиДовідникВідповідноДоВиду(string name, UnigueID? unigueID, ФункціїДляДинамічногоВідкриття.TypeForm typeForm = ФункціїДляДинамічногоВідкриття.TypeForm.Journal)
+        protected override void ВідкритиДовідникВідповідноДоВиду(string name, UniqueID? uniqueID, ФункціїДляДинамічногоВідкриття.TypeForm typeForm = ФункціїДляДинамічногоВідкриття.TypeForm.Journal)
         {
-            new ФункціїДляДинамічногоВідкриття().ВідкритиДовідникВідповідноДоВиду(name, unigueID, typeForm);
+            new ФункціїДляДинамічногоВідкриття().ВідкритиДовідникВідповідноДоВиду(name, uniqueID, typeForm);
         }
 
         protected override async ValueTask ВигрузитиВФайл_PDF(InterfaceGtk3.ЗвітСторінка звіт, (Dictionary<string, PDFColumnsSettings> Settings, List<string[]> Rows) settingsAndRows)

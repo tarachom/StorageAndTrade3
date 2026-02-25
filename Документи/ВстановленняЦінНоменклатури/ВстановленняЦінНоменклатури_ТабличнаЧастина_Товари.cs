@@ -277,14 +277,14 @@ namespace StorageAndTrade
                     {
                         Номенклатура_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Номенклатура.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Номенклатура.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Номенклатура(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -302,14 +302,14 @@ namespace StorageAndTrade
                     {
                         ХарактеристикиНоменклатури_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -337,8 +337,8 @@ namespace StorageAndTrade
                     {
                         ПакуванняОдиниціВиміру_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Пакування.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Пакування.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Пакування(запис);
@@ -351,8 +351,8 @@ namespace StorageAndTrade
                     {
                         ВидиЦін_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.ВидЦіни.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.ВидЦіни.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.ВидЦіни = new ВидиЦін_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_ВидЦіни(запис);
@@ -502,8 +502,8 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
             {
                 Dictionary<string, object> paramQuery = new()
                 {
-                    { "valuta", ЕлементВласник.Валюта.UnigueID.UGuid },
-                    { "vid_cen", ЕлементВласник.ВидЦіни.UnigueID.UGuid }
+                    { "valuta", ЕлементВласник.Валюта.UniqueID.UGuid },
+                    { "vid_cen", ЕлементВласник.ВидЦіни.UniqueID.UGuid }
                 };
 
                 var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
@@ -606,8 +606,8 @@ ORDER BY
             {
                 Dictionary<string, object> paramQuery = new()
                 {
-                    { "valuta", ЕлементВласник.Валюта.UnigueID.UGuid },
-                    { "vid_cen", ЕлементВласник.ВидЦіни.UnigueID.UGuid }
+                    { "valuta", ЕлементВласник.Валюта.UniqueID.UGuid },
+                    { "vid_cen", ЕлементВласник.ВидЦіни.UniqueID.UGuid }
                 };
 
                 var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);

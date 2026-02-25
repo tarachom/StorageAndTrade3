@@ -148,14 +148,14 @@ namespace StorageAndTrade
                     {
                         Файли_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Файл.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Файл.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Файл = new Файли_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Файл(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {

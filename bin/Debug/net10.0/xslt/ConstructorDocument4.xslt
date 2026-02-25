@@ -220,9 +220,9 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
         ];
     }
 
-    public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
-        Action&lt;UnigueID?&gt;? сallBack_LoadRecords = null,
-        Action&lt;UnigueID&gt;? сallBack_OnSelectPointer = null)
+    public static async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null, 
+        Action&lt;UniqueID?&gt;? сallBack_LoadRecords = null,
+        Action&lt;UniqueID&gt;? сallBack_OnSelectPointer = null)
     {
         <xsl:value-of select="$DocumentName"/>_Елемент page = new()
         {
@@ -232,7 +232,7 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
 
         if (IsNew)
             await page.Елемент.New();
-        else if (unigueID == null || !await page.Елемент.Read(unigueID))
+        else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
         {
             Message.Error(Program.BasicApp, Program.BasicForm, "Не вдалось прочитати!");
             return;
@@ -242,11 +242,11 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
         await page.SetValue();
     }
 
-    public static async ValueTask OpenPageList(UnigueID? unigueID = null, Action&lt;UnigueID&gt;? сallBack_OnSelectPointer = null)
+    public static async ValueTask OpenPageList(UniqueID? uniqueID = null, Action&lt;UniqueID&gt;? сallBack_OnSelectPointer = null)
     {
         <xsl:value-of select="$DocumentName"/>_Список page = new()
         {
-            DocumentPointerItem = unigueID,
+            DocumentPointerItem = uniqueID,
             CallBack_OnSelectPointer = сallBack_OnSelectPointer
         };
 
@@ -254,24 +254,24 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
         await page.SetValue();
     }
 
-    public static async ValueTask SetDeletionLabel(UnigueID unigueID)
+    public static async ValueTask SetDeletionLabel(UniqueID uniqueID)
     {
-        <xsl:value-of select="$DocumentName"/>_Pointer Вказівник = new(unigueID);
+        <xsl:value-of select="$DocumentName"/>_Pointer Вказівник = new(uniqueID);
         bool? label = await Вказівник.GetDeletionLabel();
         if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
     }
 
-    public static async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
+    public static async ValueTask&lt;UniqueID?&gt; Copy(UniqueID uniqueID)
     {
         <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new();
-        if (await Обєкт.Read(unigueID))
+        if (await Обєкт.Read(uniqueID))
         {
             <xsl:value-of select="$DocumentName"/>_Objest Новий = await Обєкт.Copy(true);
             await Новий.Save();
             <xsl:for-each select="$TabularParts">
                 await Новий.<xsl:value-of select="Name"/>_TablePart.Save(false); // Таблична частина "<xsl:value-of select="Name"/>"
             </xsl:for-each>
-            return Новий.UnigueID;
+            return Новий.UniqueID;
         }
         else
         {
@@ -615,7 +615,7 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
         if (spendDoc)
         {
             bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
-            //if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
+            //if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UniqueID);
             return isSpend;
         }
         else
@@ -625,14 +625,14 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
         }
     }
 
-    protected override void ReportSpendTheDocument(UnigueID unigueID)
+    protected override void ReportSpendTheDocument(UniqueID uniqueID)
     {
-        CommonForms_DocumentMovementThroughRegisters.Create(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID));
+        CommonForms_DocumentMovementThroughRegisters.Create(new <xsl:value-of select="$DocumentName"/>_Pointer(uniqueID));
     }
 
-    protected override async ValueTask InJournal(UnigueID unigueID)
+    protected override async ValueTask InJournal(UniqueID uniqueID)
     {
-        await Функції.OpenPageList(unigueID);
+        await Функції.OpenPageList(uniqueID);
     }
 }
     </xsl:template>
@@ -697,19 +697,19 @@ public class <xsl:value-of select="$DocumentName"/>_Список : DocumentFormJ
         ТабличнийСписок.CreateFilter(this);
     }
 
-    protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+    protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
     {
-        await Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, CallBack_OnSelectPointer);
+        await Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, CallBack_OnSelectPointer);
     }
 
-    protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+    protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
     {
-        await Функції.SetDeletionLabel(unigueID);
+        await Функції.SetDeletionLabel(uniqueID);
     }
 
-    protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
+    protected override async ValueTask&lt;UniqueID?&gt; Copy(UniqueID uniqueID)
     {
-        return await Функції.Copy(unigueID);
+        return await Функції.Copy(uniqueID);
     }
 
     protected override async ValueTask BeforeSetValue()
@@ -722,18 +722,18 @@ public class <xsl:value-of select="$DocumentName"/>_Список : DocumentFormJ
         ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(FormKey, Period.Period.ToString(), Period.DateStart, Period.DateStop);
     }
 
-    protected override async ValueTask SpendTheDocument(UnigueID[] unigueID, bool spendDoc)
+    protected override async ValueTask SpendTheDocument(UniqueID[] uniqueID, bool spendDoc)
     {
 
     }
 
-    protected override void ReportSpendTheDocument(UnigueID[] unigueID)
+    protected override void ReportSpendTheDocument(UniqueID[] uniqueID)
     {
-        foreach (var uid in unigueID)
+        foreach (var uid in uniqueID)
             CommonForms_DocumentMovementThroughRegisters.Create(new <xsl:value-of select="$DocumentName"/>_Pointer(uid));
     }
 
-    protected override async ValueTask VersionsHistory(UnigueID[] unigueID)
+    protected override async ValueTask VersionsHistory(UniqueID[] uniqueID)
     {
 
     }
@@ -800,24 +800,24 @@ public class <xsl:value-of select="$DocumentName"/>_ШвидкийВибір : D
         ТабличнийСписок.CreateFilter(this);
     }
 
-    protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+    protected override async ValueTask OpenPageList(UniqueID? uniqueID = null)
     {
-        await Функції.OpenPageList(unigueID, CallBack_OnSelectPointer);
+        await Функції.OpenPageList(uniqueID, CallBack_OnSelectPointer);
     }
 
-    protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+    protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
     {
-        await Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, CallBack_OnSelectPointer);
+        await Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, CallBack_OnSelectPointer);
     }
 
-    protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+    protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
     {
-        await Функції.SetDeletionLabel(unigueID);
+        await Функції.SetDeletionLabel(uniqueID);
     }
 
-    protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
+    protected override async ValueTask&lt;UniqueID?&gt; Copy(UniqueID uniqueID)
     {
-        return await Функції.Copy(unigueID);
+        return await Функції.Copy(uniqueID);
     }
 
     protected override async ValueTask BeforeSetValue()
@@ -830,14 +830,14 @@ public class <xsl:value-of select="$DocumentName"/>_ШвидкийВибір : D
         ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(FormKey, Period.Period.ToString(), Period.DateStart, Period.DateStop);
     }
 
-    protected override async ValueTask SpendTheDocument(UnigueID[] unigueID, bool spendDoc)
+    protected override async ValueTask SpendTheDocument(UniqueID[] uniqueID, bool spendDoc)
     {
 
     }
 
-    protected override void ReportSpendTheDocument(UnigueID[] unigueID)
+    protected override void ReportSpendTheDocument(UniqueID[] uniqueID)
     {
-        foreach (var uid in unigueID)
+        foreach (var uid in uniqueID)
             CommonForms_DocumentMovementThroughRegisters.Create(new <xsl:value-of select="$DocumentName"/>_Pointer(uid));
     }
 
@@ -901,7 +901,7 @@ public class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerCont
         <xsl:value-of select="$DocumentName"/>_ШвидкийВибір page = new()
         {
             PopoverParent = popover,
-            DocumentPointerItem = Pointer.UnigueID,
+            DocumentPointerItem = Pointer.UniqueID,
             CallBack_OnSelectPointer = selectPointer =&gt;
             {
                 Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(selectPointer);
@@ -960,9 +960,9 @@ public class <xsl:value-of select="$DocumentName"/>_PointerTablePartCell : Point
 
     public async ValueTask GetPresentation() =&gt; Presentation = pointer != null ? await pointer.GetPresentation() : "";
 
-    async ValueTask PointerChange(UnigueID? p)
+    async ValueTask PointerChange(UniqueID? p)
     {
-        Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(p ?? new UnigueID());
+        Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(p ?? new UniqueID());
         await GetPresentation();
         OnSelect?.Invoke();
     }
@@ -977,7 +977,7 @@ public class <xsl:value-of select="$DocumentName"/>_PointerTablePartCell : Point
         <xsl:value-of select="$DocumentName"/>_ШвидкийВибір page = new()
         {
             PopoverParent = popover,
-            DocumentPointerItem = pointer.UnigueID,
+            DocumentPointerItem = pointer.UniqueID,
             CallBack_OnSelectPointer = async p =&gt; 
             {
                 await PointerChange(p);

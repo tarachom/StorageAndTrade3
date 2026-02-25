@@ -51,8 +51,8 @@ namespace StorageAndTrade
             Каси_ШвидкийВибір page = new Каси_ШвидкийВибір
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                DirectoryPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new Каси_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

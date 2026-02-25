@@ -44,10 +44,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!СкладВласник.Pointer.UnigueID.IsEmpty())
+            if (!СкладВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UniqueID.UGuid));
             }
 
             await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid, SelectPointerItem, DirectoryPointerItem);
@@ -57,10 +57,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!СкладВласник.Pointer.UnigueID.IsEmpty())
+            if (!СкладВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UniqueID.UGuid));
             }
 
             //Відбори
@@ -84,24 +84,24 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіПриміщення_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await СкладськіПриміщення_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            await СкладськіПриміщення_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, null);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await СкладськіПриміщення_Функції.SetDeletionLabel(unigueID);
+            await СкладськіПриміщення_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await СкладськіПриміщення_Функції.Copy(unigueID);
+            return await СкладськіПриміщення_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new СкладськіПриміщення_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new СкладськіПриміщення_Pointer(uniqueID).GetBasis());
         }
 
         protected override async ValueTask BeforeSetValue()

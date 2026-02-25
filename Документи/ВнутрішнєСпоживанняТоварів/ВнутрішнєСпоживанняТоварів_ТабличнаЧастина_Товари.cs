@@ -406,14 +406,14 @@ namespace StorageAndTrade
                     {
                         Номенклатура_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Номенклатура.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Номенклатура.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Номенклатура(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -431,14 +431,14 @@ namespace StorageAndTrade
                     {
                         ХарактеристикиНоменклатури_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -466,14 +466,14 @@ namespace StorageAndTrade
                     {
                         СеріїНоменклатури_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Серія.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Серія.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Серія(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -491,8 +491,8 @@ namespace StorageAndTrade
                     {
                         ПакуванняОдиниціВиміру_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Пакування.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Пакування.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Пакування(запис);
@@ -505,8 +505,8 @@ namespace StorageAndTrade
                     {
                         ПартіяТоварівКомпозит_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Партія.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Партія.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Партія = new ПартіяТоварівКомпозит_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Партія(запис);

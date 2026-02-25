@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПоверненняТоварівПостачальнику_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new ПоверненняТоварівПостачальнику_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПоверненняТоварівПостачальнику_Const.FULLNAME}", () => page);

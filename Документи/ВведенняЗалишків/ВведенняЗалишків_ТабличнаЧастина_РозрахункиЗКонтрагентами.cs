@@ -260,14 +260,14 @@ namespace StorageAndTrade
                     {
                         Контрагенти_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Контрагент.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Контрагент.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Контрагент = new Контрагенти_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Контрагент(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -285,14 +285,14 @@ namespace StorageAndTrade
                     {
                         Валюти_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Валюта.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Валюта.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Валюта = new Валюти_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Валюта(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {

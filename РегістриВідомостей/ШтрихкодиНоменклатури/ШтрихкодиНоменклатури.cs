@@ -47,13 +47,13 @@ namespace StorageAndTrade.РегістриВідомостей
             if (!НоменклатураВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
+                    new Where(ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UniqueID.UGuid));
             }
 
             if (!ХарактеристикиНоменклатуриВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
+                    new Where(ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UniqueID.UGuid));
             }
 
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
@@ -66,13 +66,13 @@ namespace StorageAndTrade.РегістриВідомостей
             if (!НоменклатураВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
+                    new Where(ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UniqueID.UGuid));
             }
 
             if (!ХарактеристикиНоменклатуриВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
+                    new Where(ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UniqueID.UGuid));
             }
 
             //Штрихкод
@@ -82,7 +82,7 @@ namespace StorageAndTrade.РегістриВідомостей
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
             ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
             {
@@ -93,7 +93,7 @@ namespace StorageAndTrade.РегістриВідомостей
 
             if (IsNew)
                 page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;
@@ -103,24 +103,24 @@ namespace StorageAndTrade.РегістриВідомостей
             page.SetValue();
         }
 
-        protected override async ValueTask Delete(UnigueID unigueID)
+        protected override async ValueTask Delete(UniqueID uniqueID)
         {
             ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
-            if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))
+            if (await ШтрихкодиНоменклатури_Objest.Read(uniqueID))
                 await ШтрихкодиНоменклатури_Objest.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
             ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
-            if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))
+            if (await ШтрихкодиНоменклатури_Objest.Read(uniqueID))
             {
                 ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest_Новий = ШтрихкодиНоменклатури_Objest.Copy();
                 await ШтрихкодиНоменклатури_Objest_Новий.Save();
 
-                return ШтрихкодиНоменклатури_Objest_Новий.UnigueID;
+                return ШтрихкодиНоменклатури_Objest_Новий.UniqueID;
             }
             else
             {

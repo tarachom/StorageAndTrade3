@@ -44,8 +44,8 @@ namespace StorageAndTrade
         {
             РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new РозміщенняТоварівНаСкладі_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new РозміщенняТоварівНаСкладі_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {РозміщенняТоварівНаСкладі_Const.FULLNAME}", () => page);

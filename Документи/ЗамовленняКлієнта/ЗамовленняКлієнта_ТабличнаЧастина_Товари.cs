@@ -186,9 +186,9 @@ SELECT
 FROM 
     {ЦіниНоменклатури_Const.TABLE} AS ЦіниНоменклатури
 WHERE
-    ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = '{запис.ВидЦіни.UnigueID}' AND
-    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = '{запис.Номенклатура.UnigueID}' AND
-    ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{запис.ХарактеристикаНоменклатури.UnigueID}'
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = '{запис.ВидЦіни.UniqueID}' AND
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = '{запис.Номенклатура.UniqueID}' AND
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{запис.ХарактеристикаНоменклатури.UniqueID}'
 ORDER BY 
     ЦіниНоменклатури.period DESC 
 LIMIT 1
@@ -481,14 +481,14 @@ LIMIT 1
                     {
                         Номенклатура_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Номенклатура.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Номенклатура.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Номенклатура(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -506,14 +506,14 @@ LIMIT 1
                     {
                         ХарактеристикиНоменклатури_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -541,8 +541,8 @@ LIMIT 1
                     {
                         ПакуванняОдиниціВиміру_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Пакування.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Пакування.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Пакування(запис);
@@ -555,8 +555,8 @@ LIMIT 1
                     {
                         ВидиЦін_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.ВидЦіни.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.ВидЦіни.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.ВидЦіни = new ВидиЦін_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_ВидЦіни(запис);
@@ -569,8 +569,8 @@ LIMIT 1
                     {
                         Склади_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Склад.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Склад.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Склад = new Склади_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Склад(запис);

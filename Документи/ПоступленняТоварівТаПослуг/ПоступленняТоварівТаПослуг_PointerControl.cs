@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПоступленняТоварівТаПослуг_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new ПоступленняТоварівТаПослуг_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => page);

@@ -35,9 +35,9 @@ namespace StorageAndTrade
             new ФункціїДляДинамічногоВідкриття().ВідкритиСписокДокументівДляЖурналу(relative_to, ТабличніСписки.Журнали_Повний.AllowDocument());
         }
 
-        protected override void ErrorSpendTheDocument(UnigueID unigueID)
+        protected override void ErrorSpendTheDocument(UniqueID uniqueID)
         {
-            ФункціїДляПовідомлень.ПоказатиПовідомлення(unigueID);
+            ФункціїДляПовідомлень.ПоказатиПовідомлення(uniqueID);
         }
 
         protected override void ReportSpendTheDocument(DocumentPointer documentPointer)
@@ -45,9 +45,9 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(documentPointer);
         }
 
-        protected override void OpenDoc(string typeDoc, UnigueID unigueID)
+        protected override void OpenDoc(string typeDoc, UniqueID uniqueID)
         {
-            new ФункціїДляДинамічногоВідкриття().ВідкритиДокументВідповідноДоВиду(typeDoc, unigueID);
+            new ФункціїДляДинамічногоВідкриття().ВідкритиДокументВідповідноДоВиду(typeDoc, uniqueID);
         }
 
         const string КлючНалаштуванняКористувача = "Журнали.Повний";

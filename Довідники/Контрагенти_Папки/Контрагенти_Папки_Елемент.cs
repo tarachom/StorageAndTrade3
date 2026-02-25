@@ -42,7 +42,7 @@ namespace StorageAndTrade
             if (IsNew)
                 Елемент.Родич = РодичДляНового;
             else
-                Родич.OpenFolder = Елемент.UnigueID;
+                Родич.OpenFolder = Елемент.UniqueID;
 
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;

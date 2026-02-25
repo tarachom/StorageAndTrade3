@@ -16,9 +16,9 @@ namespace StorageAndTrade
 {
     static class ЧекККМ_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            ЧекККМ_Objest? Обєкт = await new ЧекККМ_Pointer(unigueID).GetDocumentObject();
+            ЧекККМ_Objest? Обєкт = await new ЧекККМ_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 //await Обєкт.Валюта.GetPresentation();

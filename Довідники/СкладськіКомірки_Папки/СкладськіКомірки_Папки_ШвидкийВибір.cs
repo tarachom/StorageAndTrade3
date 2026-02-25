@@ -28,9 +28,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!Власник.Pointer.UnigueID.IsEmpty())
+            if (!Власник.Pointer.UniqueID.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, Власник.Pointer.UniqueID.UGuid));
 
             await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
@@ -39,9 +39,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!Власник.Pointer.UnigueID.IsEmpty())
+            if (!Власник.Pointer.UniqueID.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, Власник.Pointer.UniqueID.UGuid));
 
             //Відбори
             ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid, СкладськіКомірки_Папки_Функції.Відбори(searchText));
@@ -49,7 +49,7 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageList(UniqueID? uniqueID = null)
         {
             СкладськіКомірки_Папки page = new СкладськіКомірки_Папки()
             {
@@ -65,14 +65,14 @@ namespace StorageAndTrade
             await page.SetValue();
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await СкладськіКомірки_Папки_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer, Власник.Pointer);
+            await СкладськіКомірки_Папки_Функції.OpenPageElement(IsNew, uniqueID, null, CallBack_OnSelectPointer, Власник.Pointer);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await СкладськіКомірки_Папки_Функції.SetDeletionLabel(unigueID);
+            await СкладськіКомірки_Папки_Функції.SetDeletionLabel(uniqueID);
         }
     }
 }

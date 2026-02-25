@@ -34,10 +34,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ДоговориКонтрагентів_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
+            if (!КонтрагентВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
+                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UniqueID.UGuid));
             }
 
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
@@ -47,10 +47,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ДоговориКонтрагентів_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
+            if (!КонтрагентВласник.Pointer.UniqueID.IsEmpty())
             {
                 ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
+                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UniqueID.UGuid));
             }
 
             //Відбори
@@ -74,24 +74,24 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ДоговориКонтрагентів_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            await ДоговориКонтрагентів_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, null);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ДоговориКонтрагентів_Функції.SetDeletionLabel(unigueID);
+            await ДоговориКонтрагентів_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await ДоговориКонтрагентів_Функції.Copy(unigueID);
+            return await ДоговориКонтрагентів_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ДоговориКонтрагентів_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ДоговориКонтрагентів_Pointer(uniqueID).GetBasis());
         }
 
         protected override async ValueTask BeforeSetValue()

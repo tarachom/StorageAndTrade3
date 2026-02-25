@@ -53,8 +53,8 @@ namespace StorageAndTrade
             СкладськіПриміщення_ШвидкийВибір page = new СкладськіПриміщення_ШвидкийВибір
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                DirectoryPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new СкладськіПриміщення_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

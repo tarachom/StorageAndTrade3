@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
         void Add(Номенклатура_Папки_Pointer item)
         {            
-            if (!pointers.Exists((Номенклатура_Папки_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
+            if (!pointers.Exists((Номенклатура_Папки_Pointer x) => x.UniqueID.ToString() == item.UniqueID.ToString()))
                 pointers.Add(item);
 
             Pointer = item;
@@ -67,12 +67,12 @@ namespace StorageAndTrade
             Номенклатура_Папки_ШвидкийВибір page = new Номенклатура_Папки_ШвидкийВибір
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                DirectoryPointerItem = pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Add(new Номенклатура_Папки_Pointer(selectPointer));
                 },
-                CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =>
+                CallBack_OnMultipleSelectPointer = (UniqueID[] selectPointers) =>
                 {
                     foreach (var selectPointer in selectPointers)
                         Add(new Номенклатура_Папки_Pointer(selectPointer));
@@ -95,7 +95,7 @@ namespace StorageAndTrade
                 LinkButton linkName = new LinkButton("", await item.GetPresentation()) { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkName.Clicked += (object? sender, EventArgs args) =>
                 {
-                    if (Pointer.UnigueID.ToString() != item.UnigueID.ToString())
+                    if (Pointer.UniqueID.ToString() != item.UniqueID.ToString())
                         Pointer = item;
                 };
 
@@ -108,7 +108,7 @@ namespace StorageAndTrade
                     pointers.Remove(item);
                     listBox.Remove(listBoxRow);
 
-                    if (Pointer.UnigueID.ToString() == item.UnigueID.ToString())
+                    if (Pointer.UniqueID.ToString() == item.UniqueID.ToString())
                         Pointer = pointers.Count > 0 ? pointers[0] : new Номенклатура_Папки_Pointer();
                     else
                         PointerChanged?.Invoke(null, pointer);

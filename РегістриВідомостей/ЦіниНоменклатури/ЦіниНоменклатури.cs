@@ -47,7 +47,7 @@ namespace StorageAndTrade.РегістриВідомостей
             await ТабличніСписки.ЦіниНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
             ЦіниНоменклатури_Елемент page = new ЦіниНоменклатури_Елемент
             {
@@ -56,7 +56,7 @@ namespace StorageAndTrade.РегістриВідомостей
 
             if (IsNew)
                 page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;
@@ -66,23 +66,23 @@ namespace StorageAndTrade.РегістриВідомостей
             page.SetValue();
         }
 
-        protected override async ValueTask Delete(UnigueID unigueID)
+        protected override async ValueTask Delete(UniqueID uniqueID)
         {
             ЦіниНоменклатури_Objest ЦіниНоменклатури_Objest = new ЦіниНоменклатури_Objest();
-            if (await ЦіниНоменклатури_Objest.Read(unigueID))
+            if (await ЦіниНоменклатури_Objest.Read(uniqueID))
                 await ЦіниНоменклатури_Objest.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
             ЦіниНоменклатури_Objest ЦіниНоменклатури_Objest = new ЦіниНоменклатури_Objest();
-            if (await ЦіниНоменклатури_Objest.Read(unigueID))
+            if (await ЦіниНоменклатури_Objest.Read(uniqueID))
             {
                 ЦіниНоменклатури_Objest ЦіниНоменклатури_Objest_Новий = ЦіниНоменклатури_Objest.Copy();
                 await ЦіниНоменклатури_Objest_Новий.Save();
-                return ЦіниНоменклатури_Objest_Новий.UnigueID;
+                return ЦіниНоменклатури_Objest_Новий.UniqueID;
             }
             else
             {

@@ -171,7 +171,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                     </xsl:when>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "", AfterSelectFunc = () =&gt; sw.Active = true };
-                        object get() =&gt; <xsl:value-of select="Name"/>.Pointer.UnigueID.UGuid;
+                        object get() =&gt; <xsl:value-of select="Name"/>.Pointer.UniqueID.UGuid;
                     </xsl:when>
                     <xsl:when test="Type = 'enum'">
                         ComboBoxText <xsl:value-of select="Name"/> = new();
@@ -266,7 +266,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                         Dictionary&lt;string, object&gt; Fields = current.Fields;
                         <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
                         {
-                            ID = current.UnigueID.ToString(),
+                            ID = current.UniqueID.ToString(),
                             DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                             <xsl:for-each select="Fields/Field">
                             <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
@@ -290,18 +290,18 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                                 <xsl:value-of select="Name"/> = Fields["<xsl:value-of select="Name"/>"].ToString() ?? "",
                             </xsl:for-each>
                         };
-                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UniqueID.UGuid];
                         Store.SetValues(Iter, Record.ToArray());
                     }
                 }
             }
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
-          UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? openFolder = null, 
+          UniqueID? selectPointerItem = null, UniqueID? directoryPointerItem = null)
         {
             TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
-            UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
+            UniqueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             <xsl:value-of select="$StoreType"/> Store = (<xsl:value-of select="$StoreType"/>)treeView.Model;
             
             Довідники.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$SelectType"/><xsl:text> </xsl:text><xsl:value-of select="$DirectoryName"/>_Select = new Довідники.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$SelectType"/>();
@@ -390,7 +390,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                     Dictionary&lt;string, object&gt; Fields = current.Fields;
                     <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
                     {
-                        ID = current.UnigueID.ToString(),
+                        ID = current.UniqueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         <xsl:for-each select="Fields/Field">
                           <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
@@ -542,7 +542,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                     </xsl:when>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "", AfterSelectFunc = () =&gt; sw.Active = true };
-                        object get() =&gt; <xsl:value-of select="Name"/>.Pointer.UnigueID.UGuid;
+                        object get() =&gt; <xsl:value-of select="Name"/>.Pointer.UniqueID.UGuid;
                     </xsl:when>
                     <xsl:when test="Type = 'enum'">
                         ComboBoxText <xsl:value-of select="Name"/> = new();
@@ -633,7 +633,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                         Dictionary&lt;string, object&gt; Fields = current.Fields;
                         <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
                         {
-                            ID = current.UnigueID.ToString(),
+                            ID = current.UniqueID.ToString(),
                             Spend = (bool)Fields["spend"], /*Проведений документ*/
                             DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                             <xsl:for-each select="Fields/Field">
@@ -655,17 +655,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                             </xsl:choose>
                             </xsl:for-each>
                         };
-                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UniqueID.UGuid];
                         Store.SetValues(Iter, Record.ToArray());
                     }
                 }
             }
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, UniqueID? directoryPointerItem = null)
         {
             TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
-            UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
+            UniqueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
             Документи.<xsl:value-of select="$DocumentName"/>_Select <xsl:value-of select="$DocumentName"/>_Select = new Документи.<xsl:value-of select="$DocumentName"/>_Select();
@@ -730,7 +730,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                     Dictionary&lt;string, object&gt; Fields = current.Fields;
                     <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
                     {
-                        ID = current.UnigueID.ToString(),
+                        ID = current.UniqueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         <xsl:for-each select="Fields/Field">
@@ -864,7 +864,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         }
 
         // Завантаження даних
-        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null) 
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null) 
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
@@ -1040,7 +1040,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
@@ -1185,7 +1185,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;

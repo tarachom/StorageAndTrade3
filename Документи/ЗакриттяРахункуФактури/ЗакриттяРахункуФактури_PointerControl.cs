@@ -45,8 +45,8 @@ namespace StorageAndTrade
             BeforeClickOpenFunc?.Invoke();
             ЗакриттяРахункуФактури page = new ЗакриттяРахункуФактури
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new ЗакриттяРахункуФактури_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

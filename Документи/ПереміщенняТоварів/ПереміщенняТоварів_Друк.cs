@@ -17,9 +17,9 @@ namespace StorageAndTrade
 {
     static class ПереміщенняТоварів_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            ПереміщенняТоварів_Objest? Обєкт = await new ПереміщенняТоварів_Pointer(unigueID).GetDocumentObject();
+            ПереміщенняТоварів_Objest? Обєкт = await new ПереміщенняТоварів_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 await Обєкт.Організація.GetPresentation();

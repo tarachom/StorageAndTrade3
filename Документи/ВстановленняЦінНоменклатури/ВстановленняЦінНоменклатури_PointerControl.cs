@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ВстановленняЦінНоменклатури_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new ВстановленняЦінНоменклатури_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ВстановленняЦінНоменклатури_Const.FULLNAME}", () => page);

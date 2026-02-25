@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             КорегуванняБоргу page = new КорегуванняБоргу
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new КорегуванняБоргу_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new КорегуванняБоргу_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {КорегуванняБоргу_Const.FULLNAME}", () => page);

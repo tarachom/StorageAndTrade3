@@ -58,24 +58,24 @@ namespace StorageAndTrade
             ТабличніСписки.КасиККМ_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await КасиККМ_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            await КасиККМ_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, null);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await КасиККМ_Функції.SetDeletionLabel(unigueID);
+            await КасиККМ_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await КасиККМ_Функції.Copy(unigueID);
+            return await КасиККМ_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new КасиККМ_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new КасиККМ_Pointer(uniqueID).GetBasis());
         }
 
         protected override async ValueTask BeforeSetValue()

@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             РахунокФактура page = new РахунокФактура
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new РахунокФактура_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new РахунокФактура_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {РахунокФактура_Const.FULLNAME}", () => page);

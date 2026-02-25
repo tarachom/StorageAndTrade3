@@ -36,7 +36,7 @@ namespace StorageAndTrade
             await ТабличніСписки.Склади_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageList(UniqueID? uniqueID = null)
         {
             Склади page = new Склади()
             {
@@ -50,14 +50,14 @@ namespace StorageAndTrade
             await page.SetValue();
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await Склади_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
+            await Склади_Функції.OpenPageElement(IsNew, uniqueID, null, CallBack_OnSelectPointer);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await Склади_Функції.SetDeletionLabel(unigueID);
+            await Склади_Функції.SetDeletionLabel(uniqueID);
         }
     }
 }

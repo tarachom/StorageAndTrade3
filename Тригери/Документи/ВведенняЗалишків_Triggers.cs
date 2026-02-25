@@ -45,7 +45,7 @@ namespace GeneratedCode.Документи
             if (label)
             {
                 ПартіяТоварівКомпозит_Select select = new ПартіяТоварівКомпозит_Select();
-                select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.ВведенняЗалишків, Comparison.EQ, ДокументОбєкт.UnigueID.UGuid));
+                select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.ВведенняЗалишків, Comparison.EQ, ДокументОбєкт.UniqueID.UGuid));
                 select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.DELETION_LABEL, Comparison.NOT, true));
                 await select.Select();
 

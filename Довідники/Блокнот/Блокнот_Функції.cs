@@ -32,9 +32,9 @@ namespace StorageAndTrade
             ];
         }
 
-        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null,
-            Action<UnigueID?>? сallBack_LoadRecords = null,
-            Action<UnigueID>? сallBack_OnSelectPointer = null)
+        public static async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null,
+            Action<UniqueID?>? сallBack_LoadRecords = null,
+            Action<UniqueID>? сallBack_OnSelectPointer = null)
         {
             Блокнот_Елемент page = new Блокнот_Елемент
             {
@@ -47,7 +47,7 @@ namespace StorageAndTrade
                 await page.Елемент.New();
 
             }
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            else if (uniqueID == null || !await page.Елемент.Read(uniqueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;
@@ -59,22 +59,22 @@ namespace StorageAndTrade
             page.SetValue();
         }
 
-        public static async ValueTask SetDeletionLabel(UnigueID unigueID)
+        public static async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            Блокнот_Pointer Вказівник = new(unigueID);
+            Блокнот_Pointer Вказівник = new(uniqueID);
             bool? label = await Вказівник.GetDeletionLabel();
             if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
-        public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        public static async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
             Блокнот_Objest Обєкт = new Блокнот_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(uniqueID))
             {
                 Блокнот_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
 
-                return Новий.UnigueID;
+                return Новий.UniqueID;
             }
             else
             {

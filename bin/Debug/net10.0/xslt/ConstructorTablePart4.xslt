@@ -379,7 +379,7 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
         {
             Store.Append(new ItemRow()
             {
-                UnigueID = new(record.UID),
+                UniqueID = new(record.UID),
                 <xsl:for-each select="$FieldsTL">
                 <xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>,
                 </xsl:for-each>
@@ -415,7 +415,7 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
             {
                 <xsl:value-of select="$Records"/>.Records.Add(new()
                 {
-                    UID = row.UnigueID.UGuid,
+                    UID = row.UniqueID.UGuid,
                     <xsl:for-each select="$FieldsTL">
                         <xsl:value-of select="Name"/> = row.<xsl:value-of select="Name"/>,
                     </xsl:for-each>
@@ -431,7 +431,7 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
                 bool sel = Grid.Model.IsSelected(position);
                 Store.Splice(position, 1, [new ItemRow()
                 {
-                    UnigueID = new(record.UID),
+                    UniqueID = new(record.UID),
                     <xsl:for-each select="$FieldsTL">
                     <xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>,
                     </xsl:for-each>

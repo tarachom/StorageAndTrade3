@@ -87,7 +87,7 @@ namespace StorageAndTrade
             НазваПовна.Buffer.Text = Елемент.НазваПовна;
 
             Холдинг.Pointer = Елемент.Холдинг;
-            Холдинг.OpenFolder = Елемент.UnigueID;
+            Холдинг.OpenFolder = Елемент.UniqueID;
 
             Контакти.ЕлементВласник = Елемент;
             await Контакти.LoadRecords();

@@ -52,8 +52,8 @@ namespace StorageAndTrade
             {
                 if (DirectoryPointerItem != null || SelectPointerItem != null)
                 {
-                    СкладськіКомірки_Objest? Обєкт = await new СкладськіКомірки_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
-                    if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
+                    СкладськіКомірки_Objest? Обєкт = await new СкладськіКомірки_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UniqueID()).GetDirectoryObject();
+                    if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UniqueID;
                 }
 
                 await ДеревоПапок.LoadRecords();
@@ -66,13 +66,13 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіКомірки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!Власник.Pointer.UnigueID.IsEmpty())
+            if (!Власник.Pointer.UniqueID.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, Власник.Pointer.UniqueID.UGuid));
 
             if (IsHierarchy.Active)
                 ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
+                    new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UniqueID().UGuid));
 
             await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
@@ -81,9 +81,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіКомірки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!Власник.Pointer.UnigueID.IsEmpty())
+            if (!Власник.Pointer.UniqueID.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, Власник.Pointer.UniqueID.UGuid));
 
             //Відбори
             ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid, СкладськіКомірки_Функції.Відбори(searchText));
@@ -106,24 +106,24 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіКомірки_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await СкладськіКомірки_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null, Власник.Pointer);
+            await СкладськіКомірки_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords, null, Власник.Pointer);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await СкладськіКомірки_Функції.SetDeletionLabel(unigueID);
+            await СкладськіКомірки_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await СкладськіКомірки_Функції.Copy(unigueID);
+            return await СкладськіКомірки_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new СкладськіКомірки_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new СкладськіКомірки_Pointer(uniqueID).GetBasis());
         }
 
         protected override async ValueTask BeforeSetValue()

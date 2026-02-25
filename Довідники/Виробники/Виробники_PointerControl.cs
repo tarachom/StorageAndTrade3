@@ -47,9 +47,9 @@ namespace StorageAndTrade
             Виробники_ШвидкийВибір page = new Виробники_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new Виробники_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

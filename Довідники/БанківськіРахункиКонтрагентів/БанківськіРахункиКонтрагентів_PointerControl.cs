@@ -47,9 +47,9 @@ namespace StorageAndTrade
             БанківськіРахункиКонтрагентів_ШвидкийВибір page = new БанківськіРахункиКонтрагентів_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new БанківськіРахункиКонтрагентів_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

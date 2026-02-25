@@ -43,7 +43,7 @@ namespace GeneratedCode.Довідники
             {
                 ХарактеристикиНоменклатури_Select select = new ХарактеристикиНоменклатури_Select();
                 select.QuerySelect.Where.AddRange([
-                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid),
+                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid),
                     new Where(ХарактеристикиНоменклатури_Const.DELETION_LABEL, Comparison.NOT, true)
                 ]);
 
@@ -63,7 +63,7 @@ namespace GeneratedCode.Довідники
             
             /*
             РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet r = new();
-            r.QuerySelect.Where.Add(new Where(РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+            r.QuerySelect.Where.Add(new Where(РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
 
             await r.Read();
             await r.RemoveAll(r.Records);
@@ -82,7 +82,7 @@ namespace GeneratedCode.Довідники
 
                         Dictionary<string, object> paramQuery = new()
                         {
-                            { "Номенклатура", ДовідникОбєкт.UnigueID.UGuid }
+                            { "Номенклатура", ДовідникОбєкт.UniqueID.UGuid }
                         };
 
                         await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);

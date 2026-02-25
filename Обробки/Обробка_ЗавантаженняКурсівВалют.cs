@@ -162,7 +162,7 @@ LIMIT 1
 ";
                     Dictionary<string, object> paramQuery = new Dictionary<string, object>
                     {
-                        { "Валюта", валюти_Pointer.UnigueID.UGuid },
+                        { "Валюта", валюти_Pointer.UniqueID.UGuid },
                         { "ДатаКурсу", ДатаКурсу }
                     };
 
@@ -186,7 +186,7 @@ LIMIT 1
                         Dictionary<string, object> Рядок = recordResult.ListRow[0];
 
                         КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest();
-                        if (await курсиВалют_Objest.Read(new UnigueID(Рядок["uid"])))
+                        if (await курсиВалют_Objest.Read(new UniqueID(Рядок["uid"])))
                         {
                             курсиВалют_Objest.Курс = Курс;
                             await курсиВалют_Objest.Save();

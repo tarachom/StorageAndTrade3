@@ -37,7 +37,7 @@ namespace StorageAndTrade
 
             //Відбір по контрагенту
             ВибіркаДоговорівКонтрагента.QuerySelect.Where.Add(
-                new Where(Довідники.ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, Контрагент.UnigueID.UGuid));
+                new Where(Довідники.ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, Контрагент.UniqueID.UGuid));
 
             //Відбір по типу договору
             ВибіркаДоговорівКонтрагента.QuerySelect.Where.Add(

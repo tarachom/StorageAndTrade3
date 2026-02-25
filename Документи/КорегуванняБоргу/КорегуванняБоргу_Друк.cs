@@ -18,9 +18,9 @@ namespace StorageAndTrade
 {
     static class КорегуванняБоргу_Друк
     {
-        public static async ValueTask PDF(UnigueID unigueID)
+        public static async ValueTask PDF(UniqueID uniqueID)
         {
-            КорегуванняБоргу_Objest? Обєкт = await new КорегуванняБоргу_Pointer(unigueID).GetDocumentObject();
+            КорегуванняБоргу_Objest? Обєкт = await new КорегуванняБоргу_Pointer(uniqueID).GetDocumentObject();
             if (Обєкт != null)
             {
                 await Обєкт.Організація.GetPresentation();

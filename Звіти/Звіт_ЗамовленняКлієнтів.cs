@@ -216,7 +216,7 @@ FROM
     (
         SELECT uid
         FROM {Номенклатура_Папки_Const.TABLE}
-        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Номенклатура_Папки_Const.TABLE}.uid
         FROM {Номенклатура_Папки_Const.TABLE}
@@ -233,7 +233,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UnigueID.UGuid))}')
+Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -244,7 +244,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UnigueID.UGuid))}')
+Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -261,7 +261,7 @@ FROM
     (
         SELECT uid
         FROM {Склади_Папки_Const.TABLE}
-        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Склади_Папки_Const.TABLE}.uid
         FROM {Склади_Папки_Const.TABLE}
@@ -278,7 +278,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UnigueID.UGuid))}')
+Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -389,7 +389,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UnigueID.UGuid))}')
+ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -400,7 +400,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UnigueID.UGuid))}')
+ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -411,7 +411,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UnigueID.UGuid))}')
+ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -471,7 +471,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
     (
         SELECT uid
         FROM {Номенклатура_Папки_Const.TABLE}
-        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Номенклатура_Папки_Const.TABLE}.uid
         FROM {Номенклатура_Папки_Const.TABLE}
@@ -494,7 +494,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
     (
         SELECT uid
         FROM {Склади_Папки_Const.TABLE}
-        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Склади_Папки_Const.TABLE}.uid
         FROM {Склади_Папки_Const.TABLE}

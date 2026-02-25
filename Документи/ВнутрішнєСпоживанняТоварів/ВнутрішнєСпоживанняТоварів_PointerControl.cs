@@ -46,8 +46,8 @@ namespace StorageAndTrade
         {
             ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ВнутрішнєСпоживанняТоварів_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new ВнутрішнєСпоживанняТоварів_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => page);

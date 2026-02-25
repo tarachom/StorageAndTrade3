@@ -45,8 +45,8 @@ namespace StorageAndTrade
         {
             ПерерахунокТоварів page = new ПерерахунокТоварів
             {
-                DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПерерахунокТоварів_Pointer(selectPointer); }
+                DocumentPointerItem = Pointer.UniqueID,
+                CallBack_OnSelectPointer = (UniqueID selectPointer) => { Pointer = new ПерерахунокТоварів_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПерерахунокТоварів_Const.FULLNAME}", () => page);

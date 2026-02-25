@@ -46,7 +46,7 @@ namespace StorageAndTrade
             КасиККМ_ШвидкийВибір page = new КасиККМ_ШвидкийВибір() 
             { 
                 PopoverParent = popover, 
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
                 CallBack_OnSelectPointer = selectPointer =>
                 {

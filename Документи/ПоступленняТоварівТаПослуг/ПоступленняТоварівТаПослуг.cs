@@ -58,25 +58,25 @@ namespace StorageAndTrade
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ПоступленняТоварівТаПослуг_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+            await ПоступленняТоварівТаПослуг_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords);
 
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ПоступленняТоварівТаПослуг_Функції.SetDeletionLabel(unigueID);
+            await ПоступленняТоварівТаПослуг_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await ПоступленняТоварівТаПослуг_Функції.Copy(unigueID);
+            return await ПоступленняТоварівТаПослуг_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ПоступленняТоварівТаПослуг_Pointer(uniqueID).GetBasis());
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ПоступленняТоварівТаПослуг";
@@ -93,30 +93,30 @@ namespace StorageAndTrade
             await BeforeLoadRecords();
         }
 
-        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
         {
-            ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+            ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(uniqueID).GetDocumentObject(true);
             if (Обєкт == null) return;
 
             if (spendDoc)
             {
                 if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
             }
             else
                 await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПоступленняТоварівТаПослуг_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПоступленняТоварівТаПослуг_Pointer(uniqueID));
         }
         
         protected override bool IsExportXML() { return true; } //Дозволити експорт документу
 
-        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportXML(UniqueID uniqueID, string pathToFolder)
         {
-            ПоступленняТоварівТаПослуг_Pointer Вказівник = new ПоступленняТоварівТаПослуг_Pointer(unigueID);
+            ПоступленняТоварівТаПослуг_Pointer Вказівник = new ПоступленняТоварівТаПослуг_Pointer(uniqueID);
             await Вказівник.GetPresentation();
             string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml");
 
@@ -124,9 +124,9 @@ namespace StorageAndTrade
             ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
         }
 
-        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        protected override async ValueTask PrintingDoc(UniqueID uniqueID)
         {
-            await ПоступленняТоварівТаПослуг_Друк.PDF(unigueID);
+            await ПоступленняТоварівТаПослуг_Друк.PDF(uniqueID);
         }
 
         #endregion
@@ -173,9 +173,9 @@ namespace StorageAndTrade
 
         async void НаОснові_РозхіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(false);
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(uniqueID).GetDocumentObject(false);
                 if (Обєкт == null) continue;
 
                 //
@@ -195,15 +195,15 @@ namespace StorageAndTrade
 
                 await Новий.Save();
 
-                await РозхіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UnigueID);
+                await РозхіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 
         async void НаОснові_ПоверненняТоварівПостачальнику(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(uniqueID).GetDocumentObject(true);
                 if (Обєкт == null) continue;
 
                 //
@@ -243,15 +243,15 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                await ПоверненняТоварівПостачальнику_Функції.OpenPageElement(false, Новий.UnigueID);
+                await ПоверненняТоварівПостачальнику_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 
         async void НаОснові_РозміщенняТоварівНаСкладі(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(uniqueID).GetDocumentObject(true);
                 if (Обєкт == null) continue;
 
                 //
@@ -286,15 +286,15 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                await РозміщенняТоварівНаСкладі_Функції.OpenPageElement(false, Новий.UnigueID);
+                await РозміщенняТоварівНаСкладі_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 
         async void НаОснові_ВнутрішнєСпоживанняТоварів(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(uniqueID).GetDocumentObject(true);
                 if (Обєкт == null) continue;
 
                 //
@@ -333,15 +333,15 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                await ВнутрішнєСпоживанняТоварів_Функції.OpenPageElement(false, Новий.UnigueID);
+                await ВнутрішнєСпоживанняТоварів_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 
         async void НаОснові_ПереміщенняТоварів(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(uniqueID).GetDocumentObject(true);
                 if (Обєкт == null) continue;
 
                 //
@@ -377,7 +377,7 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                await ПереміщенняТоварів_Функції.OpenPageElement(false, Новий.UnigueID);
+                await ПереміщенняТоварів_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 

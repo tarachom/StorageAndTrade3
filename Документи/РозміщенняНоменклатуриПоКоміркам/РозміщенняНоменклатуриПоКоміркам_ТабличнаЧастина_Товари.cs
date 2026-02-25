@@ -230,14 +230,14 @@ namespace StorageAndTrade
                     {
                         Номенклатура_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Номенклатура.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Номенклатура.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Номенклатура(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
@@ -255,8 +255,8 @@ namespace StorageAndTrade
                     {
                         ПакуванняОдиниціВиміру_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Пакування.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Пакування.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Пакування(запис);
@@ -269,14 +269,14 @@ namespace StorageAndTrade
                     {
                         СкладськіКомірки_ШвидкийВибір page = new()
                         {
-                            DirectoryPointerItem = запис.Комірка.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            DirectoryPointerItem = запис.Комірка.UniqueID,
+                            CallBack_OnSelectPointer = async (UniqueID selectPointer) =>
                             {
                                 запис.Комірка = new СкладськіКомірки_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Комірка(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             },
-                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =>
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {

@@ -243,7 +243,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_Організації.uid = '{Фільтр.Організація.UnigueID}'
+Довідник_Організації.uid = '{Фільтр.Організація.UniqueID}'
 ";
             }
 
@@ -260,7 +260,7 @@ FROM
     (
         SELECT uid
         FROM {Номенклатура_Папки_Const.TABLE}
-        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UnigueID.UGuid))}') 
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UniqueID.UGuid))}') 
         UNION ALL
         SELECT {Номенклатура_Папки_Const.TABLE}.uid
         FROM {Номенклатура_Папки_Const.TABLE}
@@ -277,7 +277,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UnigueID.UGuid))}') 
+Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UniqueID.UGuid))}') 
 ";
             }
 
@@ -288,7 +288,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UnigueID.UGuid))}') 
+Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UniqueID.UGuid))}') 
 ";
             }
 
@@ -305,7 +305,7 @@ FROM
     (
         SELECT uid
         FROM {Склади_Папки_Const.TABLE}
-        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Склади_Папки_Const.TABLE}.uid
         FROM {Склади_Папки_Const.TABLE}
@@ -322,7 +322,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UnigueID.UGuid))}')
+Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -333,7 +333,7 @@ FROM
                 isExistParent = true;
 
                 query += $@"
-Довідник_СеріїНоменклатури.uid = '{Фільтр.Серія.UnigueID}'
+Довідник_СеріїНоменклатури.uid = '{Фільтр.Серія.UniqueID}'
 ";
             }
 
@@ -610,7 +610,7 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
                 isExistParent = true;
 
                 query += $@"
-Довідник_Організації.uid = '{Фільтр.Організація.UnigueID}'
+Довідник_Організації.uid = '{Фільтр.Організація.UniqueID}'
 ";
             }
 
@@ -627,7 +627,7 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
     (
         SELECT uid
         FROM {Номенклатура_Папки_Const.TABLE}
-        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Номенклатура_Папки_Const.TABLE}.uid
         FROM {Номенклатура_Папки_Const.TABLE}
@@ -644,7 +644,7 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UnigueID.UGuid))}')
+Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -655,7 +655,7 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
                 isExistParent = true;
 
                 query += $@"
-Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UnigueID.UGuid))}')
+Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -672,7 +672,7 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
     (
         SELECT uid
         FROM {Склади_Папки_Const.TABLE}
-        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Склади_Папки_Const.TABLE}.uid
         FROM {Склади_Папки_Const.TABLE}
@@ -689,7 +689,7 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
                 isExistParent = true;
 
                 query += $@"
-Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UnigueID.UGuid))}')
+Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -700,7 +700,7 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
                 isExistParent = true;
 
                 query += $@"
-Довідник_СеріїНоменклатури.uid = '{Фільтр.Серія.UnigueID}'
+Довідник_СеріїНоменклатури.uid = '{Фільтр.Серія.UniqueID}'
 ";
             }
 
@@ -865,7 +865,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ПартіїТоварів.{ПартіїТоварів_Const.Організація} = '{Фільтр.Організація.UnigueID}'
+ПартіїТоварів.{ПартіїТоварів_Const.Організація} = '{Фільтр.Організація.UniqueID}'
 ";
             }
 
@@ -876,7 +876,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UnigueID.UGuid))}')
+ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -887,7 +887,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UnigueID.UGuid))}')
+ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -898,7 +898,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ПартіїТоварів.{ПартіїТоварів_Const.Склад} IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UnigueID.UGuid))}')
+ПартіїТоварів.{ПартіїТоварів_Const.Склад} IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UniqueID.UGuid))}')
 ";
             }
 
@@ -909,7 +909,7 @@ WITH register AS
                 isExistParent = true;
 
                 query += $@"
-ПартіїТоварів.{ПартіїТоварів_Const.Серія} = '{Фільтр.Серія.UnigueID}'
+ПартіїТоварів.{ПартіїТоварів_Const.Серія} = '{Фільтр.Серія.UniqueID}'
 ";
             }
 
@@ -976,7 +976,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
     (
         SELECT uid
         FROM {Номенклатура_Папки_Const.TABLE}
-        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Номенклатура_Папки_Const.TABLE}.uid
         FROM {Номенклатура_Папки_Const.TABLE}
@@ -999,7 +999,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
     (
         SELECT uid
         FROM {Склади_Папки_Const.TABLE}
-        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UnigueID.UGuid))}')
+        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UniqueID.UGuid))}')
         UNION ALL
         SELECT {Склади_Папки_Const.TABLE}.uid
         FROM {Склади_Папки_Const.TABLE}

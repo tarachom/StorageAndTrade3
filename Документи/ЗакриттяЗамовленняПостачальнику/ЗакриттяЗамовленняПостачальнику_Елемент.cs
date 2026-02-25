@@ -203,7 +203,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
-                if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
+                if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UniqueID);
                 return isSpend;
             }
             else
@@ -213,14 +213,14 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗакриттяЗамовленняПостачальнику_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗакриттяЗамовленняПостачальнику_Pointer(uniqueID));
         }
 
-        protected override async ValueTask InJournal(UnigueID unigueID)
+        protected override async ValueTask InJournal(UniqueID uniqueID)
         {
-            ЗакриттяЗамовленняПостачальнику page = new ЗакриттяЗамовленняПостачальнику() { SelectPointerItem = unigueID };
+            ЗакриттяЗамовленняПостачальнику page = new ЗакриттяЗамовленняПостачальнику() { SelectPointerItem = uniqueID };
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяЗамовленняПостачальнику_Const.FULLNAME, () => page);
             await page.SetValue();
         }

@@ -56,24 +56,24 @@ namespace StorageAndTrade
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ЗакриттяЗамовленняПостачальнику_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+            await ЗакриттяЗамовленняПостачальнику_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ЗакриттяЗамовленняПостачальнику_Функції.SetDeletionLabel(unigueID);
+            await ЗакриттяЗамовленняПостачальнику_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await ЗакриттяЗамовленняПостачальнику_Функції.Copy(unigueID);
+            return await ЗакриттяЗамовленняПостачальнику_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ЗакриттяЗамовленняПостачальнику_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ЗакриттяЗамовленняПостачальнику_Pointer(uniqueID).GetBasis());
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ЗакриттяЗамовленняПостачальнику";
@@ -90,29 +90,29 @@ namespace StorageAndTrade
             await BeforeLoadRecords();
         }
 
-        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
         {
-            ЗакриттяЗамовленняПостачальнику_Objest? Обєкт = await new ЗакриттяЗамовленняПостачальнику_Pointer(unigueID).GetDocumentObject(true);
+            ЗакриттяЗамовленняПостачальнику_Objest? Обєкт = await new ЗакриттяЗамовленняПостачальнику_Pointer(uniqueID).GetDocumentObject(true);
             if (Обєкт == null) return;
 
             if (spendDoc)
             {
                 if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
             }
             else
                 await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗакриттяЗамовленняПостачальнику_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗакриттяЗамовленняПостачальнику_Pointer(uniqueID));
         }
 
         protected override bool IsExportXML() { return false; } //Дозволити експорт документу
-        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportXML(UniqueID uniqueID, string pathToFolder)
         {
-            ЗакриттяЗамовленняПостачальнику_Pointer Вказівник = new ЗакриттяЗамовленняПостачальнику_Pointer(unigueID);
+            ЗакриттяЗамовленняПостачальнику_Pointer Вказівник = new ЗакриттяЗамовленняПостачальнику_Pointer(uniqueID);
             await Вказівник.GetPresentation();
             string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml");
 
@@ -121,9 +121,9 @@ namespace StorageAndTrade
         }
 
         /*
-        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        protected override async ValueTask PrintingDoc(UniqueID uniqueID)
         {
-            await ЗакриттяЗамовленняПостачальнику_Друк.PDF(unigueID);
+            await ЗакриттяЗамовленняПостачальнику_Друк.PDF(uniqueID);
         }
         */
 

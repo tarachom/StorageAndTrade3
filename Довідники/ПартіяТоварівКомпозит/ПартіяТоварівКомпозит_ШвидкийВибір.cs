@@ -47,7 +47,7 @@ SELECT DISTINCT
 FROM 
     {ПартіїТоварів_Підсумки_TablePart.TABLE} AS ПартіїТоварів_Підсумки
 WHERE
-    ПартіїТоварів_Підсумки.{ПартіїТоварів_Підсумки_TablePart.Номенклатура} = '{НоменклатураВідбір.Pointer.UnigueID}' AND
+    ПартіїТоварів_Підсумки.{ПартіїТоварів_Підсумки_TablePart.Номенклатура} = '{НоменклатураВідбір.Pointer.UniqueID}' AND
     ПартіїТоварів_Підсумки.{ПартіїТоварів_Підсумки_TablePart.Кількість} > 0
 ";
 
@@ -70,7 +70,7 @@ WHERE
             await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageList(UniqueID? uniqueID = null)
         {
             ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит()
             {
@@ -85,14 +85,14 @@ WHERE
             await page.SetValue();
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await ПартіяТоварівКомпозит_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
+            await ПартіяТоварівКомпозит_Функції.OpenPageElement(IsNew, uniqueID, null, CallBack_OnSelectPointer);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await ПартіяТоварівКомпозит_Функції.SetDeletionLabel(unigueID);
+            await ПартіяТоварівКомпозит_Функції.SetDeletionLabel(uniqueID);
         }
     }
 }

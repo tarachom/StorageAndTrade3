@@ -50,7 +50,7 @@ WHERE
 
             Dictionary<string, object> paramQuery = new()
             {
-                { "Валюта", ДовідникОбєкт.UnigueID.UGuid }
+                { "Валюта", ДовідникОбєкт.UniqueID.UGuid }
             };
 
             await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);

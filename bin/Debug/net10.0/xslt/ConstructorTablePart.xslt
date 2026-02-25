@@ -442,14 +442,14 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:choose>
                             <xsl:when test="$nameGroup = 'Довідники'">DirectoryPointerItem</xsl:when>
                             <xsl:when test="$nameGroup = 'Документи'">DocumentPointerItem</xsl:when>
-                        </xsl:choose> = запис.<xsl:value-of select="Name"/>.UnigueID,
-                        CallBack_OnSelectPointer = async (UnigueID selectPointer) =&gt;
+                        </xsl:choose> = запис.<xsl:value-of select="Name"/>.UniqueID,
+                        CallBack_OnSelectPointer = async (UniqueID selectPointer) =&gt;
                         {
                             запис.<xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_Pointer(selectPointer);
                             await Запис.ПісляЗміни_<xsl:value-of select="Name"/>(запис);
                             Store.SetValues(iter, запис.ToArray());
                         }<xsl:if test="MultipleSelect = '1'">,
-                        CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =&gt;
+                        CallBack_OnMultipleSelectPointer = async (UniqueID[] selectPointers) =&gt;
                         {
                             foreach (var selectPointer in selectPointers)
                             {

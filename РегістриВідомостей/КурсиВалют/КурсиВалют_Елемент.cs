@@ -79,7 +79,7 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(Елемент.UnigueID.UGuid), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(Елемент.UniqueID.UGuid), Caption, ex);
                 return false;
             }
         }

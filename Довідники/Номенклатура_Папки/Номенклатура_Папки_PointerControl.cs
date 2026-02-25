@@ -47,9 +47,9 @@ namespace StorageAndTrade
             Номенклатура_Папки_ШвидкийВибір page = new Номенклатура_Папки_ШвидкийВибір()
             {
                 PopoverParent = popover,
-                DirectoryPointerItem = Pointer.UnigueID,
+                DirectoryPointerItem = Pointer.UniqueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                CallBack_OnSelectPointer = (UniqueID selectPointer) =>
                 {
                     Pointer = new Номенклатура_Папки_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();

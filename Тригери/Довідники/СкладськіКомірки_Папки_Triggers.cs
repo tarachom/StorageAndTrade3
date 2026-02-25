@@ -41,7 +41,7 @@ namespace GeneratedCode.Довідники
                 //Елементи помічаються на видалення
                 {
                     СкладськіКомірки_Select select = new СкладськіКомірки_Select();
-                    select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                    select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                     select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
                     await select.Select();
 
@@ -57,7 +57,7 @@ namespace GeneratedCode.Довідники
                 //Вкладені папки помічаються на видалення
                 {
                     СкладськіКомірки_Папки_Select select = new СкладськіКомірки_Папки_Select();
-                    select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                    select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                     await select.Select();
 
                     while (select.MoveNext())
@@ -76,7 +76,7 @@ namespace GeneratedCode.Довідники
             //Елементи помічаються на видалення
             {
                 СкладськіКомірки_Select select = new СкладськіКомірки_Select();
-                select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                 select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
                 await select.Select();
 
@@ -97,7 +97,7 @@ namespace GeneratedCode.Довідники
             //Вкладені папки помічаються на видалення
             {
                 СкладськіКомірки_Папки_Select select = new СкладськіКомірки_Папки_Select();
-                select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UniqueID.UGuid));
                 await select.Select();
 
                 while (select.MoveNext())

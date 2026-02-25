@@ -57,24 +57,24 @@ namespace StorageAndTrade
             ТабличніСписки.РахунокФактура_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
-        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UniqueID? uniqueID = null)
         {
-            await РахунокФактура_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+            await РахунокФактура_Функції.OpenPageElement(IsNew, uniqueID, CallBack_LoadRecords);
         }
 
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UniqueID uniqueID)
         {
-            await РахунокФактура_Функції.SetDeletionLabel(unigueID);
+            await РахунокФактура_Функції.SetDeletionLabel(uniqueID);
         }
 
-        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UniqueID?> Copy(UniqueID uniqueID)
         {
-            return await РахунокФактура_Функції.Copy(unigueID);
+            return await РахунокФактура_Функції.Copy(uniqueID);
         }
 
-        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        protected override async ValueTask VersionsHistory(UniqueID uniqueID)
         {
-            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new РахунокФактура_Pointer(unigueID).GetBasis());
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new РахунокФактура_Pointer(uniqueID).GetBasis());
         }
 
         const string КлючНалаштуванняКористувача = "Документи.РахунокФактура";
@@ -91,30 +91,30 @@ namespace StorageAndTrade
             await BeforeLoadRecords();
         }
 
-        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
         {
-            РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(unigueID).GetDocumentObject(true);
+            РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(uniqueID).GetDocumentObject(true);
             if (Обєкт == null) return;
 
             if (spendDoc)
             {
                 if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
             }
             else
                 await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UniqueID uniqueID)
         {
-            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РахунокФактура_Pointer(unigueID));
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РахунокФактура_Pointer(uniqueID));
         }
 
         protected override bool IsExportXML() { return true; } //Дозволити експорт документу
 
-        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        protected override async ValueTask ExportXML(UniqueID uniqueID, string pathToFolder)
         {
-            РахунокФактура_Pointer Вказівник = new РахунокФактура_Pointer(unigueID);
+            РахунокФактура_Pointer Вказівник = new РахунокФактура_Pointer(uniqueID);
             await Вказівник.GetPresentation();
             string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml");
 
@@ -122,9 +122,9 @@ namespace StorageAndTrade
             ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
         }
 
-        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        protected override async ValueTask PrintingDoc(UniqueID uniqueID)
         {
-            await РахунокФактура_Друк.PDF(unigueID);
+            await РахунокФактура_Друк.PDF(uniqueID);
         }
 
         #endregion
@@ -160,9 +160,9 @@ namespace StorageAndTrade
 
         async void НаОснові_РеалізаціяТоварівТаПослуг(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(unigueID).GetDocumentObject(true);
+                РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(uniqueID).GetDocumentObject(true);
                 if (Обєкт == null) continue;
 
                 //
@@ -208,15 +208,15 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                await РеалізаціяТоварівТаПослуг_Функції.OpenPageElement(false, Новий.UnigueID);
+                await РеалізаціяТоварівТаПослуг_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 
         async void НаОснові_ЗамовленняПостачальнику(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(unigueID).GetDocumentObject(true);
+                РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(uniqueID).GetDocumentObject(true);
                 if (Обєкт == null) continue;
 
                 //
@@ -260,15 +260,15 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                await ЗамовленняПостачальнику_Функції.OpenPageElement(false, Новий.UnigueID);
+                await ЗамовленняПостачальнику_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
 
         async void НаОснові_ЗакриттяРахункуФактури(object? sender, EventArgs args)
         {
-            foreach (UnigueID unigueID in GetSelectedRows())
+            foreach (UniqueID uniqueID in GetSelectedRows())
             {
-                РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(unigueID).GetDocumentObject(true);
+                РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(uniqueID).GetDocumentObject(true);
                 if (Обєкт == null) continue;
 
                 //
@@ -309,7 +309,7 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                await ЗакриттяРахункуФактури_Функції.OpenPageElement(false, Новий.UnigueID);
+                await ЗакриттяРахункуФактури_Функції.OpenPageElement(false, Новий.UniqueID);
             }
         }
     }
