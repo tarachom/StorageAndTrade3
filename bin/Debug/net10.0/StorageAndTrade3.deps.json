@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "StorageAndTrade3/3.1.0.9": {
+      "StorageAndTrade3/3.1.0.10": {
         "dependencies": {
           "AccountingSoftware": "3.1.2.1",
           "Configurator3": "3.1.0.8",
           "GtkSharp": "3.24.24.117-develop",
-          "NPOI": "2.7.5",
-          "QuestPDF": "2025.12.0"
+          "NPOI": "2.7.6",
+          "QuestPDF": "2026.2.2"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -37,11 +37,11 @@
           }
         }
       },
-      "BouncyCastle.Cryptography/2.4.0": {
+      "BouncyCastle.Cryptography/2.6.2": {
         "runtime": {
           "lib/net6.0/BouncyCastle.Cryptography.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.4.0.33771"
+            "fileVersion": "2.6.2.46322"
           }
         }
       },
@@ -175,9 +175,9 @@
           }
         }
       },
-      "NPOI/2.7.5": {
+      "NPOI/2.7.6": {
         "dependencies": {
-          "BouncyCastle.Cryptography": "2.4.0",
+          "BouncyCastle.Cryptography": "2.6.2",
           "Enums.NET": "5.0.0",
           "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
           "MathNet.Numerics.Signed": "5.0.0",
@@ -191,20 +191,20 @@
         },
         "runtime": {
           "lib/net8.0/NPOI.Core.dll": {
-            "assemblyVersion": "2.7.5.0",
-            "fileVersion": "2.7.5.0"
+            "assemblyVersion": "2.7.6.0",
+            "fileVersion": "2.7.6.0"
           },
           "lib/net8.0/NPOI.OOXML.dll": {
-            "assemblyVersion": "2.7.5.0",
-            "fileVersion": "2.7.5.0"
+            "assemblyVersion": "2.7.6.0",
+            "fileVersion": "2.7.6.0"
           },
           "lib/net8.0/NPOI.OpenXml4Net.dll": {
-            "assemblyVersion": "2.7.5.0",
-            "fileVersion": "2.7.5.0"
+            "assemblyVersion": "2.7.6.0",
+            "fileVersion": "2.7.6.0"
           },
           "lib/net8.0/NPOI.OpenXmlFormats.dll": {
-            "assemblyVersion": "2.7.5.0",
-            "fileVersion": "2.7.5.0"
+            "assemblyVersion": "2.7.6.0",
+            "fileVersion": "2.7.6.0"
           }
         }
       },
@@ -228,11 +228,11 @@
           }
         }
       },
-      "QuestPDF/2025.12.0": {
+      "QuestPDF/2026.2.2": {
         "runtime": {
           "lib/net10.0/QuestPDF.dll": {
-            "assemblyVersion": "2025.12.0.0",
-            "fileVersion": "2025.12.0.0"
+            "assemblyVersion": "2026.2.2.0",
+            "fileVersion": "2026.2.2.0"
           }
         },
         "runtimeTargets": {
@@ -457,7 +457,7 @@
     }
   },
   "libraries": {
-    "StorageAndTrade3/3.1.0.9": {
+    "StorageAndTrade3/3.1.0.10": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -476,12 +476,12 @@
       "path": "bcrypt.net-next/4.0.3",
       "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
     },
-    "BouncyCastle.Cryptography/2.4.0": {
+    "BouncyCastle.Cryptography/2.6.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SwXsAV3sMvAU/Nn31pbjhWurYSjJ+/giI/0n6tCrYoupEK34iIHCuk3STAd9fx8yudM85KkLSVdn951vTng/vQ==",
-      "path": "bouncycastle.cryptography/2.4.0",
-      "hashPath": "bouncycastle.cryptography.2.4.0.nupkg.sha512"
+      "sha512": "sha512-7oWOcvnntmMKNzDLsdxAYqApt+AjpRpP2CShjMfIa3umZ42UQMvH0tl1qAliYPNYO6vTdcGMqnRrCPmsfzTI1w==",
+      "path": "bouncycastle.cryptography/2.6.2",
+      "hashPath": "bouncycastle.cryptography.2.6.2.nupkg.sha512"
     },
     "CairoSharp/3.24.24.117-develop": {
       "type": "package",
@@ -574,12 +574,12 @@
       "path": "npgsql/10.0.1",
       "hashPath": "npgsql.10.0.1.nupkg.sha512"
     },
-    "NPOI/2.7.5": {
+    "NPOI/2.7.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KmEHqThmfAdq/Q3LLTahpvFKHQMQJrzJNAFIoSZCGIZWUmYBtvxDArmpLF+Zyw1tzCem/rZsefCqJgqfIz2l4w==",
-      "path": "npoi/2.7.5",
-      "hashPath": "npoi.2.7.5.nupkg.sha512"
+      "sha512": "sha512-itLDt6M2VFcWjTGpzeRNy7Axmp2cVjHpTtf4zVLm6XQvuINlkHFBabBd4s8iCRAupx/NBSzqPxqe7+5fJOY8NQ==",
+      "path": "npoi/2.7.6",
+      "hashPath": "npoi.2.7.6.nupkg.sha512"
     },
     "NSax/1.0.2": {
       "type": "package",
@@ -595,12 +595,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2025.12.0": {
+    "QuestPDF/2026.2.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-INaUIKE3z9+X8alPcriqjkctT+S/xVWfkUW8Xrmu4k38t9yijGjWGWxrJkopO0YiXjVxSJ+HDAZ6P/Nyd2tB5Q==",
-      "path": "questpdf/2025.12.0",
-      "hashPath": "questpdf.2025.12.0.nupkg.sha512"
+      "sha512": "sha512-LAcnbU7Zx/adNX5+JBwRSazCLhNNrm2HMQJQVhUtzjq2hXl7QWOVS8a8bb+a6AjhV2hdC9saVqgYzjCpYgMa1g==",
+      "path": "questpdf/2026.2.2",
+      "hashPath": "questpdf.2026.2.2.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
