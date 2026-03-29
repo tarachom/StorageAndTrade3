@@ -328,24 +328,24 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
             <xsl:when test="Type = 'string'">
                 <xsl:choose>
                     <xsl:when test="Multiline = '1'">
-                <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
+                <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = TextView.New();
                     </xsl:when>
                     <xsl:otherwise>
-                <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new() { WidthRequest = <xsl:value-of select="$Size"/> };
+                <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = Entry.New();
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="Type = 'integer'">
-                <xsl:text>IntegerControl </xsl:text><xsl:value-of select="Name"/> = new();
+                <xsl:text>IntegerControl </xsl:text><xsl:value-of select="Name"/> = IntegerControl.New();
             </xsl:when>
             <xsl:when test="Type = 'numeric'">
-                <xsl:text>NumericControl </xsl:text><xsl:value-of select="Name"/> = new();
+                <xsl:text>NumericControl </xsl:text><xsl:value-of select="Name"/> = NumericControl.New();
             </xsl:when>
             <xsl:when test="Type = 'boolean'">
                 <xsl:text>CheckButton </xsl:text><xsl:value-of select="Name"/> = CheckButton.NewWithLabel("<xsl:value-of select="Name"/>");
             </xsl:when>
             <xsl:when test="Type = 'date' or Type = 'datetime'">
-                <xsl:text>DateTimeControl </xsl:text><xsl:value-of select="Name"/> = new()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
+                <xsl:text>DateTimeControl </xsl:text><xsl:value-of select="Name"/> = DateTimeControl.New();
             </xsl:when>
             <xsl:when test="Type = 'time'">
                 <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = new();
@@ -358,10 +358,10 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
             </xsl:when>
             <xsl:when test="Type = 'pointer'">
                 <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "<xsl:value-of select="Caption"/>", WidthPresentation = <xsl:value-of select="$Size"/> };
+                <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = <xsl:value-of select="$namePointer"/>_PointerControl.New();
             </xsl:when>
             <xsl:when test="Type = 'enum'">
-                <xsl:text>ComboBoxText </xsl:text><xsl:value-of select="Name"/> = new ComboBoxText();
+                <xsl:text>ComboBoxText </xsl:text><xsl:value-of select="Name"/> = ComboBoxText.New();
             </xsl:when>
             <xsl:when test="Type = 'any_pointer'">
                 <xsl:text>//Guid </xsl:text><xsl:value-of select="Name"/> = new();
@@ -421,18 +421,60 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
             NotebookTablePart.SetCurrentPage(0);
         </xsl:if>
 
-        <!-- Заповнення випадаючих списків для перелічень -->
-        <xsl:for-each select="$FieldsTL[Type = 'enum']">
-        {
-            //Заповнення списку
-            foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List())
-                <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
+        <!-- Крім поля Назва -->
+        <xsl:for-each select="$FieldsTL[Name != 'Назва']">
+            <xsl:variable name="Size">
+                <xsl:choose>
+                    <xsl:when test="Size != '0'"><xsl:value-of select="Size"/></xsl:when>
+                    <xsl:otherwise>300</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="Type = 'string'">
+                    <xsl:choose>
+                        <xsl:when test="Multiline = '1'">
+                    <xsl:value-of select="Name"/>.WrapMode = WrapMode.Word;
+                        </xsl:when>
+                        <xsl:otherwise>
+                    <xsl:value-of select="Name"/>.WidthRequest = <xsl:value-of select="$Size"/>;
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:when test="Type = 'integer'">
+                    
+                </xsl:when>
+                <xsl:when test="Type = 'numeric'">
+                    
+                </xsl:when>
+                <xsl:when test="Type = 'boolean'">
+                    
+                </xsl:when>
+                <xsl:when test="Type = 'date'">
+                    <xsl:value-of select="Name"/>.OnlyDate = true;
+                </xsl:when>
+                <xsl:when test="Type = 'time'">
+                    
+                </xsl:when>
+                <xsl:when test="Type = 'composite_pointer'">
+                    
+                </xsl:when>
+                <xsl:when test="Type = 'pointer'">
+                    <xsl:value-of select="Name"/>.Caption = "<xsl:value-of select="Caption"/>";
+                    <xsl:value-of select="Name"/>.WidthPresentation = <xsl:value-of select="$Size"/>;
+                </xsl:when>
+                <xsl:when test="Type = 'enum'">
+            {
+                //Заповнення списку
+                foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List())
+                    <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
 
-            //Заборона прокрутки списку
-            EventControllerScroll controller = EventControllerScroll.New(EventControllerScrollFlags.BothAxes);
-            <xsl:value-of select="Name"/>.AddController(controller);
-            controller.OnScroll += (_, _) =&gt; true;
-        }
+                //Заборона прокрутки списку
+                EventControllerScroll controller = EventControllerScroll.New(EventControllerScrollFlags.BothAxes);
+                <xsl:value-of select="Name"/>.AddController(controller);
+                controller.OnScroll += (_, _) =&gt; true;
+            }
+                </xsl:when>
+            </xsl:choose>
         </xsl:for-each>
     }
 
@@ -876,6 +918,8 @@ public class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerCont
         Caption = $"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}:";
         PointerChanged += async (_, pointer) =&gt; Presentation = pointer != null ? await pointer.GetPresentation() : "";
     }
+
+    public static <xsl:value-of select="$DocumentName"/>_PointerControl New() =&gt; new();
 
     <xsl:value-of select="$DocumentName"/>_Pointer pointer;
     public <xsl:value-of select="$DocumentName"/>_Pointer Pointer

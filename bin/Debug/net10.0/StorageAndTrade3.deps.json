@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v10.0": {
       "StorageAndTrade3/3.1.0.10": {
         "dependencies": {
-          "AccountingSoftware": "3.1.2.1",
+          "AccountingSoftware": "3.1.3",
           "Configurator3": "3.1.0.8",
           "GtkSharp": "3.24.24.117-develop",
           "NPOI": "2.7.6",
@@ -29,11 +29,11 @@
           }
         }
       },
-      "BCrypt.Net-Next/4.0.3": {
+      "BCrypt.Net-Next/4.1.0": {
         "runtime": {
-          "lib/net6.0/BCrypt.Net-Next.dll": {
-            "assemblyVersion": "4.0.3.0",
-            "fileVersion": "4.0.3.0"
+          "lib/net10.0/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.1.0.0"
           }
         }
       },
@@ -164,14 +164,14 @@
           }
         }
       },
-      "Npgsql/10.0.1": {
+      "Npgsql/10.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "10.0.0"
         },
         "runtime": {
           "lib/net10.0/Npgsql.dll": {
-            "assemblyVersion": "10.0.1.0",
-            "fileVersion": "10.0.1.0"
+            "assemblyVersion": "10.0.2.0",
+            "fileVersion": "10.0.2.0"
           }
         }
       },
@@ -407,24 +407,24 @@
           }
         }
       },
-      "AccountingSoftware/3.1.2.1": {
+      "AccountingSoftware/3.1.3": {
         "dependencies": {
-          "BCrypt.Net-Next": "4.0.3",
-          "Npgsql": "10.0.1"
+          "BCrypt.Net-Next": "4.1.0",
+          "Npgsql": "10.0.2"
         },
         "runtime": {
           "AccountingSoftware.dll": {
-            "assemblyVersion": "3.1.2.1",
-            "fileVersion": "3.1.2.1"
+            "assemblyVersion": "3.1.3.0",
+            "fileVersion": "3.1.3.0"
           }
         }
       },
       "Configurator3/3.1.0.8": {
         "dependencies": {
-          "AccountingSoftware": "3.1.2.1",
+          "AccountingSoftware": "3.1.3",
           "GtkSharp": "3.24.24.117-develop",
           "GtkSourceSharp": "3.24.24.117-develop",
-          "InterfaceGtk3": "3.1.0.8"
+          "InterfaceGtk3": "3.1.0.9"
         },
         "runtime": {
           "Configurator3.dll": {
@@ -433,16 +433,16 @@
           }
         }
       },
-      "InterfaceGtk3/3.1.0.8": {
+      "InterfaceGtk3/3.1.0.9": {
         "dependencies": {
-          "AccountingSoftware": "3.1.2.1",
+          "AccountingSoftware": "3.1.3",
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtkLib": "1.0.0"
         },
         "runtime": {
           "InterfaceGtk3.dll": {
-            "assemblyVersion": "3.1.0.8",
-            "fileVersion": "3.1.0.8"
+            "assemblyVersion": "3.1.0.9",
+            "fileVersion": "3.1.0.9"
           }
         }
       },
@@ -469,12 +469,12 @@
       "path": "atksharp/3.24.24.117-develop",
       "hashPath": "atksharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "BCrypt.Net-Next/4.0.3": {
+    "BCrypt.Net-Next/4.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
-      "path": "bcrypt.net-next/4.0.3",
-      "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
+      "sha512": "sha512-5YT3DKllmtkyW68PjURu/V1TOe4MKiByKwsRNVcfYE1S5KuFTeozdmKzyNzolKiQF391OXCaQtINvYT3j1ERzQ==",
+      "path": "bcrypt.net-next/4.1.0",
+      "hashPath": "bcrypt.net-next.4.1.0.nupkg.sha512"
     },
     "BouncyCastle.Cryptography/2.6.2": {
       "type": "package",
@@ -567,12 +567,12 @@
       "path": "microsoft.io.recyclablememorystream/3.0.1",
       "hashPath": "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512"
     },
-    "Npgsql/10.0.1": {
+    "Npgsql/10.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XyUcxEfqlFomhNTG/ZdGlec+uSOQArKz0Mzz8jYKP/Jj9GM2YabU5CVZtp0yiC4f9hRp+tRZTnHMatJeJ3rwgw==",
-      "path": "npgsql/10.0.1",
-      "hashPath": "npgsql.10.0.1.nupkg.sha512"
+      "sha512": "sha512-q5RfBI+wywJSFUNDE1L4ZbHEHCFTblo8Uf6A6oe4feOUFYiUQXyAf9GBh5qEZpvJaHiEbpBPkQumjEhXCJxdrg==",
+      "path": "npgsql/10.0.2",
+      "hashPath": "npgsql.10.0.2.nupkg.sha512"
     },
     "NPOI/2.7.6": {
       "type": "package",
@@ -644,7 +644,7 @@
       "path": "zstring/2.6.0",
       "hashPath": "zstring.2.6.0.nupkg.sha512"
     },
-    "AccountingSoftware/3.1.2.1": {
+    "AccountingSoftware/3.1.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -654,7 +654,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "InterfaceGtk3/3.1.0.8": {
+    "InterfaceGtk3/3.1.0.9": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

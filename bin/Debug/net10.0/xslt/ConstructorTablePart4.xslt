@@ -168,6 +168,8 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
 
     class ItemRow : RowTablePart
     {
+        public static ItemRow New() =&gt; (ItemRow)NewWithProperties([]);
+        public ItemRow(GObject.Internal.ObjectHandle handle) : base(handle) { }
     <xsl:for-each select="$FieldsTL">
         //
         // <xsl:value-of select="Name"/>
@@ -202,17 +204,17 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
         
         public override ItemRow Copy()
         {
-            return new()
-            {
-                <xsl:for-each select="$FieldsTL">
-                    <xsl:value-of select="Name"/>
-                    <xsl:text> = </xsl:text>
-                    <xsl:value-of select="Name"/>
-                    <xsl:choose>
-                        <xsl:when test="Type = 'pointer'">.Copy()</xsl:when>
-                    </xsl:choose>,
-                </xsl:for-each>
-            };
+            var itemRow = New();
+            <xsl:for-each select="$FieldsTL">
+                <xsl:text>itemRow.</xsl:text>
+                <xsl:value-of select="Name"/>
+                <xsl:text> = </xsl:text>
+                <xsl:value-of select="Name"/>
+                <xsl:choose>
+                    <xsl:when test="Type = 'pointer'">.Copy()</xsl:when>
+                </xsl:choose>;
+            </xsl:for-each>
+            return itemRow;
         }
     }
 
@@ -377,13 +379,12 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
         </xsl:variable>
         foreach (var record in <xsl:value-of select="$InRecords"/>.Records)
         {
-            Store.Append(new ItemRow()
-            {
-                UniqueID = new(record.UID),
-                <xsl:for-each select="$FieldsTL">
-                <xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>,
-                </xsl:for-each>
-            });
+            var row = ItemRow.New();
+            row.UniqueID = new(record.UID);
+            <xsl:for-each select="$FieldsTL">
+                <xsl:text>row.</xsl:text><xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>;
+            </xsl:for-each>
+            Store.Append(row);
 
             if (SelectPosition &gt; 0)
             {
@@ -429,13 +430,13 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
             foreach (var record in <xsl:value-of select="$InRecords"/>.Records)
             {
                 bool sel = Grid.Model.IsSelected(position);
-                Store.Splice(position, 1, [new ItemRow()
-                {
-                    UniqueID = new(record.UID),
-                    <xsl:for-each select="$FieldsTL">
-                    <xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>,
-                    </xsl:for-each>
-                }], 1);
+
+                var row = ItemRow.New();
+                row.UniqueID = new(record.UID);
+                <xsl:for-each select="$FieldsTL">
+                    <xsl:text>row.</xsl:text><xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>;
+                </xsl:for-each>
+                Store.Splice(position, 1, [row], 1);
                 if (sel) Grid.Model.SelectItem(position, false);
                 position++;
             }
@@ -445,7 +446,7 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
 
     public override bool NewRecord()
     {
-        Store.Append(new ItemRow());
+        Store.Append(ItemRow.New());
         return true;
     }
 }
