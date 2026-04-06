@@ -108,11 +108,13 @@ limitations under the License.
                         object get() =&gt; <xsl:value-of select="Name"/>.Value;
                     </xsl:when>
                     <xsl:when test="Type = 'time'">
-                        TimeControl <xsl:value-of select="Name"/> = new();
+                        TimeControl <xsl:value-of select="Name"/> = TimeControl.New();
                         object get() =&gt; <xsl:value-of select="Name"/>.Value;
                     </xsl:when>
                     <xsl:when test="Type = 'pointer'">
-                        <xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "", AfterSelectFunc = () =&gt; sw.Active = true };
+                        <xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = <xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl.New();
+                        <xsl:value-of select="Name"/>.Caption = "";
+                        <xsl:value-of select="Name"/>.AfterSelectFunc = () =&gt; sw.Active = true;
                         object get() =&gt; <xsl:value-of select="Name"/>.Pointer.UniqueID.UGuid;
                     </xsl:when>
                     <xsl:when test="Type = 'enum'">
@@ -154,7 +156,7 @@ limitations under the License.
                 {
                     ListItem listItem = (ListItem)args.Object;
                     <xsl:value-of select="$RowType"/>? row = (<xsl:value-of select="$RowType"/>?)listItem.Item;
-                    listItem.SetChild(ImageTablePartCell.NewForPixbuf((row?.DeletionLabel ?? false) ? InterfaceGtk4.Icon.ForTabularLists.Delete : InterfaceGtk4.Icon.ForTabularLists.Normal));
+                    listItem.SetChild(ImageTablePartCell.NewFromPixbuf((row?.DeletionLabel ?? false) ? InterfaceGtk4.Icon.ForTabularLists.Delete : InterfaceGtk4.Icon.ForTabularLists.Normal));
                 };
                 ColumnViewColumn column = ColumnViewColumn.New("", factory);
                 form.Grid.AppendColumn(column);
@@ -169,7 +171,7 @@ limitations under the License.
                 {
                     ListItem listItem = (ListItem)args.Object;
                     DocumentRowJournal? row = (DocumentRowJournal?)listItem.Item;
-                    listItem.SetChild(ImageTablePartCell.NewForPixbuf((row?.Spend ?? false) ? InterfaceGtk4.Icon.ForInformation.Check : null));
+                    listItem.SetChild(ImageTablePartCell.NewFromPixbuf((row?.Spend ?? false) ? InterfaceGtk4.Icon.ForInformation.Check : null));
                 };
                 ColumnViewColumn column = ColumnViewColumn.New("", factory);
                 form.Grid.AppendColumn(column);
@@ -183,7 +185,7 @@ limitations under the License.
                 factory.OnSetup += (_, args) =&gt;
                 {
                     ListItem listItem = (ListItem)args.Object;
-                    var cell = LabelTablePartCell.New(null);
+                    var cell = LabelTablePartCell.New();
                     cell.Halign = Align.Center;
                     listItem.Child = cell;
                 };
@@ -208,7 +210,7 @@ limitations under the License.
                 factory.OnSetup += (_, args) =&gt;
                 {
                     ListItem listItem = (ListItem)args.Object;
-                    listItem.Child = LabelTablePartCell.New(null);
+                    listItem.Child = LabelTablePartCell.New();
                 };
                 factory.OnBind += (_, args) =&gt;
                 {
@@ -231,7 +233,7 @@ limitations under the License.
                 factory.OnSetup += (_, args) =&gt;
                 {
                     ListItem listItem = (ListItem)args.Object;
-                    listItem.Child = LabelTablePartCell.New(null);
+                    listItem.Child = LabelTablePartCell.New();
                 };
                 factory.OnBind += (_, args) =&gt;
                 {
@@ -254,7 +256,7 @@ limitations under the License.
                 factory.OnSetup += (_, args) =&gt;
                 {
                     ListItem listItem = (ListItem)args.Object;
-                    listItem.Child = LabelTablePartCell.New(null);
+                    listItem.Child = LabelTablePartCell.New();
                 };
                 factory.OnBind += (_, args) =&gt;
                 {
@@ -277,7 +279,7 @@ limitations under the License.
                 factory.OnSetup += (_, args) =&gt;
                 {
                     ListItem listItem = (ListItem)args.Object;
-                    listItem.Child = LabelTablePartCell.New(null);
+                    listItem.Child = LabelTablePartCell.New();
                 };
                 factory.OnBind += (_, args) =&gt;
                 {
@@ -361,7 +363,7 @@ limitations under the License.
                 {
                     ListItem listItem = (ListItem)args.Object;
                     TreeExpander expander = TreeExpander.New();
-                    expander.SetChild(new ImageTablePartCell());
+                    expander.SetChild(ImageTablePartCell.New());
                     listItem.SetChild(expander);
                 };
                 factory.OnBind += (_, args) =&gt;

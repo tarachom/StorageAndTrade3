@@ -351,7 +351,7 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
                 <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = new();
             </xsl:when>
             <xsl:when test="Type = 'composite_pointer'">
-                <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = new() { BoundConfType = "Документи.<xsl:value-of select="$DocumentName"/>.<xsl:value-of select="Name"/>" };
+                <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = CompositePointerControl.New();
             </xsl:when>
             <xsl:when test="Type = 'composite_text'">
                 <xsl:text>//NameAndText </xsl:text><xsl:value-of select="Name"/> = new();
@@ -456,7 +456,7 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
                     
                 </xsl:when>
                 <xsl:when test="Type = 'composite_pointer'">
-                    
+                    <xsl:value-of select="Name"/>.BoundConfType = "Документи.<xsl:value-of select="$DocumentName"/>.<xsl:value-of select="Name"/>";
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
                     <xsl:value-of select="Name"/>.Caption = "<xsl:value-of select="Caption"/>";
@@ -896,6 +896,7 @@ public class <xsl:value-of select="$DocumentName"/>_ШвидкийВибір : D
     <!-- PointerControl -->
     <xsl:template name="DocumentPointerControl">
         <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="SubclassName" select="concat('PointerControl_', Document/Alias)"/>
 
 /*     
         <xsl:value-of select="$DocumentName"/>_PointerControl.cs
@@ -907,21 +908,21 @@ using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-public class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerControl
+[GObject.Subclass&lt;PointerControl&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerControl
 {
-    event EventHandler&lt;<xsl:value-of select="$DocumentName"/>_Pointer&gt; PointerChanged;
+    event EventHandler&lt;<xsl:value-of select="$DocumentName"/>_Pointer&gt;? PointerChanged;
 
-    public <xsl:value-of select="$DocumentName"/>_PointerControl()
+    partial void Initialize()
     {
-        pointer = new <xsl:value-of select="$DocumentName"/>_Pointer();
         WidthPresentation = 300;
         Caption = $"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}:";
         PointerChanged += async (_, pointer) =&gt; Presentation = pointer != null ? await pointer.GetPresentation() : "";
     }
 
-    public static <xsl:value-of select="$DocumentName"/>_PointerControl New() =&gt; new();
+    public static <xsl:value-of select="$DocumentName"/>_PointerControl New() =&gt; NewWithProperties([]);
 
-    <xsl:value-of select="$DocumentName"/>_Pointer pointer;
+    <xsl:value-of select="$DocumentName"/>_Pointer pointer = new();
     public <xsl:value-of select="$DocumentName"/>_Pointer Pointer
     {
         get
@@ -977,6 +978,7 @@ public class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerCont
     <!-- PointerControl -->
     <xsl:template name="DocumentPointerTablePartCell">
         <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="SubclassName" select="concat('PointerTablePartCell_', Document/Alias)"/>
 
 /*     
         <xsl:value-of select="$DocumentName"/>_PointerTablePartCell.cs
@@ -989,8 +991,11 @@ using AccountingSoftware;
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-public class <xsl:value-of select="$DocumentName"/>_PointerTablePartCell : PointerTablePartCell
+[GObject.Subclass&lt;PointerTablePartCell&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$DocumentName"/>_PointerTablePartCell : PointerTablePartCell
 {
+    public static <xsl:value-of select="$DocumentName"/>_PointerTablePartCell New() =&gt; NewWithProperties([]);
+
     <xsl:value-of select="$DocumentName"/>_Pointer pointer = new();
     public <xsl:value-of select="$DocumentName"/>_Pointer Pointer
     {

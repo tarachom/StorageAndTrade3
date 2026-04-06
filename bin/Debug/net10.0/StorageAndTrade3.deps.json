@@ -6,26 +6,27 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "StorageAndTrade3/3.1.0.10": {
+      "StorageAndTrade3/3.1.0.20": {
         "dependencies": {
           "AccountingSoftware": "3.1.3",
           "Configurator3": "3.1.0.8",
-          "GtkSharp": "3.24.24.117-develop",
-          "NPOI": "2.7.6",
-          "QuestPDF": "2026.2.2"
+          "GtkSharp": "3.24.24.133-develop",
+          "NPOI": "2.8.0",
+          "QuestPDF": "2026.2.4",
+          "SkiaSharp": "3.119.2"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
         }
       },
-      "AtkSharp/3.24.24.117-develop": {
+      "AtkSharp/3.24.24.133-develop": {
         "dependencies": {
-          "GLibSharp": "3.24.24.117-develop"
+          "GLibSharp": "3.24.24.133-develop"
         },
         "runtime": {
           "lib/net8.0/AtkSharp.dll": {
-            "assemblyVersion": "3.24.24.117",
-            "fileVersion": "3.24.24.117"
+            "assemblyVersion": "3.24.24.133",
+            "fileVersion": "3.24.24.133"
           }
         }
       },
@@ -45,11 +46,11 @@
           }
         }
       },
-      "CairoSharp/3.24.24.117-develop": {
+      "CairoSharp/3.24.24.133-develop": {
         "runtime": {
           "lib/net8.0/CairoSharp.dll": {
-            "assemblyVersion": "3.24.24.117",
-            "fileVersion": "3.24.24.117"
+            "assemblyVersion": "3.24.24.133",
+            "fileVersion": "3.24.24.133"
           }
         }
       },
@@ -69,58 +70,58 @@
           }
         }
       },
-      "GdkSharp/3.24.24.117-develop": {
+      "GdkSharp/3.24.24.133-develop": {
         "dependencies": {
-          "CairoSharp": "3.24.24.117-develop",
-          "GLibSharp": "3.24.24.117-develop",
-          "GioSharp": "3.24.24.117-develop",
-          "PangoSharp": "3.24.24.117-develop"
+          "CairoSharp": "3.24.24.133-develop",
+          "GLibSharp": "3.24.24.133-develop",
+          "GioSharp": "3.24.24.133-develop",
+          "PangoSharp": "3.24.24.133-develop"
         },
         "runtime": {
           "lib/net8.0/GdkSharp.dll": {
-            "assemblyVersion": "3.24.24.117",
-            "fileVersion": "3.24.24.117"
+            "assemblyVersion": "3.24.24.133",
+            "fileVersion": "3.24.24.133"
           }
         }
       },
-      "GioSharp/3.24.24.117-develop": {
+      "GioSharp/3.24.24.133-develop": {
         "dependencies": {
-          "GLibSharp": "3.24.24.117-develop"
+          "GLibSharp": "3.24.24.133-develop"
         },
         "runtime": {
           "lib/net8.0/GioSharp.dll": {
-            "assemblyVersion": "3.24.24.117",
-            "fileVersion": "3.24.24.117"
+            "assemblyVersion": "3.24.24.133",
+            "fileVersion": "3.24.24.133"
           }
         }
       },
-      "GLibSharp/3.24.24.117-develop": {
+      "GLibSharp/3.24.24.133-develop": {
         "runtime": {
           "lib/net8.0/GLibSharp.dll": {
-            "assemblyVersion": "3.24.24.117",
-            "fileVersion": "3.24.24.117"
+            "assemblyVersion": "3.24.24.133",
+            "fileVersion": "3.24.24.133"
           }
         }
       },
-      "GtkSharp/3.24.24.117-develop": {
+      "GtkSharp/3.24.24.133-develop": {
         "dependencies": {
-          "AtkSharp": "3.24.24.117-develop",
-          "CairoSharp": "3.24.24.117-develop",
-          "GLibSharp": "3.24.24.117-develop",
-          "GdkSharp": "3.24.24.117-develop",
-          "GioSharp": "3.24.24.117-develop",
-          "PangoSharp": "3.24.24.117-develop"
+          "AtkSharp": "3.24.24.133-develop",
+          "CairoSharp": "3.24.24.133-develop",
+          "GLibSharp": "3.24.24.133-develop",
+          "GdkSharp": "3.24.24.133-develop",
+          "GioSharp": "3.24.24.133-develop",
+          "PangoSharp": "3.24.24.133-develop"
         },
         "runtime": {
           "lib/net8.0/GtkSharp.dll": {
-            "assemblyVersion": "3.24.24.117",
-            "fileVersion": "3.24.24.117"
+            "assemblyVersion": "3.24.24.133",
+            "fileVersion": "3.24.24.133"
           }
         }
       },
       "GtkSourceSharp/3.24.24.117-develop": {
         "dependencies": {
-          "GtkSharp": "3.24.24.117-develop"
+          "GtkSharp": "3.24.24.133-develop"
         },
         "runtime": {
           "lib/net8.0/GtkSourceSharp.dll": {
@@ -175,64 +176,55 @@
           }
         }
       },
-      "NPOI/2.7.6": {
+      "NPOI/2.8.0": {
         "dependencies": {
           "BouncyCastle.Cryptography": "2.6.2",
           "Enums.NET": "5.0.0",
           "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
           "MathNet.Numerics.Signed": "5.0.0",
           "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
-          "NSax": "1.0.2",
           "SharpZipLib": "1.4.2",
-          "SixLabors.Fonts": "1.0.1",
-          "SixLabors.ImageSharp": "2.1.11",
+          "SkiaSharp": "3.119.2",
+          "SkiaSharp.NativeAssets.Linux.NoDependencies": "3.119.2",
           "System.Security.Cryptography.Xml": "8.0.2",
           "ZString": "2.6.0"
         },
         "runtime": {
-          "lib/net8.0/NPOI.Core.dll": {
-            "assemblyVersion": "2.7.6.0",
-            "fileVersion": "2.7.6.0"
+          "lib/net10.0/NPOI.Core.dll": {
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.0.0"
           },
-          "lib/net8.0/NPOI.OOXML.dll": {
-            "assemblyVersion": "2.7.6.0",
-            "fileVersion": "2.7.6.0"
+          "lib/net10.0/NPOI.OOXML.dll": {
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.0.0"
           },
-          "lib/net8.0/NPOI.OpenXml4Net.dll": {
-            "assemblyVersion": "2.7.6.0",
-            "fileVersion": "2.7.6.0"
+          "lib/net10.0/NPOI.OpenXml4Net.dll": {
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.0.0"
           },
-          "lib/net8.0/NPOI.OpenXmlFormats.dll": {
-            "assemblyVersion": "2.7.6.0",
-            "fileVersion": "2.7.6.0"
+          "lib/net10.0/NPOI.OpenXmlFormats.dll": {
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.0.0"
           }
         }
       },
-      "NSax/1.0.2": {
-        "runtime": {
-          "lib/net6.0/NSax.dll": {
-            "assemblyVersion": "1.0.2.0",
-            "fileVersion": "1.0.2.0"
-          }
-        }
-      },
-      "PangoSharp/3.24.24.117-develop": {
+      "PangoSharp/3.24.24.133-develop": {
         "dependencies": {
-          "CairoSharp": "3.24.24.117-develop",
-          "GLibSharp": "3.24.24.117-develop"
+          "CairoSharp": "3.24.24.133-develop",
+          "GLibSharp": "3.24.24.133-develop"
         },
         "runtime": {
           "lib/net8.0/PangoSharp.dll": {
-            "assemblyVersion": "3.24.24.117",
-            "fileVersion": "3.24.24.117"
+            "assemblyVersion": "3.24.24.133",
+            "fileVersion": "3.24.24.133"
           }
         }
       },
-      "QuestPDF/2026.2.2": {
+      "QuestPDF/2026.2.4": {
         "runtime": {
           "lib/net10.0/QuestPDF.dll": {
-            "assemblyVersion": "2026.2.2.0",
-            "fileVersion": "2026.2.2.0"
+            "assemblyVersion": "2026.2.4.0",
+            "fileVersion": "2026.2.4.0"
           }
         },
         "runtimeTargets": {
@@ -356,19 +348,117 @@
           }
         }
       },
-      "SixLabors.Fonts/1.0.1": {
+      "SkiaSharp/3.119.2": {
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "3.119.2",
+          "SkiaSharp.NativeAssets.macOS": "3.119.2"
+        },
         "runtime": {
-          "lib/netcoreapp3.1/SixLabors.Fonts.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.1.0"
+          "lib/net8.0/SkiaSharp.dll": {
+            "assemblyVersion": "3.119.0.0",
+            "fileVersion": "3.119.2.0"
           }
         }
       },
-      "SixLabors.ImageSharp/2.1.11": {
-        "runtime": {
-          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.1.11.0"
+      "SkiaSharp.NativeAssets.Linux.NoDependencies/3.119.2": {
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libSkiaSharp.so": {
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libSkiaSharp.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-loongarch64/native/libSkiaSharp.so": {
+            "rid": "linux-loongarch64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-arm/native/libSkiaSharp.so": {
+            "rid": "linux-musl-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-arm64/native/libSkiaSharp.so": {
+            "rid": "linux-musl-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-loongarch64/native/libSkiaSharp.so": {
+            "rid": "linux-musl-loongarch64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-riscv64/native/libSkiaSharp.so": {
+            "rid": "linux-musl-riscv64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-x64/native/libSkiaSharp.so": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-riscv64/native/libSkiaSharp.so": {
+            "rid": "linux-riscv64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libSkiaSharp.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x86/native/libSkiaSharp.so": {
+            "rid": "linux-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.macOS/3.119.2": {
+        "runtimeTargets": {
+          "runtimes/osx/native/libSkiaSharp.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.Win32/3.119.2": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/libSkiaSharp.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-arm64/native/libSkiaSharp.pdb": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libSkiaSharp.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libSkiaSharp.pdb": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libSkiaSharp.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libSkiaSharp.pdb": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -422,7 +512,7 @@
       "Configurator3/3.1.0.8": {
         "dependencies": {
           "AccountingSoftware": "3.1.3",
-          "GtkSharp": "3.24.24.117-develop",
+          "GtkSharp": "3.24.24.133-develop",
           "GtkSourceSharp": "3.24.24.117-develop",
           "InterfaceGtk3": "3.1.0.9"
         },
@@ -436,7 +526,7 @@
       "InterfaceGtk3/3.1.0.9": {
         "dependencies": {
           "AccountingSoftware": "3.1.3",
-          "GtkSharp": "3.24.24.117-develop",
+          "GtkSharp": "3.24.24.133-develop",
           "InterfaceGtkLib": "1.0.0"
         },
         "runtime": {
@@ -457,17 +547,17 @@
     }
   },
   "libraries": {
-    "StorageAndTrade3/3.1.0.10": {
+    "StorageAndTrade3/3.1.0.20": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "AtkSharp/3.24.24.117-develop": {
+    "AtkSharp/3.24.24.133-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LqhUEqLkNC4Uybx/IKQenGDSvDFrjGE6w9uQ1zZwyHuGyDSZhiqeg6PyzU1FaQ3NF+uGwbFxDcDYJCVM2JoTpw==",
-      "path": "atksharp/3.24.24.117-develop",
-      "hashPath": "atksharp.3.24.24.117-develop.nupkg.sha512"
+      "sha512": "sha512-wu67y8h/QGYMMTwcmBHmX/+YSlRl35lzAAVdgFxKgdgdu2gV939LSZ5HH229ihPD8wPQVQ9OL8i8RoQHXaL+UQ==",
+      "path": "atksharp/3.24.24.133-develop",
+      "hashPath": "atksharp.3.24.24.133-develop.nupkg.sha512"
     },
     "BCrypt.Net-Next/4.1.0": {
       "type": "package",
@@ -483,12 +573,12 @@
       "path": "bouncycastle.cryptography/2.6.2",
       "hashPath": "bouncycastle.cryptography.2.6.2.nupkg.sha512"
     },
-    "CairoSharp/3.24.24.117-develop": {
+    "CairoSharp/3.24.24.133-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5zsEUuksviQPiZHdXyiuzVbn2wVnaBURTyENkVmZuHzr5T8mONAm+15LUu19Z3xbFCKx0CH4GJzuO7qW14nNQw==",
-      "path": "cairosharp/3.24.24.117-develop",
-      "hashPath": "cairosharp.3.24.24.117-develop.nupkg.sha512"
+      "sha512": "sha512-9Y/+DbwUyV62l+OOvMc9UCra2QHOsiZ2IwVPmXA/drr+O0pgiIxVYPdF8hvohrXcrEJ+yL+KNiRHJgV3VZ2BBw==",
+      "path": "cairosharp/3.24.24.133-develop",
+      "hashPath": "cairosharp.3.24.24.133-develop.nupkg.sha512"
     },
     "Enums.NET/5.0.0": {
       "type": "package",
@@ -504,33 +594,33 @@
       "path": "extendednumerics.bigdecimal/2025.1001.2.129",
       "hashPath": "extendednumerics.bigdecimal.2025.1001.2.129.nupkg.sha512"
     },
-    "GdkSharp/3.24.24.117-develop": {
+    "GdkSharp/3.24.24.133-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-M7N7gMqjrW2NnAWcqR2E5/x5JUuz2jT3mFTTD7raHWF6llW7fiP3zxJfIiJHwHIOjSd8pfu7G8bVdCHwAd8t8g==",
-      "path": "gdksharp/3.24.24.117-develop",
-      "hashPath": "gdksharp.3.24.24.117-develop.nupkg.sha512"
+      "sha512": "sha512-B/eAjYaKIeqVkgBJuzOIf/zoAx9Vngy3Rf38mUYvpaEJDGt/34Kh6mt2eJ/B8U30+wiOeNFUUD1LiUWyZs73oA==",
+      "path": "gdksharp/3.24.24.133-develop",
+      "hashPath": "gdksharp.3.24.24.133-develop.nupkg.sha512"
     },
-    "GioSharp/3.24.24.117-develop": {
+    "GioSharp/3.24.24.133-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-PxXTbBumyzJHt/h6qED0MYO3vEAY4vBHbgDrWFp1Kap5uUSpIMV8GPH2UaswX0wEtgdkMrVdhYGdeSllMwHWHw==",
-      "path": "giosharp/3.24.24.117-develop",
-      "hashPath": "giosharp.3.24.24.117-develop.nupkg.sha512"
+      "sha512": "sha512-NPGJHSgRqN5YwKI2YK3bNlrwFhZ51cOS7sm8+n3K+Z9t7+QiwxE3xnxCsVupalmrGJsfuUWeaLWsVqf5ZwEWBw==",
+      "path": "giosharp/3.24.24.133-develop",
+      "hashPath": "giosharp.3.24.24.133-develop.nupkg.sha512"
     },
-    "GLibSharp/3.24.24.117-develop": {
+    "GLibSharp/3.24.24.133-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-NPHNJBR0FTZRMREP7ZtdFOlPFTRJwecYSCIWiJMvRybasH5xyavf7UmPkMzrGGJdt5ne4ZEZ3Yj+uOcqVKnkqg==",
-      "path": "glibsharp/3.24.24.117-develop",
-      "hashPath": "glibsharp.3.24.24.117-develop.nupkg.sha512"
+      "sha512": "sha512-lFJKjqTZznCIR6UuzSYTqls0ASqGdDTKH7CGwTVho2RE7e1INBn7mp7EGbjTA4MWDTVNGRV5iEH1dLLvitNAQw==",
+      "path": "glibsharp/3.24.24.133-develop",
+      "hashPath": "glibsharp.3.24.24.133-develop.nupkg.sha512"
     },
-    "GtkSharp/3.24.24.117-develop": {
+    "GtkSharp/3.24.24.133-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qc4oBmHw4VoMk+tTurM6g2FRCl8yot/oOAy9ytmvzQ2+zI9T/SLF+Q534R1q8z3uz4q9sm46QOJOQOfAyOlKnQ==",
-      "path": "gtksharp/3.24.24.117-develop",
-      "hashPath": "gtksharp.3.24.24.117-develop.nupkg.sha512"
+      "sha512": "sha512-xBHWajUmOB32zUj6WVo8MQf8/yOUyOwwcy6bh1lEYtbbr1wxFwUvUTOETcsmnl6ZmT07k25Gq0D3l2X7nq6ftw==",
+      "path": "gtksharp/3.24.24.133-develop",
+      "hashPath": "gtksharp.3.24.24.133-develop.nupkg.sha512"
     },
     "GtkSourceSharp/3.24.24.117-develop": {
       "type": "package",
@@ -574,33 +664,26 @@
       "path": "npgsql/10.0.2",
       "hashPath": "npgsql.10.0.2.nupkg.sha512"
     },
-    "NPOI/2.7.6": {
+    "NPOI/2.8.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-itLDt6M2VFcWjTGpzeRNy7Axmp2cVjHpTtf4zVLm6XQvuINlkHFBabBd4s8iCRAupx/NBSzqPxqe7+5fJOY8NQ==",
-      "path": "npoi/2.7.6",
-      "hashPath": "npoi.2.7.6.nupkg.sha512"
+      "sha512": "sha512-fAAc8iUvDuRu+e+TU+Ghg4czJPT1JY/v/wJjHvFaHJo0Y6XMWvanbH1U6nPaCK36UtcIc1Y9uOXNomRhdAaGEw==",
+      "path": "npoi/2.8.0",
+      "hashPath": "npoi.2.8.0.nupkg.sha512"
     },
-    "NSax/1.0.2": {
+    "PangoSharp/3.24.24.133-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7txlId2RJTQBL3YdSGO7x70+r3HUOCw725lu0OoBgThRl/e3RhAZ2QKYxW2y9dPRtqbFZYHVa8siIeB8+L//Cg==",
-      "path": "nsax/1.0.2",
-      "hashPath": "nsax.1.0.2.nupkg.sha512"
+      "sha512": "sha512-OgZkvZbcc0wY3681N4CbbERoVGynZ+SkBHu7O2IxWePQb1qEAqz1W6Yq1mQIEYJTsvFMC6O1+pBuM3XqBtjMag==",
+      "path": "pangosharp/3.24.24.133-develop",
+      "hashPath": "pangosharp.3.24.24.133-develop.nupkg.sha512"
     },
-    "PangoSharp/3.24.24.117-develop": {
+    "QuestPDF/2026.2.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WycHWMa+cd07LrbFMi4ulvFYbzz2WrjNw2F2MsJTZKW63J7Yxw9gHA5vMAkF6h/jT0beAi0+0FLqDyFm4xJszg==",
-      "path": "pangosharp/3.24.24.117-develop",
-      "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
-    },
-    "QuestPDF/2026.2.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-LAcnbU7Zx/adNX5+JBwRSazCLhNNrm2HMQJQVhUtzjq2hXl7QWOVS8a8bb+a6AjhV2hdC9saVqgYzjCpYgMa1g==",
-      "path": "questpdf/2026.2.2",
-      "hashPath": "questpdf.2026.2.2.nupkg.sha512"
+      "sha512": "sha512-fajBdRJFr3hu2Mr6mEVsXjvVKD9Q/Q6hfPEUMpV/xlwxWdFebmpGdi0FLQTApMvpapy72v9dvcGuk7e7NQmQyQ==",
+      "path": "questpdf/2026.2.4",
+      "hashPath": "questpdf.2026.2.4.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
@@ -609,19 +692,33 @@
       "path": "sharpziplib/1.4.2",
       "hashPath": "sharpziplib.1.4.2.nupkg.sha512"
     },
-    "SixLabors.Fonts/1.0.1": {
+    "SkiaSharp/3.119.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ljezRHWc7N0azdQViib7Aa5v+DagRVkKI2/93kEbtjVczLs+yTkSq6gtGmvOcx4IqyNbO3GjLt7SAQTpLkySNw==",
-      "path": "sixlabors.fonts/1.0.1",
-      "hashPath": "sixlabors.fonts.1.0.1.nupkg.sha512"
+      "sha512": "sha512-nmy2dOFWPvQKMglfpjz8+/xQQcSrL9jzul3cUyzCJVSwrmSAw+6B1sEgU7jt6NZBptwGq2k/V0kjyu2GizMFtg==",
+      "path": "skiasharp/3.119.2",
+      "hashPath": "skiasharp.3.119.2.nupkg.sha512"
     },
-    "SixLabors.ImageSharp/2.1.11": {
+    "SkiaSharp.NativeAssets.Linux.NoDependencies/3.119.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-tUvsejgzUmEbES114yLseRxmFiYlQbH5RyaYXUQsEL7ksDo1/kW+ZL1EfD6iSUfxj7LHU8p110oFvSrRfsaWSQ==",
-      "path": "sixlabors.imagesharp/2.1.11",
-      "hashPath": "sixlabors.imagesharp.2.1.11.nupkg.sha512"
+      "sha512": "sha512-1rmveKZ8Cz7k4QJQdtKV6RFXYIEqYBiX450Bm0Bk41EE50MMPUyF81cRnASsuV0qCwdZuzjZTaFvoqS0Q2zVfA==",
+      "path": "skiasharp.nativeassets.linux.nodependencies/3.119.2",
+      "hashPath": "skiasharp.nativeassets.linux.nodependencies.3.119.2.nupkg.sha512"
+    },
+    "SkiaSharp.NativeAssets.macOS/3.119.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I2jMGQ/26KOnc6iAoR+Mxh9vSJJ2vioJyj9aJ9OL5yEZyXothXJxf4vBMqnSaiXMqiiU1scG7KqtT0CLkmMmWA==",
+      "path": "skiasharp.nativeassets.macos/3.119.2",
+      "hashPath": "skiasharp.nativeassets.macos.3.119.2.nupkg.sha512"
+    },
+    "SkiaSharp.NativeAssets.Win32/3.119.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uYe+da6+GXVgPKkCopzvIZ83DmC8SXXKeUAPrNcztJNsg0SjPQAxfKMOPZqmVjbzznrq/QUIjLUlJSZV/e0IPA==",
+      "path": "skiasharp.nativeassets.win32/3.119.2",
+      "hashPath": "skiasharp.nativeassets.win32.3.119.2.nupkg.sha512"
     },
     "System.Security.Cryptography.Pkcs/8.0.1": {
       "type": "package",

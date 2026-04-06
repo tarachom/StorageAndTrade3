@@ -227,7 +227,6 @@ namespace StorageAndTrade
                     font.IsBold = true;
 
                     XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
-                    cellStyle.WrapText = true;
                     cellStyle.SetFont(font);
 
                     cellStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Dashed;
@@ -254,7 +253,6 @@ namespace StorageAndTrade
                     font.FontName = "Arial";
 
                     XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
-                    cellStyle.WrapText = true;
                     cellStyle.SetFont(font);
 
                     XSSFCellStyle cellStyleDateTime = (XSSFCellStyle)workbook.CreateCellStyle();
@@ -264,8 +262,6 @@ namespace StorageAndTrade
                     for (int r = 0; r < settingsAndRows.Rows.Count; r++)
                     {
                         IRow row = sheet.CreateRow(currRow++);
-
-                        //sheet.GroupRow(0, currRow);
 
                         string[] Значення = settingsAndRows.Rows[r];
                         for (int i = 0; i < Значення.Length; i++)

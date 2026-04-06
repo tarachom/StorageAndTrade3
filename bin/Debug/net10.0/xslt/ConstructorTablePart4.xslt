@@ -128,6 +128,7 @@ static class <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePar
     <!-- Таблична Частина -->
     <xsl:template name="TablePart">
         <xsl:variable name="TablePartName" select="TablePart/Name"/>
+        <xsl:variable name="SubclassName" select="concat('ItemRow_', TablePart/Alias)"/>
         <xsl:variable name="IncludeIconColumn" select="TablePart/IncludeIconColumn"/>
         <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/>
 
@@ -153,27 +154,30 @@ using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Перелічення;
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:value-of select="$TablePartName"/> : <xsl:value-of select="$OwnerType"/>FormTablePart
+partial class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:value-of select="$TablePartName"/> : <xsl:value-of select="$OwnerType"/>FormTablePart
 {
-    <xsl:choose>
-        <xsl:when test="$OwnerType = 'Constants'">
-    <xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart Таблиця { get; set; } = new();
-        </xsl:when>
-        <xsl:otherwise>
-    public <xsl:value-of select="$OwnerName"/>_Objest? ЕлементВласник { get; set; }
-        </xsl:otherwise>
-    </xsl:choose>
-    
     #region Data
-
-    class ItemRow : RowTablePart
+    
+    [GObject.Subclass&lt;GObject.Object&gt;("<xsl:value-of select="$SubclassName"/>")]
+    public partial class ItemRow : IRowSubclassTablePart
     {
-        public static ItemRow New() =&gt; (ItemRow)NewWithProperties([]);
-        public ItemRow(GObject.Internal.ObjectHandle handle) : base(handle) { }
+        public static ItemRow New() =&gt; NewWithProperties([]);
+
+        // Унікальний ідентифікатор
+        public UniqueID UniqueID
+        {
+            get =&gt; UnigueID_;
+            set
+            {
+                UnigueID_ = value;
+                Сhanged_UnigueID?.Invoke();
+            }
+        }
+        UniqueID UnigueID_ = new();
+        public Action? Сhanged_UnigueID;
+
     <xsl:for-each select="$FieldsTL">
-        //
-        // <xsl:value-of select="Name"/>
-        //
+        /* <xsl:value-of select="Name"/> */
         <xsl:text>public </xsl:text>
         <xsl:call-template name="FieldType" />
         <xsl:text> </xsl:text>
@@ -202,7 +206,7 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
         Функції
         */
         
-        public override ItemRow Copy()
+        public GObject.Object Copy()
         {
             var itemRow = New();
             <xsl:for-each select="$FieldsTL">
@@ -220,6 +224,15 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
 
     #endregion
 
+    <xsl:choose>
+        <xsl:when test="$OwnerType = 'Constants'">
+    <xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart Таблиця { get; set; } = new();
+        </xsl:when>
+        <xsl:otherwise>
+    public <xsl:value-of select="$OwnerName"/>_Objest? ЕлементВласник { get; set; }
+        </xsl:otherwise>
+    </xsl:choose>
+    
     protected override Gio.ListStore Store { get; } = Gio.ListStore.New(ItemRow.GetGType());
 
     public <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>() : base(Program.BasicForm?.NotebookFunc)
@@ -252,19 +265,19 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
             SignalListItemFactory factory = SignalListItemFactory.New();
             factory.OnSetup += (_, args) =&gt;
             {
-                ListItem listItem = (ListItem)args.Object;
+                if (args.Object is not ListItem listItem) return;
                 var cell = <xsl:choose>
-                    <xsl:when test="Type = 'string' and ReadOnly = '0'">new TextTablePartCell()</xsl:when>
-                    <xsl:when test="Type = 'integer' and ReadOnly = '0'">new IntegerTablePartCell()</xsl:when>
-                    <xsl:when test="Type = 'numeric' and ReadOnly = '0'">new NumericTablePartCell()</xsl:when>
-                    <xsl:when test="Type = 'boolean'">new CheckTablePartCell()</xsl:when>
-                    <xsl:when test="Type = 'pointer'">new <xsl:value-of select="substring-after(Pointer, '.')"/>_PointerTablePartCell()</xsl:when>
-                    <xsl:when test="Type = 'enum'">new ComboTextTablePartCell();
+                    <xsl:when test="Type = 'string' and ReadOnly = '0'">TextTablePartCell.New()</xsl:when>
+                    <xsl:when test="Type = 'integer' and ReadOnly = '0'">IntegerTablePartCell.New()</xsl:when>
+                    <xsl:when test="Type = 'numeric' and ReadOnly = '0'">NumericTablePartCell.New()</xsl:when>
+                    <xsl:when test="Type = 'boolean'">CheckTablePartCell.New()</xsl:when>
+                    <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_PointerTablePartCell.New()</xsl:when>
+                    <xsl:when test="Type = 'enum'">ComboTextTablePartCell.New();
                 foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List())
                     cell.Combo.Append(field.Value.ToString(), field.Name)</xsl:when>
-                    <xsl:when test="Type = 'date' or Type = 'datetime'">new DateTimeTablePartCell()</xsl:when>
-                    <xsl:when test="Type = 'time'">new TimeTablePartCell()</xsl:when>
-                    <xsl:otherwise>LabelTablePartCell.New(null)</xsl:otherwise>
+                    <xsl:when test="Type = 'date' or Type = 'datetime'">DateTimeTablePartCell.New()</xsl:when>
+                    <xsl:when test="Type = 'time'">TimeTablePartCell.New()</xsl:when>
+                    <xsl:otherwise>LabelTablePartCell.New()</xsl:otherwise>
                 </xsl:choose>;
                 <xsl:choose>
                     <xsl:when test="(Type = 'integer' or Type = 'numeric') and ReadOnly = '1'">
@@ -281,8 +294,8 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
             };
             factory.OnBind += (_, args) =&gt;
             {
-                ListItem listItem = (ListItem)args.Object;
-                var cell = (<xsl:choose>
+                if (args.Object is not ListItem listItem) return;
+                if (listItem.Child is not <xsl:choose>
                     <xsl:when test="Type = 'string'">TextTablePartCell</xsl:when>
                     <xsl:when test="Type = 'integer' and ReadOnly = '0'">IntegerTablePartCell</xsl:when>
                     <xsl:when test="Type = 'numeric'">NumericTablePartCell</xsl:when>
@@ -292,42 +305,39 @@ class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:va
                     <xsl:when test="Type = 'date' or Type = 'datetime'">DateTimeTablePartCell</xsl:when>
                     <xsl:when test="Type = 'time'">TimeTablePartCell</xsl:when>
                     <xsl:otherwise>LabelTablePartCell</xsl:otherwise>
-                </xsl:choose>?)listItem.Child;
-                ItemRow? row = (ItemRow?)listItem.Item;
-                if (cell != null &amp;&amp; row != null)
-                {
-                    <xsl:choose>
-                        <xsl:when test="(Type = 'string' or Type = 'integer' or Type = 'numeric') and ReadOnly = '0'">
-                    cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = cell.Value;
-                    (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>).Invoke();
-                        </xsl:when>
-                        <xsl:when test="Type = 'boolean'">
-                    cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = cell.Check.Active;
-                    (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>).Invoke();
-                        </xsl:when>
-                        <xsl:when test="Type = 'pointer'">
-                        <xsl:if test="normalize-space(DirectoryOwner) != ''">
-                            <xsl:variable name="DirectoryOwner" select="substring-after(DirectoryOwner, '.')"/>
-                            <xsl:if test="count($FieldsTL[Name = $DirectoryOwner]) = 1">
-                    cell.BeforeClickOpenFunc = () =&gt; cell.Власник  = row.<xsl:value-of select="$DirectoryOwner"/>;
-                            </xsl:if>
+                </xsl:choose> cell) return;
+                if (listItem.Item is not ItemRow row) return;
+                <xsl:choose>
+                    <xsl:when test="(Type = 'string' or Type = 'integer' or Type = 'numeric') and ReadOnly = '0'">
+                cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = cell.Value;
+                (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>).Invoke();
+                    </xsl:when>
+                    <xsl:when test="Type = 'boolean'">
+                cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = cell.Check.Active;
+                (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>).Invoke();
+                    </xsl:when>
+                    <xsl:when test="Type = 'pointer'">
+                    <xsl:if test="normalize-space(DirectoryOwner) != ''">
+                        <xsl:variable name="DirectoryOwner" select="substring-after(DirectoryOwner, '.')"/>
+                        <xsl:if test="count($FieldsTL[Name = $DirectoryOwner]) = 1">
+                cell.BeforeClickOpenFunc = () =&gt; cell.Власник  = row.<xsl:value-of select="$DirectoryOwner"/>;
                         </xsl:if>
-                    cell.OnSelect = () =&gt; row.<xsl:value-of select="Name"/> = cell.Pointer;
-                    (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Pointer = row.<xsl:value-of select="Name"/>).Invoke();
-                        </xsl:when>
-                        <xsl:when test="Type = 'enum'">
-                    cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_FindByName(cell.Combo.ActiveId);
-                    (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>.ToString()).Invoke();
-                        </xsl:when>
-                        <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
-                    cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = cell.Value;
-                    (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>).Invoke();
-                        </xsl:when>
-                        <xsl:otherwise>
-                    (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.SetText(row.<xsl:value-of select="Name"/>)).Invoke();
-                        </xsl:otherwise>
-                    </xsl:choose>
-                }
+                    </xsl:if>
+                cell.OnSelect = () =&gt; row.<xsl:value-of select="Name"/> = cell.Pointer;
+                (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Pointer = row.<xsl:value-of select="Name"/>).Invoke();
+                    </xsl:when>
+                    <xsl:when test="Type = 'enum'">
+                cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_FindByName(cell.Combo.ActiveId);
+                (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>.ToString()).Invoke();
+                    </xsl:when>
+                    <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+                cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = cell.Value;
+                (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>).Invoke();
+                    </xsl:when>
+                    <xsl:otherwise>
+                (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.SetText(row.<xsl:value-of select="Name"/>)).Invoke();
+                    </xsl:otherwise>
+                </xsl:choose>
             };
             ColumnViewColumn column = ColumnViewColumn.New("<xsl:value-of select="Caption"/>", factory);
             column.Resizable = true;

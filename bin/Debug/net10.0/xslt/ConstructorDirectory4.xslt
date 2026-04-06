@@ -335,7 +335,7 @@ class <xsl:value-of select="$DirectoryName"/>_Елемент : DirectoryFormElem
                 <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = TimeControl.New();
             </xsl:when>
             <xsl:when test="Type = 'composite_pointer'">
-                <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = new() { BoundConfType = "Довідники.<xsl:value-of select="$DirectoryName"/>.<xsl:value-of select="Name"/>" };
+                <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = CompositePointerControl.New();
             </xsl:when>
             <xsl:when test="Type = 'composite_text'">
                 <xsl:text>//NameAndText </xsl:text><xsl:value-of select="Name"/> = new();
@@ -426,7 +426,7 @@ class <xsl:value-of select="$DirectoryName"/>_Елемент : DirectoryFormElem
                     
                 </xsl:when>
                 <xsl:when test="Type = 'composite_pointer'">
-                    
+                    <xsl:value-of select="Name"/>.BoundConfType = "Довідники.<xsl:value-of select="$DirectoryName"/>.<xsl:value-of select="Name"/>";
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
                     <xsl:value-of select="Name"/>.Caption = "<xsl:value-of select="Caption"/>";
@@ -651,7 +651,7 @@ class <xsl:value-of select="$DirectoryName"/>_Список : DirectoryFormJourna
 {
     <xsl:if test="normalize-space($DirectoryOwner) != ''">
     <xsl:variable name="namePointer" select="substring-after($DirectoryOwner, '.')" />
-    public <xsl:value-of select="$namePointer"/>_PointerControl Власник = new() { Caption = "<xsl:value-of select="$PointerFieldOwner"/>:" };
+    public <xsl:value-of select="$namePointer"/>_PointerControl Власник = <xsl:value-of select="$namePointer"/>_PointerControl.New();
     </xsl:if>
     
     public <xsl:value-of select="$DirectoryName"/>_Список() : base(Program.BasicForm?.NotebookFunc)
@@ -663,6 +663,7 @@ class <xsl:value-of select="$DirectoryName"/>_Список : DirectoryFormJourna
         <xsl:if test="normalize-space($DirectoryOwner) != ''">
         //Власник
         {
+            Власник.Caption = "<xsl:value-of select="$PointerFieldOwner"/>:";
             HBoxTop.Append(Власник);
             OwnerWhereListFunc = () =&gt; Власник.Pointer.IsEmpty() ? [] : [new(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UniqueID.UGuid)];
             Власник.AfterSelectFunc = async () =&gt;
@@ -748,7 +749,7 @@ class <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір : Directo
 {
     <xsl:if test="normalize-space($DirectoryOwner) != ''">
     <xsl:variable name="namePointer" select="substring-after($DirectoryOwner, '.')" />
-    public <xsl:value-of select="$namePointer"/>_PointerControl Власник = new() { Caption = "<xsl:value-of select="$PointerFieldOwner"/>:" };
+    public <xsl:value-of select="$namePointer"/>_PointerControl Власник = <xsl:value-of select="$namePointer"/>_PointerControl.New();
     </xsl:if>
     
     public <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() : base(Program.BasicForm?.NotebookFunc)
@@ -761,6 +762,7 @@ class <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір : Directo
         <xsl:if test="normalize-space($DirectoryOwner) != ''">
         //Власник
         {
+            Власник.Caption = "<xsl:value-of select="$PointerFieldOwner"/>:";
             HBoxTop.Append(Власник);
             OwnerWhereListFunc = () =&gt; Власник.Pointer.IsEmpty() ? [] : [new(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UniqueID.UGuid)];
             Власник.AfterSelectFunc = async () =&gt;
@@ -861,7 +863,7 @@ class <xsl:value-of select="$DirectoryName"/>_Список : DirectoryFormJourna
     <xsl:value-of select="$PointerFolders"/>_Список Папки = new() { InsertEmptyFirstRow = true };
     <xsl:if test="normalize-space($DirectoryOwner) != ''">
     <xsl:variable name="namePointer" select="substring-after($DirectoryOwner, '.')" />
-    public <xsl:value-of select="$namePointer"/>_PointerControl Власник = new() { Caption = "<xsl:value-of select="$PointerFieldOwner"/>:" };
+    public <xsl:value-of select="$namePointer"/>_PointerControl Власник = <xsl:value-of select="$namePointer"/>_PointerControl.New();
     </xsl:if>
 
     public <xsl:value-of select="$DirectoryName"/>_Список() : base(Program.BasicForm?.NotebookFunc)
@@ -897,6 +899,7 @@ class <xsl:value-of select="$DirectoryName"/>_Список : DirectoryFormJourna
         <xsl:if test="normalize-space($DirectoryOwner) != ''">
         //Власник
         {
+            Власник.Caption = "<xsl:value-of select="$PointerFieldOwner"/>:";
             HBoxTop.Append(Власник);
             OwnerWhereListFunc = () =&gt; Власник.Pointer.IsEmpty() ? [] : [new(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UniqueID.UGuid)];
             Власник.AfterSelectFunc = async () =&gt;
@@ -965,6 +968,7 @@ class <xsl:value-of select="$DirectoryName"/>_Список : DirectoryFormJourna
     <!-- PointerControl -->
     <xsl:template name="DirectoryPointerControl">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
+        <xsl:variable name="SubclassName" select="concat('PointerControl_', Directory/Alias)"/>
 
         <!-- Додатова інформація про підпорядкування довідника -->
         <xsl:variable name="DirectoryOwner" select="Directory/DirectoryOwner"/>
@@ -980,21 +984,21 @@ using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-public class <xsl:value-of select="$DirectoryName"/>_PointerControl : PointerControl
+[GObject.Subclass&lt;PointerControl&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$DirectoryName"/>_PointerControl : PointerControl
 {
-    event EventHandler&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; PointerChanged;
+    event EventHandler&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt;? PointerChanged;
 
-    public <xsl:value-of select="$DirectoryName"/>_PointerControl()
+    partial void Initialize()
     {
-        pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
         WidthPresentation = 300;
         Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
         PointerChanged += async (_, pointer) =&gt; Presentation = pointer != null ? await pointer.GetPresentation() : "";
     }
 
-    public static <xsl:value-of select="$DirectoryName"/>_PointerControl New() =&gt; new();
+    public static <xsl:value-of select="$DirectoryName"/>_PointerControl New() =&gt; NewWithProperties([]);
 
-    <xsl:value-of select="$DirectoryName"/>_Pointer pointer;
+    <xsl:value-of select="$DirectoryName"/>_Pointer pointer = new();
     public <xsl:value-of select="$DirectoryName"/>_Pointer Pointer
     {
         get
@@ -1060,6 +1064,7 @@ public class <xsl:value-of select="$DirectoryName"/>_PointerControl : PointerCon
     <!-- PointerControl -->
     <xsl:template name="DirectoryPointerTablePartCell">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
+        <xsl:variable name="SubclassName" select="concat('PointerTablePartCell_', Directory/Alias)"/>
 
         <!-- Додатова інформація про підпорядкування довідника -->
         <xsl:variable name="DirectoryOwner" select="Directory/DirectoryOwner"/>
@@ -1076,8 +1081,11 @@ using AccountingSoftware;
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-public class <xsl:value-of select="$DirectoryName"/>_PointerTablePartCell : PointerTablePartCell
+[GObject.Subclass&lt;PointerTablePartCell&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$DirectoryName"/>_PointerTablePartCell : PointerTablePartCell
 {
+    public static <xsl:value-of select="$DirectoryName"/>_PointerTablePartCell New() =&gt; NewWithProperties([]);
+
     <xsl:value-of select="$DirectoryName"/>_Pointer pointer = new();
     public <xsl:value-of select="$DirectoryName"/>_Pointer Pointer
     {
@@ -1160,137 +1168,142 @@ public class <xsl:value-of select="$DirectoryName"/>_PointerTablePartCell : Poin
 */
 
 using Gtk;
-using InterfaceGtk3;
+using InterfaceGtk4;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 
-namespace <xsl:value-of select="$NameSpace"/>
+namespace <xsl:value-of select="$NameSpace"/>;
+
+[GObject.Subclass&lt;MultiplePointerControl&gt;]
+public partial class <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl : MultiplePointerControl
 {
-    public class <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl : MultiplePointerControl
+    event EventHandler&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; PointerChanged;
+
+    public static <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl New() =&gt; NewWithProperties([]);
+
+    partial void Initialize()
     {
-        event EventHandler&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; PointerChanged;
-
-        public <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl()
+        pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
+        WidthPresentation = 300;
+        Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
+        PointerChanged += async (_, pointer) =&gt;
         {
-            pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            WidthPresentation = 300;
-            Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
-            PointerChanged += async (_, pointer) =&gt;
-            {
-                Presentation = pointer != null ? await pointer.GetPresentation() : "";
-                if (pointers.Count &gt; 1) Presentation += $" ... {pointers.Count}";
-            };
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            if (pointers.Count &gt; 1) Presentation += $" ... {pointers.Count}";
+        };
+    }
+
+    <xsl:value-of select="$DirectoryName"/>_Pointer pointer;
+    List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; pointers = [];
+    public <xsl:value-of select="$DirectoryName"/>_Pointer Pointer
+    {
+        get
+        {
+            return pointer;
         }
-
-        <xsl:value-of select="$DirectoryName"/>_Pointer pointer;
-        List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; pointers = [];
-        public <xsl:value-of select="$DirectoryName"/>_Pointer Pointer
+        set
         {
-            get
-            {
-                return pointer;
-            }
-            set
-            {
-                pointer = value;
-                PointerChanged?.Invoke(null, pointer);
-            }
+            pointer = value;
+            PointerChanged?.Invoke(null, pointer);
         }
+    }
 
-        public <xsl:value-of select="$DirectoryName"/>_Pointer[] GetPointers()
+    public <xsl:value-of select="$DirectoryName"/>_Pointer[] GetPointers()
+    {
+        <xsl:value-of select="$DirectoryName"/>_Pointer[] copy = new <xsl:value-of select="$DirectoryName"/>_Pointer[pointers.Count];
+        pointers.CopyTo(copy);
+
+        return copy;
+    }
+
+    void Add(<xsl:value-of select="$DirectoryName"/>_Pointer item)
+    {
+        if (!pointers.Exists((<xsl:value-of select="$DirectoryName"/>_Pointer x) =&gt; x.UniqueID.ToString() == item.UniqueID.ToString()))
+            pointers.Add(item);
+
+        Pointer = item;
+        //AfterSelectFunc?.Invoke();
+    }
+
+    <xsl:if test="normalize-space($DirectoryOwner) != ''">
+    <xsl:variable name="namePointer" select="substring-after($DirectoryOwner, '.')" />
+    public <xsl:value-of select="$namePointer"/>_Pointer Власник { get; set; } = new <xsl:value-of select="$namePointer"/>_Pointer();
+    </xsl:if>
+
+    protected override async void OpenSelect(Button button, EventArgs args)
+    {
+        Popover popover = Popover.New();
+        popover.SetParent(button);
+        popover.WidthRequest = 800;
+        popover.HeightRequest = 400;
+        BeforeClickOpenFunc?.Invoke();
+        <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір
         {
-            <xsl:value-of select="$DirectoryName"/>_Pointer[] copy = new <xsl:value-of select="$DirectoryName"/>_Pointer[pointers.Count];
-            pointers.CopyTo(copy);
-
-            return copy;
-        }
-
-        void Add(<xsl:value-of select="$DirectoryName"/>_Pointer item)
-        {
-            if (!pointers.Exists((<xsl:value-of select="$DirectoryName"/>_Pointer x) =&gt; x.UniqueID.ToString() == item.UniqueID.ToString()))
-                pointers.Add(item);
-
-            Pointer = item;
-            //AfterSelectFunc?.Invoke();
-        }
-
-        <xsl:if test="normalize-space($DirectoryOwner) != ''">
-        <xsl:variable name="namePointer" select="substring-after($DirectoryOwner, '.')" />
-        public <xsl:value-of select="$namePointer"/>_Pointer Власник { get; set; } = new <xsl:value-of select="$namePointer"/>_Pointer();
-        </xsl:if>
-
-        protected override async void OpenSelect(object? sender, EventArgs args)
-        {
-            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
-            BeforeClickOpenFunc?.Invoke();
-            <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір
+            PopoverParent = popover,
+            DirectoryPointerItem = pointer.UniqueID,
+            CallBack_OnSelectPointer = selectPointer =&gt;
             {
-                PopoverParent = popover,
-                DirectoryPointerItem = pointer.UniqueID,
-                CallBack_OnSelectPointer = selectPointer =&gt;
-                {
+                Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
+            },
+            CallBack_OnMultipleSelectPointer = selectPointers =&gt;
+            {
+                foreach (var selectPointer in selectPointers)
                     Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
-                },
-                CallBack_OnMultipleSelectPointer = selectPointers =&gt;
-                {
-                    foreach (var selectPointer in selectPointers)
-                        Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
-                }
-            };
-            <xsl:if test="normalize-space($DirectoryOwner) != ''">
-            page.Власник.Pointer = Власник;
-            </xsl:if>
-            popover.Add(page);
-            popover.ShowAll();
-
-            await page.SetValue();
-        }
-
-        protected override async ValueTask FillList(ListBox listBox)
-        {
-            foreach (<xsl:value-of select="$DirectoryName"/>_Pointer item in pointers)
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                ListBoxRow listBoxRow = [hBox];
-
-                string presentation = await item.GetPresentation();
-
-                LinkButton linkName = new LinkButton("", SubstringName(presentation)) { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Doc), AlwaysShowImage = true, TooltipText = presentation };
-                linkName.Clicked += (sender, args) =&gt;
-                {
-                    if (Pointer.UniqueID.ToString() != item.UniqueID.ToString())
-                        Pointer = item;
-                };
-
-                hBox.PackStart(linkName, true, true, 0);
-
-                //Remove
-                LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
-                linkRemove.Clicked += (sender, args) =&gt;
-                {
-                    pointers.Remove(item);
-                    listBox.Remove(listBoxRow);
-
-                    if (Pointer.UniqueID.ToString() == item.UniqueID.ToString())
-                        Pointer = pointers.Count &gt; 0 ? pointers[0] : new <xsl:value-of select="$DirectoryName"/>_Pointer();
-                    else
-                        PointerChanged?.Invoke(null, pointer);
-                };
-
-                hBox.PackEnd(linkRemove, false, false, 0);
-
-                listBox.Add(listBoxRow);
-                listBox.ShowAll();
             }
-        }
+        };
+        <xsl:if test="normalize-space($DirectoryOwner) != ''">
+        page.Власник.Pointer = Власник;
+        </xsl:if>
+        popover.SetChild(page);
+        popover.Show();
 
-        protected override void OnClear(object? sender, EventArgs args)
+        await page.SetValue();
+    }
+
+    protected override async ValueTask FillList(ListBox listBox)
+    {
+        foreach (<xsl:value-of select="$DirectoryName"/>_Pointer item in pointers)
         {
-            pointers = [];
-            Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            AfterSelectFunc?.Invoke();
-            AfterClearFunc?.Invoke();
+            Box hBox = Box.New(Orientation.Horizontal, 0);
+            ListBoxRow listBoxRow = [hBox];
+
+            string presentation = await item.GetPresentation();
+
+            LinkButton linkName = new LinkButton("", SubstringName(presentation)) { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Doc), AlwaysShowImage = true, TooltipText = presentation };
+            linkName.Clicked += (sender, args) =&gt;
+            {
+                if (Pointer.UniqueID.ToString() != item.UniqueID.ToString())
+                    Pointer = item;
+            };
+
+            hBox.PackStart(linkName, true, true, 0);
+
+            //Remove
+            LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
+            linkRemove.Clicked += (sender, args) =&gt;
+            {
+                pointers.Remove(item);
+                listBox.Remove(listBoxRow);
+
+                if (Pointer.UniqueID.ToString() == item.UniqueID.ToString())
+                    Pointer = pointers.Count &gt; 0 ? pointers[0] : new <xsl:value-of select="$DirectoryName"/>_Pointer();
+                else
+                    PointerChanged?.Invoke(null, pointer);
+            };
+
+            hBox.PackEnd(linkRemove, false, false, 0);
+
+            listBox.Add(listBoxRow);
+            listBox.ShowAll();
         }
+    }
+
+    protected override void OnClear(Button button, EventArgs args)
+    {
+        pointers = [];
+        Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
+        AfterSelectFunc?.Invoke();
+        AfterClearFunc?.Invoke();
     }
 }
     </xsl:template>
