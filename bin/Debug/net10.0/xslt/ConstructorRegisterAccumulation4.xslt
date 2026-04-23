@@ -34,6 +34,7 @@
     <!-- Список -->
     <xsl:template name="RegisterAccumulationList">
         <xsl:variable name="RegisterAccumulationName" select="RegisterAccumulation/Name"/>
+        <xsl:variable name="SubclassName" select="concat('List_', RegisterAccumulation/Alias)"/>
         <xsl:variable name="TabularList" select="RegisterAccumulation/TabularList"/>
 
         <!-- Додатова інформація -->
@@ -54,13 +55,22 @@ using ТабличнийСписок = <xsl:value-of select="$NameSpaceGenerated
 
 namespace <xsl:value-of select="$NameSpace"/>.РегістриНакопичення;
 
-public class <xsl:value-of select="$RegisterAccumulationName"/>_Список : RegisterAccumulationFormJournalBase
+[GObject.Subclass&lt;RegisterAccumulationFormJournalBase&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$RegisterAccumulationName"/>_Список : RegisterAccumulationFormJournalBase
 {
-    public <xsl:value-of select="$RegisterAccumulationName"/>_Список() : base(Program.BasicForm?.NotebookFunc)
+    partial void Initialize()
     {
         TypeName = <xsl:value-of select="$RegisterAccumulationName"/>_Const.TYPENAME;
         ТабличнийСписок.AddColumn(this);
         SetPagesSettings(50);
+    }
+
+    public static <xsl:value-of select="$RegisterAccumulationName"/>_Список New()
+    {
+        <xsl:value-of select="$RegisterAccumulationName"/>_Список list = NewWithProperties([]);
+        list.NotebookFunc = Program.BasicForm?.NotebookFunc;
+
+        return list;
     }
 
     #region Override
@@ -98,6 +108,7 @@ public class <xsl:value-of select="$RegisterAccumulationName"/>_Список : R
     <!-- Список -->
     <xsl:template name="RegisterAccumulationListSmall">
         <xsl:variable name="RegisterAccumulationName" select="RegisterAccumulation/Name"/>
+        <xsl:variable name="SubclassName" select="concat('SmallList_', RegisterAccumulation/Alias)"/>
         <xsl:variable name="TabularList" select="RegisterAccumulation/TabularList"/>
 
         <!-- Додатова інформація -->
@@ -118,13 +129,22 @@ using ТабличнийСписок = <xsl:value-of select="$NameSpaceGenerated
 
 namespace <xsl:value-of select="$NameSpace"/>.РегістриНакопичення;
 
-public class <xsl:value-of select="$RegisterAccumulationName"/>_СписокМіні : RegisterAccumulationFormJournalSmall
+[GObject.Subclass&lt;RegisterAccumulationFormJournalSmall&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$RegisterAccumulationName"/>_СписокМіні : RegisterAccumulationFormJournalSmall
 {
-    public <xsl:value-of select="$RegisterAccumulationName"/>_СписокМіні() : base(Program.BasicForm?.NotebookFunc)
+    partial void Initialize()
     {
         TypeName = <xsl:value-of select="$RegisterAccumulationName"/>_Const.TYPENAME;
         ТабличнийСписок.AddColumn(this);
         SetPagesSettings(50);
+    }
+
+    public static <xsl:value-of select="$RegisterAccumulationName"/>_СписокМіні New()
+    {
+        <xsl:value-of select="$RegisterAccumulationName"/>_СписокМіні list = NewWithProperties([]);
+        list.NotebookFunc = Program.BasicForm?.NotebookFunc;
+
+        return list;
     }
 
     #region Override

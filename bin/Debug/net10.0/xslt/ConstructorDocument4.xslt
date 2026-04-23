@@ -130,6 +130,7 @@ static class <xsl:value-of select="$DocumentName"/>_Triggers
 */
 
 using AccountingSoftware;
+using <xsl:value-of select="$NameSpace"/>;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>;
 
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
@@ -151,7 +152,7 @@ static class <xsl:value-of select="$DocumentName"/>_SpendTheDocument
         }
         catch (Exception ex)
         {
-            await СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
+            await ФункціїДляДокументів.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
             return false;
         }
     }
@@ -224,11 +225,9 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
         Action&lt;UniqueID?&gt;? сallBack_LoadRecords = null,
         Action&lt;UniqueID&gt;? сallBack_OnSelectPointer = null)
     {
-        <xsl:value-of select="$DocumentName"/>_Елемент page = new()
-        {
-            CallBack_LoadRecords = сallBack_LoadRecords,
-            CallBack_OnSelectPointer = сallBack_OnSelectPointer
-        };
+        <xsl:value-of select="$DocumentName"/>_Елемент page = <xsl:value-of select="$DocumentName"/>_Елемент.New();
+        page.CallBack_LoadRecords = сallBack_LoadRecords;
+        page.CallBack_OnSelectPointer = сallBack_OnSelectPointer;
 
         if (IsNew)
             await page.Елемент.New();
@@ -244,11 +243,9 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
 
     public static async ValueTask OpenPageList(UniqueID? uniqueID = null, Action&lt;UniqueID&gt;? сallBack_OnSelectPointer = null)
     {
-        <xsl:value-of select="$DocumentName"/>_Список page = new()
-        {
-            DocumentPointerItem = uniqueID,
-            CallBack_OnSelectPointer = сallBack_OnSelectPointer
-        };
+        <xsl:value-of select="$DocumentName"/>_Список page = <xsl:value-of select="$DocumentName"/>_Список.New();
+        page.DocumentPointerItem = uniqueID;
+        page.CallBack_OnSelectPointer = сallBack_OnSelectPointer;
 
         Program.BasicForm?.NotebookFunc.CreatePage(<xsl:value-of select="$DocumentName"/>_Const.FULLNAME, page);
         await page.SetValue();
@@ -291,6 +288,7 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
     <!-- Елемент -->
     <xsl:template name="DocumentElement">
         <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="SubclassName" select="concat('Element_', Document/Alias)"/>
         <xsl:variable name="FieldsTL" select="Document/ElementFields/Field"/>
         <xsl:variable name="TabularPartsTL" select="Document/ElementTableParts/TablePart"/>
 /*
@@ -311,7 +309,8 @@ using Функції = <xsl:value-of select="$NameSpace"/>.<xsl:value-of select=
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElement
+[GObject.Subclass&lt;DocumentFormElement&gt;("<xsl:value-of select="$SubclassName"/>")]
+partial class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElement
 {
     public <xsl:value-of select="$DocumentName"/>_Objest Елемент { get; init; } = new();
 
@@ -348,7 +347,7 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
                 <xsl:text>DateTimeControl </xsl:text><xsl:value-of select="Name"/> = DateTimeControl.New();
             </xsl:when>
             <xsl:when test="Type = 'time'">
-                <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = new();
+                <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = TimeControl.New();
             </xsl:when>
             <xsl:when test="Type = 'composite_pointer'">
                 <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = CompositePointerControl.New();
@@ -400,11 +399,11 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
             </xsl:choose>
         </xsl:variable>
         // Таблична частина "<xsl:value-of select="Name"/>" 
-        <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> = new() { WidthRequest = <xsl:value-of select="$Size"/>, HeightRequest = <xsl:value-of select="$Height"/> };
+        <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>.New();
     </xsl:for-each>
     #endregion
 
-    public <xsl:value-of select="$DocumentName"/>_Елемент() : base(Program.BasicForm?.NotebookFunc)
+    partial void Initialize()
     {
         Element = Елемент;
 
@@ -415,7 +414,9 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
 
         <xsl:if test="count($TabularPartsTL) != 0">
             <xsl:for-each select="$TabularPartsTL">
-            // Таблична частина "<xsl:value-of select="Name"/>" 
+            // Таблична частина "<xsl:value-of select="Name"/>"
+            <xsl:value-of select="Name"/>.WidthRequest = 500;
+            <xsl:value-of select="Name"/>.HeightRequest = 300;
             NotebookTablePart.InsertPage(<xsl:value-of select="Name"/>, Label.New("<xsl:value-of select="Caption"/>"), <xsl:value-of select="position() - 1"/>);
             </xsl:for-each>
             NotebookTablePart.SetCurrentPage(0);
@@ -429,6 +430,7 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
                     <xsl:otherwise>300</xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
+            //<xsl:value-of select="Name"/>:
             <xsl:choose>
                 <xsl:when test="Type = 'string'">
                     <xsl:choose>
@@ -462,8 +464,7 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
                     <xsl:value-of select="Name"/>.Caption = "<xsl:value-of select="Caption"/>";
                     <xsl:value-of select="Name"/>.WidthPresentation = <xsl:value-of select="$Size"/>;
                 </xsl:when>
-                <xsl:when test="Type = 'enum'">
-            {
+                <xsl:when test="Type = 'enum'">{
                 //Заповнення списку
                 foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List())
                     <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
@@ -476,6 +477,14 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
                 </xsl:when>
             </xsl:choose>
         </xsl:for-each>
+    }
+
+    public static <xsl:value-of select="$DocumentName"/>_Елемент New()
+    {
+        <xsl:value-of select="$DocumentName"/>_Елемент element = NewWithProperties([]);
+        element.NotebookFunc = Program.BasicForm?.NotebookFunc;
+
+        return element;
     }
 
     protected override void CreateTopStart(Box vBox)
@@ -688,6 +697,7 @@ class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFormElemen
     <!-- Список -->
     <xsl:template name="DocumentList">
         <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="SubclassName" select="concat('List_', Document/Alias)"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
         <xsl:variable name="TabularList" select="Document/TabularList"/>
 
@@ -708,13 +718,22 @@ using Функції = <xsl:value-of select="$NameSpace"/>.<xsl:value-of select=
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-public class <xsl:value-of select="$DocumentName"/>_Список : DocumentFormJournalFull
+[GObject.Subclass&lt;DocumentFormJournalFull&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$DocumentName"/>_Список : DocumentFormJournalFull
 {
-    public <xsl:value-of select="$DocumentName"/>_Список() : base(Program.BasicForm?.NotebookFunc)
+    partial void Initialize()
     {
         TypeName = <xsl:value-of select="$DocumentName"/>_Const.POINTER;
         ТабличнийСписок.AddColumn(this);
         SetPagesSettings(50, Pages.StartingPosition.End);
+    }
+
+    public static <xsl:value-of select="$DocumentName"/>_Список New()
+    {
+        <xsl:value-of select="$DocumentName"/>_Список list = NewWithProperties([]);
+        list.NotebookFunc = Program.BasicForm?.NotebookFunc;
+
+        return list;
     }
 
     #region Override
@@ -793,6 +812,7 @@ public class <xsl:value-of select="$DocumentName"/>_Список : DocumentFormJ
     <!-- ШвидкийВибір -->
     <xsl:template name="DocumentListSmallSelect">
         <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="SubclassName" select="concat('SmallList_', Document/Alias)"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
         <xsl:variable name="TabularList" select="Document/TabularList"/>
 
@@ -810,14 +830,23 @@ using Функції = <xsl:value-of select="$NameSpace"/>.<xsl:value-of select=
 
 namespace <xsl:value-of select="$NameSpace"/>;
 
-public class <xsl:value-of select="$DocumentName"/>_ШвидкийВибір : DocumentFormJournalSmall
+[GObject.Subclass&lt;DocumentFormJournalSmall&gt;("<xsl:value-of select="$SubclassName"/>")]
+public partial class <xsl:value-of select="$DocumentName"/>_ШвидкийВибір : DocumentFormJournalSmall
 {
-    public <xsl:value-of select="$DocumentName"/>_ШвидкийВибір() : base(Program.BasicForm?.NotebookFunc)
+    partial void Initialize()
     {
         TypeName = <xsl:value-of select="$DocumentName"/>_Const.POINTER;
         KeyForSetting = ".Small";
         ТабличнийСписок.AddColumn(this);
         SetPagesSettings(50);
+    }
+
+    public static <xsl:value-of select="$DocumentName"/>_ШвидкийВибір New()
+    {
+        <xsl:value-of select="$DocumentName"/>_ШвидкийВибір list = NewWithProperties([]);
+        list.NotebookFunc = Program.BasicForm?.NotebookFunc;
+
+        return list;
     }
 
     #region Override
@@ -943,16 +972,16 @@ public partial class <xsl:value-of select="$DocumentName"/>_PointerControl : Poi
         popover.WidthRequest = 800;
         popover.HeightRequest = 400;
         BeforeClickOpenFunc?.Invoke();
-        <xsl:value-of select="$DocumentName"/>_ШвидкийВибір page = new()
+
+        <xsl:value-of select="$DocumentName"/>_ШвидкийВибір page = <xsl:value-of select="$DocumentName"/>_ШвидкийВибір.New();
+        page.PopoverParent = popover;
+        page.DocumentPointerItem = Pointer.UniqueID;
+        page.CallBack_OnSelectPointer = selectPointer =&gt;
         {
-            PopoverParent = popover,
-            DocumentPointerItem = Pointer.UniqueID,
-            CallBack_OnSelectPointer = selectPointer =&gt;
-            {
-                Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(selectPointer);
-                AfterSelectFunc?.Invoke();
-            }
+            Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(selectPointer);
+            AfterSelectFunc?.Invoke();
         };
+
         popover.SetChild(page);
         popover.Show();
 
@@ -1023,15 +1052,14 @@ public partial class <xsl:value-of select="$DocumentName"/>_PointerTablePartCell
         popover.WidthRequest = 800;
         popover.HeightRequest = 400;
         BeforeClickOpenFunc?.Invoke();
-        <xsl:value-of select="$DocumentName"/>_ШвидкийВибір page = new()
+
+        <xsl:value-of select="$DocumentName"/>_ШвидкийВибір page = <xsl:value-of select="$DocumentName"/>_ШвидкийВибір.New();
+        page.PopoverParent = popover;
+        page.DocumentPointerItem = pointer.UniqueID;
+        page.CallBack_OnSelectPointer = async p =&gt; 
         {
-            PopoverParent = popover,
-            DocumentPointerItem = pointer.UniqueID,
-            CallBack_OnSelectPointer = async p =&gt; 
-            {
-                await PointerChange(p);
-                AfterSelectFunc?.Invoke();
-            }
+            await PointerChange(p);
+            AfterSelectFunc?.Invoke();
         };
 
         popover.SetChild(page);

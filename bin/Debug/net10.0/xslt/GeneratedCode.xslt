@@ -497,13 +497,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>
             (bool result, string pointerGroup, string pointerType) = Configuration.PointerParse(uuidAndText.Text, out Exception? _);
             if (result)
             {
-                record.pointer = pointerGroup;
-                record.type = pointerType;
+                record.Pointer = pointerGroup;
+                record.Type = pointerType;
 
                 if (!uuidAndText.IsEmpty())
-                    if (record.pointer == "Довідники") 
+                    if (record.Pointer == "Довідники")
                     {
-                        <xsl:text>record.result = record.type switch</xsl:text>
+                        <xsl:text>record.Result = record.Type switch</xsl:text>
                         {
                         <xsl:for-each select="Configuration/Directories/Directory">
                             <xsl:variable name="DirectoryName" select="Name"/>
@@ -512,9 +512,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>
                         <xsl:text>_ =&gt; ""</xsl:text>
                         };
                     }
-                    else if (record.pointer == "Документи") 
+                    else if (record.Pointer == "Документи")
                     {
-                        <xsl:text>record.result = record.type switch</xsl:text>
+                        <xsl:text>record.Result = record.Type switch</xsl:text>
                         {
                         <xsl:for-each select="Configuration/Documents/Document">
                             <xsl:variable name="DocumentName" select="Name"/>
