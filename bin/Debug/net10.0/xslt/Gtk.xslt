@@ -1123,6 +1123,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         <xsl:for-each select="Fields/Field">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
@@ -1135,6 +1136,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text><xsl:value-of select="Name"/>,
                 </xsl:for-each> 
@@ -1150,6 +1152,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),
                 </xsl:for-each>
@@ -1162,11 +1165,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
             <xsl:for-each select="Fields/Field">
               <xsl:text>treeView.AppendColumn(new TreeViewColumn("</xsl:text><xsl:value-of select="normalize-space(Caption)"/>
-              <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text><xsl:value-of select="position() + 4"/>
-              <xsl:text>) { MinWidth = 20, Resizable = true, SortColumnId = </xsl:text><xsl:value-of select="position() + 4"/>
+              <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text><xsl:value-of select="position() + 5"/>
+              <xsl:text>) { MinWidth = 20, Resizable = true, SortColumnId = </xsl:text><xsl:value-of select="position() + 5"/>
               <xsl:if test="Size != '0'"><xsl:value-of select="concat(', FixedWidth = ', Size)"/></xsl:if> } ); /*<xsl:value-of select="Name"/>*/
             </xsl:for-each>
             //Пустишка
@@ -1231,6 +1235,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     <xsl:for-each select="Fields/Field">
                       <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
                       <xsl:choose>

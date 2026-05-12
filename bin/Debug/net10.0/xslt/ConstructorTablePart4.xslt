@@ -136,6 +136,12 @@ static class <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePar
         <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
         <xsl:variable name="OwnerType" select="TablePart/OwnerType"/>
         <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
+        <xsl:variable name="OwnerTypeName">
+            <xsl:choose>
+                <xsl:when test="$OwnerType = 'Document'">Документи</xsl:when>
+                <xsl:when test="$OwnerType = 'Directory'">Довідники</xsl:when>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="OwnerBlockName">
             <xsl:if test="TablePart/OwnerType = 'Constants' and normalize-space(TablePart/OwnerBlockName) != ''">
                 <xsl:value-of select="concat(normalize-space(TablePart/OwnerBlockName), '.')"/>
@@ -220,7 +226,7 @@ partial class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина
                 <xsl:text> = </xsl:text>
                 <xsl:value-of select="Name"/>
                 <xsl:choose>
-                    <xsl:when test="Type = 'pointer'">.Copy()</xsl:when>
+                    <xsl:when test="Type = 'pointer' or Type = 'composite_pointer'">.Copy()</xsl:when>
                 </xsl:choose>;
             </xsl:for-each>
             return row;
@@ -294,6 +300,7 @@ partial class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина
                 contr.OnScroll += (_, _) =&gt; true</xsl:when>
                     <xsl:when test="Type = 'date' or Type = 'datetime'">DateTimeTablePartCell.New()</xsl:when>
                     <xsl:when test="Type = 'time'">TimeTablePartCell.New()</xsl:when>
+                    <xsl:when test="Type = 'composite_pointer'">CompositePointerControlTablePartCell.New()</xsl:when>
                     <xsl:otherwise>LabelTablePartCell.New()</xsl:otherwise>
                 </xsl:choose>;
                 <xsl:choose>
@@ -305,6 +312,9 @@ partial class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина
                     </xsl:when>
                     <xsl:when test="Type = 'date'">
                 cell.OnlyDate = true;
+                    </xsl:when>
+                    <xsl:when test="Type = 'composite_pointer'">
+                cell.BoundConfType = "<xsl:value-of select="$OwnerTypeName"/>.<xsl:value-of select="$OwnerName"/>.<xsl:value-of select="$TablePartName"/>.<xsl:value-of select="Name"/>";
                     </xsl:when>
                 </xsl:choose>
                 listItem.Child = cell;
@@ -321,6 +331,7 @@ partial class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина
                     <xsl:when test="Type = 'enum'">ComboTextTablePartCell</xsl:when>
                     <xsl:when test="Type = 'date' or Type = 'datetime'">DateTimeTablePartCell</xsl:when>
                     <xsl:when test="Type = 'time'">TimeTablePartCell</xsl:when>
+                    <xsl:when test="Type = 'composite_pointer'">CompositePointerControlTablePartCell</xsl:when>
                     <xsl:otherwise>LabelTablePartCell</xsl:otherwise>
                 </xsl:choose> cell) return;
                 if (listItem.Item is not ItemRow row) return;
@@ -350,6 +361,10 @@ partial class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина
                     <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
                 cell.OnСhanged = () =&gt; row.<xsl:value-of select="Name"/> = cell.Value;
                 (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Value = row.<xsl:value-of select="Name"/>).Invoke();
+                    </xsl:when>
+                    <xsl:when test="Type = 'composite_pointer'">
+                cell.OnSelect = () =&gt; row.<xsl:value-of select="Name"/> = cell.Pointer;
+                (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.Pointer = row.<xsl:value-of select="Name"/>).Invoke();
                     </xsl:when>
                     <xsl:otherwise>
                 (row.Сhanged_<xsl:value-of select="Name"/> = () =&gt; cell.SetText(row.<xsl:value-of select="Name"/>)).Invoke();

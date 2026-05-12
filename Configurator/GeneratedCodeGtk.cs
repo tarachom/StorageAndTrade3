@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 21.04.2026 13:37:50
+ * Дата конфігурації: 12.05.2026 15:09:35
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -22761,6 +22761,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Номенклатура = "";
         string ХарактеристикаНоменклатури = "";
@@ -22777,6 +22778,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
                 /*Склад*/ Склад,
@@ -22795,6 +22797,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
                 /*Склад*/ typeof(string),
@@ -22810,12 +22813,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Серія*/
-            treeView.AppendColumn(new TreeViewColumn("В наявності", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*ВНаявності*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Серія*/
+            treeView.AppendColumn(new TreeViewColumn("В наявності", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*ВНаявності*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -22866,6 +22870,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Номенклатура = record.Номенклатура.Назва,
                         ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
                         Склад = record.Склад.Назва,
@@ -22899,6 +22904,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string ЗамовленняКлієнта = "";
         string Номенклатура = "";
@@ -22916,6 +22922,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*ЗамовленняКлієнта*/ ЗамовленняКлієнта,
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
@@ -22935,6 +22942,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*ЗамовленняКлієнта*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
@@ -22951,13 +22959,14 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Замовлення клієнта", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ЗамовленняКлієнта*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Замовлено", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Замовлено*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Замовлення клієнта", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ЗамовленняКлієнта*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Замовлено", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Замовлено*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*Сума*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23008,6 +23017,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     ЗамовленняКлієнта = record.ЗамовленняКлієнта.Назва,
                         Номенклатура = record.Номенклатура.Назва,
                         ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
@@ -23042,6 +23052,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Валюта = "";
         string Контрагент = "";
@@ -23056,6 +23067,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Валюта*/ Валюта,
                 /*Контрагент*/ Контрагент,
                 /*Сума*/ Сума,
@@ -23072,6 +23084,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Валюта*/ typeof(string),
                 /*Контрагент*/ typeof(string),
                 /*Сума*/ typeof(string),
@@ -23085,10 +23098,11 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Сума*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23139,6 +23153,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Валюта = record.Валюта.Назва,
                         Контрагент = record.Контрагент.Назва,
                         Сума = record.Сума.ToString() ?? "",
@@ -23170,6 +23185,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Організація = "";
         string Склад = "";
@@ -23190,6 +23206,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Організація*/ Організація,
                 /*Склад*/ Склад,
                 /*Контрагент*/ Контрагент,
@@ -23212,6 +23229,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Організація*/ typeof(string),
                 /*Склад*/ typeof(string),
                 /*Контрагент*/ typeof(string),
@@ -23231,16 +23249,17 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Договір", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Договір*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Кількість", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*Кількість*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true, SortColumnId = 12 } ); /*Сума*/
-            treeView.AppendColumn(new TreeViewColumn("Собівартість", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true, SortColumnId = 13 } ); /*Собівартість*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Договір", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Договір*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Кількість", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true, SortColumnId = 12 } ); /*Кількість*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true, SortColumnId = 13 } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Собівартість", new CellRendererText() { Xpad = 4 }, "text", 14) { MinWidth = 20, Resizable = true, SortColumnId = 14 } ); /*Собівартість*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23291,6 +23310,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Організація = record.Організація.Назва,
                         Склад = record.Склад.Назва,
                         Контрагент = record.Контрагент.Назва,
@@ -23328,6 +23348,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Номенклатура = "";
         string ХарактеристикаНоменклатури = "";
@@ -23345,6 +23366,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
                 /*Склад*/ Склад,
@@ -23364,6 +23386,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
                 /*Склад*/ typeof(string),
@@ -23380,13 +23403,14 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("В наявності", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*ВНаявності*/
-            treeView.AppendColumn(new TreeViewColumn("В резерві зі складу", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*ВРезервіЗіСкладу*/
-            treeView.AppendColumn(new TreeViewColumn("В резерві під замовлення", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*ВРезервіПідЗамовлення*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("В наявності", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*ВНаявності*/
+            treeView.AppendColumn(new TreeViewColumn("В резерві зі складу", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*ВРезервіЗіСкладу*/
+            treeView.AppendColumn(new TreeViewColumn("В резерві під замовлення", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*ВРезервіПідЗамовлення*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23437,6 +23461,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Номенклатура = record.Номенклатура.Назва,
                         ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
                         Склад = record.Склад.Назва,
@@ -23471,6 +23496,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string ЗамовленняПостачальнику = "";
         string Номенклатура = "";
@@ -23487,6 +23513,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*ЗамовленняПостачальнику*/ ЗамовленняПостачальнику,
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
@@ -23505,6 +23532,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*ЗамовленняПостачальнику*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
@@ -23520,12 +23548,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Замовлення постачальнику", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ЗамовленняПостачальнику*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Замовлено", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Замовлено*/
+            treeView.AppendColumn(new TreeViewColumn("Замовлення постачальнику", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ЗамовленняПостачальнику*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Замовлено", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Замовлено*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23576,6 +23605,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     ЗамовленняПостачальнику = record.ЗамовленняПостачальнику.Назва,
                         Номенклатура = record.Номенклатура.Назва,
                         ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
@@ -23609,6 +23639,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Контрагент = "";
         string Валюта = "";
@@ -23623,6 +23654,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Контрагент*/ Контрагент,
                 /*Валюта*/ Валюта,
                 /*Сума*/ Сума,
@@ -23639,6 +23671,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Контрагент*/ typeof(string),
                 /*Валюта*/ typeof(string),
                 /*Сума*/ typeof(string),
@@ -23652,10 +23685,11 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Сума*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23706,6 +23740,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Контрагент = record.Контрагент.Назва,
                         Валюта = record.Валюта.Назва,
                         Сума = record.Сума.ToString() ?? "",
@@ -23737,6 +23772,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Організація = "";
         string Каса = "";
@@ -23752,6 +23788,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Організація*/ Організація,
                 /*Каса*/ Каса,
                 /*Валюта*/ Валюта,
@@ -23769,6 +23806,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Організація*/ typeof(string),
                 /*Каса*/ typeof(string),
                 /*Валюта*/ typeof(string),
@@ -23783,11 +23821,12 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Сума*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23838,6 +23877,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Організація = record.Організація.Назва,
                         Каса = record.Каса.Назва,
                         Валюта = record.Валюта.Назва,
@@ -23870,6 +23910,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Організація = "";
         string ПартіяТоварівКомпозит = "";
@@ -23891,6 +23932,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Організація*/ Організація,
                 /*ПартіяТоварівКомпозит*/ ПартіяТоварівКомпозит,
                 /*Номенклатура*/ Номенклатура,
@@ -23914,6 +23956,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Організація*/ typeof(string),
                 /*ПартіяТоварівКомпозит*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
@@ -23934,17 +23977,18 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Партія", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ПартіяТоварівКомпозит*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Серія*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Рядок", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*Рядок*/
-            treeView.AppendColumn(new TreeViewColumn("Кількість", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true, SortColumnId = 12 } ); /*Кількість*/
-            treeView.AppendColumn(new TreeViewColumn("Собівартість", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true, SortColumnId = 13 } ); /*Собівартість*/
-            treeView.AppendColumn(new TreeViewColumn("Списана собівартість", new CellRendererText() { Xpad = 4 }, "text", 14) { MinWidth = 20, Resizable = true, SortColumnId = 14 } ); /*СписанаСобівартість*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Партія", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ПартіяТоварівКомпозит*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Серія*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Рядок", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true, SortColumnId = 12 } ); /*Рядок*/
+            treeView.AppendColumn(new TreeViewColumn("Кількість", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true, SortColumnId = 13 } ); /*Кількість*/
+            treeView.AppendColumn(new TreeViewColumn("Собівартість", new CellRendererText() { Xpad = 4 }, "text", 14) { MinWidth = 20, Resizable = true, SortColumnId = 14 } ); /*Собівартість*/
+            treeView.AppendColumn(new TreeViewColumn("Списана собівартість", new CellRendererText() { Xpad = 4 }, "text", 15) { MinWidth = 20, Resizable = true, SortColumnId = 15 } ); /*СписанаСобівартість*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -23995,6 +24039,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Організація = record.Організація.Назва,
                         ПартіяТоварівКомпозит = record.ПартіяТоварівКомпозит.Назва,
                         Номенклатура = record.Номенклатура.Назва,
@@ -24033,6 +24078,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Організація = "";
         string Склад = "";
@@ -24054,6 +24100,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Організація*/ Організація,
                 /*Склад*/ Склад,
                 /*Контрагент*/ Контрагент,
@@ -24077,6 +24124,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Організація*/ typeof(string),
                 /*Склад*/ typeof(string),
                 /*Контрагент*/ typeof(string),
@@ -24097,17 +24145,18 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Договір", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Договір*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Кількість", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*Кількість*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true, SortColumnId = 12 } ); /*Сума*/
-            treeView.AppendColumn(new TreeViewColumn("Дохід", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true, SortColumnId = 13 } ); /*Дохід*/
-            treeView.AppendColumn(new TreeViewColumn("Собівартість", new CellRendererText() { Xpad = 4 }, "text", 14) { MinWidth = 20, Resizable = true, SortColumnId = 14 } ); /*Собівартість*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Договір", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Договір*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Кількість", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true, SortColumnId = 12 } ); /*Кількість*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true, SortColumnId = 13 } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Дохід", new CellRendererText() { Xpad = 4 }, "text", 14) { MinWidth = 20, Resizable = true, SortColumnId = 14 } ); /*Дохід*/
+            treeView.AppendColumn(new TreeViewColumn("Собівартість", new CellRendererText() { Xpad = 4 }, "text", 15) { MinWidth = 20, Resizable = true, SortColumnId = 15 } ); /*Собівартість*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -24158,6 +24207,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Організація = record.Організація.Назва,
                         Склад = record.Склад.Назва,
                         Контрагент = record.Контрагент.Назва,
@@ -24196,6 +24246,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Номенклатура = "";
         string ХарактеристикаНоменклатури = "";
@@ -24213,6 +24264,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
                 /*Пакування*/ Пакування,
@@ -24232,6 +24284,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
                 /*Пакування*/ typeof(string),
@@ -24248,13 +24301,14 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Пакування*/
-            treeView.AppendColumn(new TreeViewColumn("Комірка", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Комірка*/
-            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Серія*/
-            treeView.AppendColumn(new TreeViewColumn("В наявності", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*ВНаявності*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Пакування*/
+            treeView.AppendColumn(new TreeViewColumn("Комірка", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Комірка*/
+            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Серія*/
+            treeView.AppendColumn(new TreeViewColumn("В наявності", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true, SortColumnId = 11 } ); /*ВНаявності*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -24305,6 +24359,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Номенклатура = record.Номенклатура.Назва,
                         ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
                         Пакування = record.Пакування.Назва,
@@ -24339,6 +24394,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
         bool Income = false;
         string Period = "";
         string OwnerName = "";
+        int OwnerLineNum = 0;
         
         string Організація = "";
         string КасаККМ = "";
@@ -24354,6 +24410,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 Income ? "+" : "-", 
                 Period, 
                 OwnerName,
+                OwnerLineNum,
                 /*Організація*/ Організація,
                 /*КасаККМ*/ КасаККМ,
                 /*Валюта*/ Валюта,
@@ -24371,6 +24428,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                 /*Income*/ typeof(string), 
                 /*Period*/ typeof(string),
                 /*OwnerName*/ typeof(string),
+                /*OwnerLineNum*/ typeof(string),
                 /*Організація*/ typeof(string),
                 /*КасаККМ*/ typeof(string),
                 /*Валюта*/ typeof(string),
@@ -24385,11 +24443,12 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
             treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", 5));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Каса ККМ", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*КасаККМ*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Каса ККМ", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*КасаККМ*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Сума*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -24440,6 +24499,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                     Period = record.Period.ToString(),
                     Income = record.Income,
                     OwnerName = record.OwnerName,
+                    OwnerLineNum = record.OwnerLineNum,
                     Організація = record.Організація.Назва,
                         КасаККМ = record.КасаККМ.Назва,
                         Валюта = record.Валюта.Назва,

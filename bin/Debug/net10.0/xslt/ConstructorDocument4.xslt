@@ -954,10 +954,7 @@ public partial class <xsl:value-of select="$DocumentName"/>_PointerControl : Poi
     <xsl:value-of select="$DocumentName"/>_Pointer pointer = new();
     public <xsl:value-of select="$DocumentName"/>_Pointer Pointer
     {
-        get
-        {
-            return pointer;
-        }
+        get =&gt; pointer;
         set
         {
             pointer = value;

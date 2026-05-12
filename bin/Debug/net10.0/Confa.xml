@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>21.04.2026 13:37:50</DateTimeSave>
+  <DateTimeSave>12.05.2026 15:09:35</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <GtkVersion>Gtk3</GtkVersion>
   <ConstantsBlocks>
@@ -30603,7 +30603,7 @@ FROM
       </TriggerFunctions>
       <SpendFunctions>
         <Spend Action="1">Spend</Spend>
-        <ClearSpend Action="0">ClearSpend</ClearSpend>
+        <ClearSpend Action="1">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -41641,6 +41641,14 @@ SQL тип  непотрібно вказувати
           <IsIndex>1</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
       </PredefinedFields>
       <DimensionFields>
         <Fields>
@@ -42489,6 +42497,14 @@ HAVING
           <IsIndex>1</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
       </PredefinedFields>
       <DimensionFields>
         <Fields>
@@ -42878,6 +42894,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>
@@ -43315,6 +43339,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>
@@ -43793,6 +43825,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>
@@ -44366,6 +44406,14 @@ HAVING
           <IsIndex>1</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
       </PredefinedFields>
       <DimensionFields>
         <Fields>
@@ -44712,6 +44760,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>
@@ -45148,6 +45204,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>
@@ -45745,6 +45809,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>
@@ -46699,6 +46771,14 @@ HAVING
           <IsIndex>1</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
       </PredefinedFields>
       <DimensionFields>
         <Fields>
@@ -47209,6 +47289,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>
@@ -47929,6 +48017,14 @@ HAVING
           <Type>composite_text</Type>
           <IsPrimaryKey>0</IsPrimaryKey>
           <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownerlinenum</Name>
+          <NameInTable>ownerlinenum</NameInTable>
+          <Type>integer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
           <IsNotNull>0</IsNotNull>
         </PredefinedField>
       </PredefinedFields>

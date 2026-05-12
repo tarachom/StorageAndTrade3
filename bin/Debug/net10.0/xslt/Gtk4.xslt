@@ -31,7 +31,7 @@ limitations under the License.
   <xsl:template name="FieldValue">
     <xsl:param name="ConfTypeName" />
     <xsl:choose>
-        <xsl:when test="Type = 'pointer'">
+        <xsl:when test="Type = 'pointer' or Type = 'composite_pointer'">
             <xsl:text>Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString() ?? ""</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'enum'">
@@ -51,7 +51,7 @@ limitations under the License.
   <xsl:template name="FieldValueReg">
     <xsl:param name="VarName" />
     <xsl:choose>
-        <xsl:when test="Type = 'pointer'">
+        <xsl:when test="Type = 'pointer' or Type = 'composite_pointer'">
             <xsl:value-of select="$VarName"/>.<xsl:value-of select="Name"/><xsl:text>.Name</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'enum'">
@@ -289,7 +289,30 @@ limitations under the License.
                     if (cell != null &amp;&amp; row != null)
                         cell.SetText(row.OwnerName.ToString());
                 };
-                ColumnViewColumn column = ColumnViewColumn.New("Власник назва", factory);
+                ColumnViewColumn column = ColumnViewColumn.New("Назва власника", factory);
+                form.Grid.AppendColumn(column);
+            }
+  </xsl:template>
+
+  <xsl:template name="AddColumnOwnerLineNum">
+        <xsl:param name="RowType" />
+            //OwnerLineNum
+            {
+                SignalListItemFactory factory = SignalListItemFactory.New();
+                factory.OnSetup += (_, args) =&gt;
+                {
+                    ListItem listItem = (ListItem)args.Object;
+                    listItem.Child = LabelTablePartCell.New();
+                };
+                factory.OnBind += (_, args) =&gt;
+                {
+                    ListItem listItem = (ListItem)args.Object;
+                    LabelTablePartCell? cell = (LabelTablePartCell?)listItem.Child;
+                    <xsl:value-of select="$RowType"/>? row = (<xsl:value-of select="$RowType"/>?)listItem.Item;
+                    if (cell != null &amp;&amp; row != null)
+                        cell.SetText(row.OwnerLineNum.ToString());
+                };
+                ColumnViewColumn column = ColumnViewColumn.New("№", factory);
                 form.Grid.AppendColumn(column);
             }
   </xsl:template>
@@ -407,6 +430,7 @@ limitations under the License.
     <xsl:param name="SelectType" />
     <!-- Для ієрархії довідника-->
     <xsl:param name="DirectoryType" />
+    <xsl:param name="ParentField" />
     <xsl:param name="DirectoryAllowedContent" />
     <xsl:param name="DirectoryIsFolderField" />
 
@@ -415,13 +439,26 @@ limitations under the License.
                 <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.Field.AddRange(
                 [
                     <xsl:text>"deletion_label"</xsl:text>,
-                    <!-- Для ієрархічних довідників, у яких тип контенту папки та елементи, додаткове поле isfolders -->
-                    <xsl:if test="$ConfTypeGroup = 'Довідники' and $DirectoryType = 'Hierarchical' and $DirectoryAllowedContent = 'FoldersAndElements'">
-                        <xsl:text>/*isfolders*/ </xsl:text>
-                        <xsl:value-of select="concat($ConfTypeGroup, '.', $ConfTypeName, '_Const.', $DirectoryIsFolderField)"/>,
+                    <!-- Для ієрархічних довідників -->
+                    <xsl:if test="$ConfTypeGroup = 'Довідники' and $DirectoryType = 'Hierarchical'">
+                        <!-- 
+                            Родич, додаткове поле parent. 
+                            Це поле потрібне для динамічного підвантаження, щоб розділити підвантажені елементи за полем Родич. 
+                            Це поле не повинно конфліктувати якщо воно буде включене в табличний список, 
+                            так як його тип pointer і воно додається в таблицю через join
+                        -->
+                        <xsl:if test="normalize-space($ParentField) != ''">
+                            <xsl:text>/* + parent */ </xsl:text>
+                            <xsl:value-of select="concat($ConfTypeGroup, '.', $ConfTypeName, '_Const.', $ParentField)"/>,
+                        </xsl:if>
+                        <!-- Тип контенту папки та елементи, додаткове поле isfolders -->
+                        <xsl:if test="$DirectoryAllowedContent = 'FoldersAndElements'">
+                            <xsl:text>/* + isfolders */ </xsl:text>
+                            <xsl:value-of select="concat($ConfTypeGroup, '.', $ConfTypeName, '_Const.', $DirectoryIsFolderField)"/>,
+                        </xsl:if>
                     </xsl:if>
                     <xsl:if test="$ConfTypeGroup = 'Документи'"><!-- Для документів додаткове поле spend -->
-                        <xsl:text>"spend"</xsl:text>,
+                        <xsl:text>/* + spend */ "spend"</xsl:text>,
                     </xsl:if>
                     <xsl:for-each select="Fields/Field[Type != 'pointer']">
                         <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
@@ -454,10 +491,19 @@ limitations under the License.
                 </xsl:for-each>
 
                 <!-- Приєднання таблиць -->
-                <xsl:for-each select="Fields/Field[Type = 'pointer']">
-                    /* Приєднання */
-                    <xsl:value-of select="substring-before(Pointer, '.')"/>.<xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer.GetJoin(<xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect, <xsl:value-of select="$ConfTypeGroup"/>.<xsl:value-of select="$ConfTypeName"/>_Const.<xsl:value-of select="Name"/>,
-                    <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.Table, "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
+                <xsl:for-each select="Fields/Field[Type = 'pointer' or Type = 'composite_pointer']">
+                    <xsl:choose>
+                        <xsl:when test="Type = 'pointer'">
+                            /* Приєднання pointer */
+                            <xsl:value-of select="substring-before(Pointer, '.')"/>.<xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer.GetJoin(<xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect, <xsl:value-of select="$ConfTypeGroup"/>.<xsl:value-of select="$ConfTypeName"/>_Const.<xsl:value-of select="Name"/>,
+                            <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.Table, "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
+                        </xsl:when>
+                        <xsl:when test="Type = 'composite_pointer'">
+                            /* Приєднання composite_pointer */
+                            <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.FieldAndAlias.Add(new ValueName&lt;string&gt;("join_tab_<xsl:value-of select="position()"/>.name", "<xsl:value-of select="Name"/>"));
+                            <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.Joins.Add(new Join("view_special_presentation", <xsl:value-of select="$ConfTypeName"/>_Const.<xsl:value-of select="Name"/>, <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.Table, "join_tab_<xsl:value-of select="position()"/>"));
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:for-each>
             </xsl:if>
 
@@ -515,9 +561,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             <xsl:variable name="TabularListName" select="Name"/>
     public static class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
     {
+        <xsl:if test="$DirectoryType = 'Hierarchical'">
         /* Тип вмісту довідника (елемент, папки, чи папки та елементи) */
         static readonly ConfigurationDirectories.HierarchicalContentType AllowedContent = Configuration.GetAllowedContent("<xsl:value-of select="$DirectoryAllowedContent"/>");
-
+        </xsl:if>
         public static void AddColumn(DirectoryFormJournalBase form)
         {
             <xsl:choose>
@@ -646,7 +693,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             return row;
         }
 
-        public static async ValueTask&lt;List&lt;DirectoryHierarchicalRow&gt;&gt; LoadChildren(DirectoryFormJournalBase form, UniqueID parent)
+        public static async ValueTask&lt;List&lt;DirectoryHierarchicalRow&gt;&gt; LoadChildren(DirectoryFormJournalBase form, UniqueID[] parents)
         {
             /* Вибірка */
             <xsl:call-template name="Select">
@@ -655,12 +702,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                 <xsl:with-param name="SelectType"><xsl:value-of select="$SelectType"/></xsl:with-param>
 
                 <xsl:with-param name="DirectoryType"><xsl:value-of select="$DirectoryType"/></xsl:with-param>
+                <xsl:with-param name="ParentField"><xsl:value-of select="$ParentField"/></xsl:with-param>
                 <xsl:with-param name="DirectoryAllowedContent"><xsl:value-of select="$DirectoryAllowedContent"/></xsl:with-param>
                 <xsl:with-param name="DirectoryIsFolderField"><xsl:value-of select="$DirectoryIsFolderField"/></xsl:with-param>
             </xsl:call-template>
 
             /* Відбір по полю Родич */
-            <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Where.Add(new(Довідники.<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$ParentField"/>, Comparison.EQ, parent.UGuid));
+            <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Where.Add(new(Довідники.<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$ParentField"/>, Comparison.IN, $"'{string.Join("', '", parents.Select(x =&gt; x.UGuid))}'", true));
 
             /* Сховати відкриту папку для вибору */
             if (form.OpenFolder != null)
@@ -678,6 +726,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                     <xsl:value-of select="$RowType"/> row = <xsl:value-of select="$RowType"/>.New();
                     row.UniqueID = curr.UniqueID;
                     row.DeletionLabel = (bool)Fields["deletion_label"];
+                    row.Parent = new UniqueID(Fields[Довідники.<xsl:value-of select="concat($DirectoryName, '_Const.', $ParentField)"/>]);
                     <xsl:for-each select="Fields/Field">
                         <xsl:text>row.Fields.Add("</xsl:text><xsl:value-of select="Name"/>", <xsl:call-template name="FieldValue"><xsl:with-param name="ConfTypeName">Довідники.<xsl:value-of select="$DirectoryName"/></xsl:with-param></xsl:call-template>);
                     </xsl:for-each>
@@ -747,7 +796,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
 
             <!-- Вибрати дані -->
             await <xsl:value-of select="$DirectoryName"/>_Select.Select();
-            form.Store.RemoveAll();
+            if (form.Store.GetNItems() &gt; 0) form.Store.RemoveAll();
 
             <xsl:if test="$DirectoryType = 'Hierarchical'">
             /* Пустий рядок */
@@ -942,12 +991,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
 
             <!-- Вибрати дані -->
             await <xsl:value-of select="$DocumentName"/>_Select.Select();
-            /* Очистка сховища */
-            if (form.Store.GetNItems() &gt; 0)
-            {
-                form.Store.RemoveAll();
-                GC.Collect();
-            }
+            if (form.Store.GetNItems() &gt; 0) form.Store.RemoveAll();
             uint selectPosition = 0;
             while (<xsl:value-of select="$DocumentName"/>_Select.MoveNext())
             {
@@ -1003,6 +1047,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             <xsl:call-template name="AddColumnOwnerName">
                 <xsl:with-param name="RowType">RegisterAccumulationRowJournal</xsl:with-param>
             </xsl:call-template>
+            <xsl:call-template name="AddColumnOwnerLineNum">
+                <xsl:with-param name="RowType">RegisterAccumulationRowJournal</xsl:with-param>
+            </xsl:call-template>
             
             <xsl:call-template name="AddColumnLabel">
                 <xsl:with-param name="ConfTypeName"><xsl:value-of select="$RegisterName"/></xsl:with-param>
@@ -1053,12 +1100,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
 
             <!-- Вибрати дані -->
             await <xsl:value-of select="$RegisterName"/>_Select.Read();
-            /* Очистка сховища */
-            if (form.Store.GetNItems() &gt; 0)
-            {
-                form.Store.RemoveAll();
-                GC.Collect();
-            }
+            if (form.Store.GetNItems() &gt; 0) form.Store.RemoveAll();
             uint selectPosition = 0;
             foreach (<xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$SelectType"/>.Record record in <xsl:value-of select="$RegisterName"/>_Select.Records)
             {
@@ -1069,6 +1111,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 row.Owner = record.Owner;
                 row.OwnerType = record.OwnerType;
                 row.OwnerName = record.OwnerName;
+                row.OwnerLineNum = record.OwnerLineNum;
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>row.Fields.Add("</xsl:text><xsl:value-of select="Name"/>", <xsl:call-template name="FieldValueReg"><xsl:with-param name="VarName">record</xsl:with-param></xsl:call-template>);
                 </xsl:for-each>
@@ -1100,6 +1143,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
         public static void AddColumn(RegisterAccumulationFormJournalSmall form)
         {
             <xsl:call-template name="AddColumnIncome" />
+            <xsl:call-template name="AddColumnOwnerLineNum">
+                <xsl:with-param name="RowType">RegisterAccumulationRowJournal</xsl:with-param>
+            </xsl:call-template>
                         
             <xsl:call-template name="AddColumnLabel">
                 <xsl:with-param name="ConfTypeName"><xsl:value-of select="$RegisterName"/></xsl:with-param>
@@ -1135,12 +1181,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
 
             <!-- Вибрати дані -->
             await <xsl:value-of select="$RegisterName"/>_Select.Read();
-            /* Очистка сховища */
-            if (form.Store.GetNItems() &gt; 0)
-            {
-                form.Store.RemoveAll();
-                GC.Collect();
-            }
+            if (form.Store.GetNItems() &gt; 0) form.Store.RemoveAll();
             foreach (<xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$SelectType"/>.Record record in <xsl:value-of select="$RegisterName"/>_Select.Records)
             {
                 RegisterAccumulationRowJournal row = RegisterAccumulationRowJournal.New();
@@ -1150,6 +1191,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 row.Owner = record.Owner;
                 row.OwnerType = record.OwnerType;
                 row.OwnerName = record.OwnerName;
+                row.OwnerLineNum = record.OwnerLineNum;
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>row.Fields.Add("</xsl:text><xsl:value-of select="Name"/>", <xsl:call-template name="FieldValueReg"><xsl:with-param name="VarName">record</xsl:with-param></xsl:call-template>);
                 </xsl:for-each>
