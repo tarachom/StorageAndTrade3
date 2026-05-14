@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 12.05.2026 15:09:35
+ * Дата конфігурації: 14.05.2026 16:37:07
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -65,145 +65,7 @@ namespace GeneratedCode
     }
 
     public class Functions
-    {
-        /*
-          Функція для типу який задається користувачем.
-          Створює або оновлює VIEW на PostgreSQL сервері для відображення презентації для uuidAndText
-        */
-        public static async ValueTask CreateCompositePresentationView()
-        {            
-            string query = """
-            CREATE OR REPLACE VIEW view_special_presentation AS
-            
-            SELECT (uid, 'Довідники.Організації')::uuidtext AS uid, "col_a1" AS name FROM tab_a01
-            UNION ALL
-            SELECT (uid, 'Довідники.Номенклатура')::uuidtext AS uid, "col_b1" AS name FROM tab_a03
-            UNION ALL
-            SELECT (uid, 'Довідники.Виробники')::uuidtext AS uid, "col_b6" AS name FROM tab_a04
-            UNION ALL
-            SELECT (uid, 'Довідники.ВидиНоменклатури')::uuidtext AS uid, "col_b8" AS name FROM tab_a05
-            UNION ALL
-            SELECT (uid, 'Довідники.ПакуванняОдиниціВиміру')::uuidtext AS uid, "col_c1" AS name FROM tab_a06
-            UNION ALL
-            SELECT (uid, 'Довідники.Валюти')::uuidtext AS uid, "col_c5" AS name FROM tab_a07
-            UNION ALL
-            SELECT (uid, 'Довідники.Контрагенти')::uuidtext AS uid, "col_c7" AS name FROM tab_a08
-            UNION ALL
-            SELECT (uid, 'Довідники.Склади')::uuidtext AS uid, "col_d9" AS name FROM tab_a10
-            UNION ALL
-            SELECT (uid, 'Довідники.ВидиЦін')::uuidtext AS uid, "col_e9" AS name FROM tab_a12
-            UNION ALL
-            SELECT (uid, 'Довідники.ВидиЦінПостачальників')::uuidtext AS uid, "col_f3" AS name FROM tab_a13
-            UNION ALL
-            SELECT (uid, 'Довідники.Користувачі')::uuidtext AS uid, "col_f6" AS name FROM tab_a14
-            UNION ALL
-            SELECT (uid, 'Довідники.ФізичніОсоби')::uuidtext AS uid, "col_g7" AS name FROM tab_a16
-            UNION ALL
-            SELECT (uid, 'Довідники.СтруктураПідприємства')::uuidtext AS uid, "col_h8" AS name FROM tab_a18
-            UNION ALL
-            SELECT (uid, 'Довідники.КраїниСвіту')::uuidtext AS uid, "col_i2" AS name FROM tab_a19
-            UNION ALL
-            SELECT (uid, 'Довідники.Файли')::uuidtext AS uid, "col_i5" AS name FROM tab_a20
-            UNION ALL
-            SELECT (uid, 'Довідники.ХарактеристикиНоменклатури')::uuidtext AS uid, "col_i7" AS name FROM tab_a21
-            UNION ALL
-            SELECT (uid, 'Довідники.Номенклатура_Папки')::uuidtext AS uid, "col_j1" AS name FROM tab_a22
-            UNION ALL
-            SELECT (uid, 'Довідники.Контрагенти_Папки')::uuidtext AS uid, "col_j4" AS name FROM tab_a23
-            UNION ALL
-            SELECT (uid, 'Довідники.Склади_Папки')::uuidtext AS uid, "col_j7" AS name FROM tab_a24
-            UNION ALL
-            SELECT (uid, 'Довідники.Каси')::uuidtext AS uid, "col_k8" AS name FROM tab_a26
-            UNION ALL
-            SELECT (uid, 'Довідники.БанківськіРахункиОрганізацій')::uuidtext AS uid, "col_l1" AS name FROM tab_a27
-            UNION ALL
-            SELECT (uid, 'Довідники.ДоговориКонтрагентів')::uuidtext AS uid, concat_ws (', ', "col_n4", "col_b8") AS name FROM tab_a28
-            UNION ALL
-            SELECT (uid, 'Довідники.БанківськіРахункиКонтрагентів')::uuidtext AS uid, "col_n7" AS name FROM tab_a29
-            UNION ALL
-            SELECT (uid, 'Довідники.СтаттяРухуКоштів')::uuidtext AS uid, "col_i7" AS name FROM tab_a45
-            UNION ALL
-            SELECT (uid, 'Довідники.СеріїНоменклатури')::uuidtext AS uid, "col_a3" AS name FROM tab_b02
-            UNION ALL
-            SELECT (uid, 'Довідники.ПартіяТоварівКомпозит')::uuidtext AS uid, "col_a1" AS name FROM tab_b06
-            UNION ALL
-            SELECT (uid, 'Довідники.ВидиЗапасів')::uuidtext AS uid, "col_a5" AS name FROM tab_b13
-            UNION ALL
-            SELECT (uid, 'Довідники.Банки')::uuidtext AS uid, "col_a2" AS name FROM tab_a39
-            UNION ALL
-            SELECT (uid, 'Довідники.СкладськіПриміщення')::uuidtext AS uid, "col_a2" AS name FROM tab_a71
-            UNION ALL
-            SELECT (uid, 'Довідники.СкладськіКомірки')::uuidtext AS uid, "col_a2" AS name FROM tab_a72
-            UNION ALL
-            SELECT (uid, 'Довідники.ОбластьЗберігання')::uuidtext AS uid, "col_a2" AS name FROM tab_a73
-            UNION ALL
-            SELECT (uid, 'Довідники.ТипорозміриКомірок')::uuidtext AS uid, "col_a2" AS name FROM tab_a75
-            UNION ALL
-            SELECT (uid, 'Довідники.СкладськіКомірки_Папки')::uuidtext AS uid, "col_j1" AS name FROM tab_a76
-            UNION ALL
-            SELECT (uid, 'Довідники.Блокнот')::uuidtext AS uid, "col_a2" AS name FROM tab_a41
-            UNION ALL
-            SELECT (uid, 'Довідники.ЗбереженіЗвіти')::uuidtext AS uid, "col_a2" AS name FROM tab_b04
-            UNION ALL
-            SELECT (uid, 'Довідники.КасиККМ')::uuidtext AS uid, "col_a2" AS name FROM tab_b52
-            UNION ALL
-            SELECT (uid, 'Документи.ЗамовленняПостачальнику')::uuidtext AS uid, "docname" AS name FROM tab_a25
-            UNION ALL
-            SELECT (uid, 'Документи.ПоступленняТоварівТаПослуг')::uuidtext AS uid, "docname" AS name FROM tab_a32
-            UNION ALL
-            SELECT (uid, 'Документи.ЗамовленняКлієнта')::uuidtext AS uid, "docname" AS name FROM tab_a34
-            UNION ALL
-            SELECT (uid, 'Документи.РеалізаціяТоварівТаПослуг')::uuidtext AS uid, "docname" AS name FROM tab_a36
-            UNION ALL
-            SELECT (uid, 'Документи.ВстановленняЦінНоменклатури')::uuidtext AS uid, "docname" AS name FROM tab_a42
-            UNION ALL
-            SELECT (uid, 'Документи.ПрихіднийКасовийОрдер')::uuidtext AS uid, "docname" AS name FROM tab_a44
-            UNION ALL
-            SELECT (uid, 'Документи.РозхіднийКасовийОрдер')::uuidtext AS uid, "docname" AS name FROM tab_a48
-            UNION ALL
-            SELECT (uid, 'Документи.ПереміщенняТоварів')::uuidtext AS uid, "docname" AS name FROM tab_a31
-            UNION ALL
-            SELECT (uid, 'Документи.ПоверненняТоварівПостачальнику')::uuidtext AS uid, "docname" AS name FROM tab_a51
-            UNION ALL
-            SELECT (uid, 'Документи.ПоверненняТоварівВідКлієнта')::uuidtext AS uid, "docname" AS name FROM tab_a53
-            UNION ALL
-            SELECT (uid, 'Документи.АктВиконанихРобіт')::uuidtext AS uid, "docname" AS name FROM tab_a81
-            UNION ALL
-            SELECT (uid, 'Документи.ВведенняЗалишків')::uuidtext AS uid, "docname" AS name FROM tab_a83
-            UNION ALL
-            SELECT (uid, 'Документи.НадлишкиТоварів')::uuidtext AS uid, "docname" AS name FROM tab_a88
-            UNION ALL
-            SELECT (uid, 'Документи.ПересортицяТоварів')::uuidtext AS uid, "docname" AS name FROM tab_a90
-            UNION ALL
-            SELECT (uid, 'Документи.ПерерахунокТоварів')::uuidtext AS uid, "docname" AS name FROM tab_a92
-            UNION ALL
-            SELECT (uid, 'Документи.ПсуванняТоварів')::uuidtext AS uid, "docname" AS name FROM tab_a94
-            UNION ALL
-            SELECT (uid, 'Документи.ВнутрішнєСпоживанняТоварів')::uuidtext AS uid, "docname" AS name FROM tab_b07
-            UNION ALL
-            SELECT (uid, 'Документи.РахунокФактура')::uuidtext AS uid, "docname" AS name FROM tab_b10
-            UNION ALL
-            SELECT (uid, 'Документи.РозміщенняТоварівНаСкладі')::uuidtext AS uid, "docname" AS name FROM tab_a64
-            UNION ALL
-            SELECT (uid, 'Документи.ПереміщенняТоварівНаСкладі')::uuidtext AS uid, "docname" AS name FROM tab_b09
-            UNION ALL
-            SELECT (uid, 'Документи.ЗбіркаТоварівНаСкладі')::uuidtext AS uid, "docname" AS name FROM tab_b27
-            UNION ALL
-            SELECT (uid, 'Документи.РозміщенняНоменклатуриПоКоміркам')::uuidtext AS uid, "docname" AS name FROM tab_b29
-            UNION ALL
-            SELECT (uid, 'Документи.КорегуванняБоргу')::uuidtext AS uid, "docname" AS name FROM tab_a65
-            UNION ALL
-            SELECT (uid, 'Документи.ЗакриттяЗамовленняКлієнта')::uuidtext AS uid, "docname" AS name FROM tab_a96
-            UNION ALL
-            SELECT (uid, 'Документи.ЗакриттяРахункуФактури')::uuidtext AS uid, "docname" AS name FROM tab_b41
-            UNION ALL
-            SELECT (uid, 'Документи.ЗакриттяЗамовленняПостачальнику')::uuidtext AS uid, "docname" AS name FROM tab_b44
-            UNION ALL
-            SELECT (uid, 'Документи.ЧекККМ')::uuidtext AS uid, "docname" AS name FROM tab_b51
-            """;
-            await Config.Kernel.DataBase.ExecuteSQL(query);
-        }
-
+    {        
         /*
           Функція для типу який задається користувачем.
           Повертає презентацію для uuidAndText
@@ -2689,7 +2551,7 @@ namespace GeneratedCode.Довідники
             }
             
                       /* pointer */
-                      Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b19", "join_tab_1", "Файл");
+                      Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, $"{TABLE}", "join_tab_1", "Файл");
                   
         }
 
@@ -4024,7 +3886,7 @@ namespace GeneratedCode.Довідники
             }
             
                       /* pointer */
-                      Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b20", "join_tab_1", "Файл");
+                      Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, $"{TABLE}", "join_tab_1", "Файл");
                   
         }
 
@@ -12856,19 +12718,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a30", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a30", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a30", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_a30", "join_tab_11", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_11", "Склад");
                   
                       /* pointer */
-                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, "tab_a30", "join_tab_12", "Підрозділ");
+                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, $"{TABLE}", "join_tab_12", "Підрозділ");
                   
         }
 
@@ -13679,28 +13541,28 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a33", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a33", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a33", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a33", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_a33", "join_tab_10", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_10", "Склад");
                   
                       /* pointer */
-                      Документи.ЗамовленняПостачальнику_Pointer.GetJoin(QuerySelect, ЗамовленняПостачальнику, "tab_a33", "join_tab_11", "ЗамовленняПостачальнику");
+                      Документи.ЗамовленняПостачальнику_Pointer.GetJoin(QuerySelect, ЗамовленняПостачальнику, $"{TABLE}", "join_tab_11", "ЗамовленняПостачальнику");
                   
                       /* pointer */
-                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, "tab_a33", "join_tab_13", "Підрозділ");
+                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, $"{TABLE}", "join_tab_13", "Підрозділ");
                   
                       /* pointer */
-                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, "tab_a33", "join_tab_14", "ВидЦіни");
+                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, $"{TABLE}", "join_tab_14", "ВидЦіни");
                   
         }
 
@@ -14497,19 +14359,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a35", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a35", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a35", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
                       /* pointer */
-                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, "tab_a35", "join_tab_7", "ВидЦіни");
+                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, $"{TABLE}", "join_tab_7", "ВидЦіни");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_a35", "join_tab_11", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_11", "Склад");
                   
         }
 
@@ -15311,31 +15173,31 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a37", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a37", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a37", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a37", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, "tab_a37", "join_tab_8", "ВидЦіни");
+                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, $"{TABLE}", "join_tab_8", "ВидЦіни");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_a37", "join_tab_11", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_11", "Склад");
                   
                       /* pointer */
-                      Документи.ЗамовленняКлієнта_Pointer.GetJoin(QuerySelect, ЗамовленняКлієнта, "tab_a37", "join_tab_12", "ЗамовленняКлієнта");
+                      Документи.ЗамовленняКлієнта_Pointer.GetJoin(QuerySelect, ЗамовленняКлієнта, $"{TABLE}", "join_tab_12", "ЗамовленняКлієнта");
                   
                       /* pointer */
-                      Документи.РахунокФактура_Pointer.GetJoin(QuerySelect, РахунокФактура, "tab_a37", "join_tab_13", "РахунокФактура");
+                      Документи.РахунокФактура_Pointer.GetJoin(QuerySelect, РахунокФактура, $"{TABLE}", "join_tab_13", "РахунокФактура");
                   
                       /* pointer */
-                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, "tab_a37", "join_tab_15", "Партія");
+                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, $"{TABLE}", "join_tab_15", "Партія");
                   
         }
 
@@ -16007,16 +15869,16 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a43", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a43", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a43", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
                       /* pointer */
-                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, "tab_a43", "join_tab_5", "ВидЦіни");
+                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, $"{TABLE}", "join_tab_5", "ВидЦіни");
                   
         }
 
@@ -16563,13 +16425,13 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, "tab_a47", "join_tab_4", "Підрозділ");
+                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, $"{TABLE}", "join_tab_4", "Підрозділ");
                   
                       /* pointer */
-                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, ВалютаВзаєморозрахунків, "tab_a47", "join_tab_5", "ВалютаВзаєморозрахунків");
+                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, ВалютаВзаєморозрахунків, $"{TABLE}", "join_tab_5", "ВалютаВзаєморозрахунків");
                   
                       /* pointer */
-                      Довідники.Організації_Pointer.GetJoin(QuerySelect, Організація, "tab_a47", "join_tab_6", "Організація");
+                      Довідники.Організації_Pointer.GetJoin(QuerySelect, Організація, $"{TABLE}", "join_tab_6", "Організація");
                   
         }
 
@@ -17126,13 +16988,13 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, ВалютаВзаєморозрахунків, "tab_a49", "join_tab_4", "ВалютаВзаєморозрахунків");
+                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, ВалютаВзаєморозрахунків, $"{TABLE}", "join_tab_4", "ВалютаВзаєморозрахунків");
                   
                       /* pointer */
-                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, "tab_a49", "join_tab_5", "Підрозділ");
+                      Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, $"{TABLE}", "join_tab_5", "Підрозділ");
                   
                       /* pointer */
-                      Довідники.Організації_Pointer.GetJoin(QuerySelect, Організація, "tab_a49", "join_tab_7", "Організація");
+                      Довідники.Організації_Pointer.GetJoin(QuerySelect, Організація, $"{TABLE}", "join_tab_7", "Організація");
                   
         }
 
@@ -17698,19 +17560,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a50", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a50", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a50", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a50", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, "tab_a50", "join_tab_8", "Партія");
+                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, $"{TABLE}", "join_tab_8", "Партія");
                   
         }
 
@@ -18301,19 +18163,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a52", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a52", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a52", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a52", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Документи.ПоступленняТоварівТаПослуг_Pointer.GetJoin(QuerySelect, ДокументПоступлення, "tab_a52", "join_tab_10", "ДокументПоступлення");
+                      Документи.ПоступленняТоварівТаПослуг_Pointer.GetJoin(QuerySelect, ДокументПоступлення, $"{TABLE}", "join_tab_10", "ДокументПоступлення");
                   
         }
 
@@ -18891,19 +18753,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a54", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a54", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a54", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a54", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Документи.РеалізаціяТоварівТаПослуг_Pointer.GetJoin(QuerySelect, ДокументРеалізації, "tab_a54", "join_tab_11", "ДокументРеалізації");
+                      Документи.РеалізаціяТоварівТаПослуг_Pointer.GetJoin(QuerySelect, ДокументРеалізації, $"{TABLE}", "join_tab_11", "ДокументРеалізації");
                   
         }
 
@@ -19462,10 +19324,10 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a82", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a82", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
         }
 
@@ -20154,16 +20016,16 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a84", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a84", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a84", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a84", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
         }
 
@@ -20320,7 +20182,7 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Каси_Pointer.GetJoin(QuerySelect, Каса, "tab_a85", "join_tab_2", "Каса");
+                      Довідники.Каси_Pointer.GetJoin(QuerySelect, Каса, $"{TABLE}", "join_tab_2", "Каса");
                   
         }
 
@@ -20456,7 +20318,7 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.БанківськіРахункиОрганізацій_Pointer.GetJoin(QuerySelect, БанківськийРахунок, "tab_a86", "join_tab_2", "БанківськийРахунок");
+                      Довідники.БанківськіРахункиОрганізацій_Pointer.GetJoin(QuerySelect, БанківськийРахунок, $"{TABLE}", "join_tab_2", "БанківськийРахунок");
                   
         }
 
@@ -20594,10 +20456,10 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, Контрагент, "tab_a87", "join_tab_2", "Контрагент");
+                      Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, Контрагент, $"{TABLE}", "join_tab_2", "Контрагент");
                   
                       /* pointer */
-                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, Валюта, "tab_a87", "join_tab_3", "Валюта");
+                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, Валюта, $"{TABLE}", "join_tab_3", "Валюта");
                   
         }
 
@@ -21060,10 +20922,10 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a89", "join_tab_1", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_1", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a89", "join_tab_2", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_2", "ХарактеристикаНоменклатури");
                   
         }
 
@@ -21530,10 +21392,10 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a91", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a91", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
         }
 
@@ -22021,13 +21883,13 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a93", "join_tab_5", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_5", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a93", "join_tab_6", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_6", "Пакування");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a93", "join_tab_7", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_7", "ХарактеристикаНоменклатури");
                   
         }
 
@@ -22556,19 +22418,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a95", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a95", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a95", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a95", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, "tab_a95", "join_tab_10", "Партія");
+                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, $"{TABLE}", "join_tab_10", "Партія");
                   
         }
 
@@ -23107,19 +22969,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b08", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b08", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_b08", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b08", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, "tab_b08", "join_tab_10", "Партія");
+                      Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, Партія, $"{TABLE}", "join_tab_10", "Партія");
                   
         }
 
@@ -23691,19 +23553,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b11", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b11", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b11", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
                       /* pointer */
-                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, "tab_b11", "join_tab_7", "ВидЦіни");
+                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, $"{TABLE}", "join_tab_7", "ВидЦіни");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_b11", "join_tab_11", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_11", "Склад");
                   
         }
 
@@ -24373,19 +24235,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a68", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a68", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a68", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a68", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, Комірка, "tab_a68", "join_tab_8", "Комірка");
+                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, Комірка, $"{TABLE}", "join_tab_8", "Комірка");
                   
         }
 
@@ -24894,22 +24756,22 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b26", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b26", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_b26", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b26", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, КоміркаВідправник, "tab_b26", "join_tab_8", "КоміркаВідправник");
+                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, КоміркаВідправник, $"{TABLE}", "join_tab_8", "КоміркаВідправник");
                   
                       /* pointer */
-                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, КоміркаОтримувач, "tab_b26", "join_tab_9", "КоміркаОтримувач");
+                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, КоміркаОтримувач, $"{TABLE}", "join_tab_9", "КоміркаОтримувач");
                   
         }
 
@@ -25426,19 +25288,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b28", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b28", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_b28", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b28", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, Комірка, "tab_b28", "join_tab_8", "Комірка");
+                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, Комірка, $"{TABLE}", "join_tab_8", "Комірка");
                   
         }
 
@@ -25927,13 +25789,13 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b32", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, Комірка, "tab_b32", "join_tab_3", "Комірка");
+                      Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, Комірка, $"{TABLE}", "join_tab_3", "Комірка");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b32", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
         }
 
@@ -26423,10 +26285,10 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, Контрагент, "tab_b12", "join_tab_2", "Контрагент");
+                      Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, Контрагент, $"{TABLE}", "join_tab_2", "Контрагент");
                   
                       /* pointer */
-                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, Валюта, "tab_b12", "join_tab_3", "Валюта");
+                      Довідники.Валюти_Pointer.GetJoin(QuerySelect, Валюта, $"{TABLE}", "join_tab_3", "Валюта");
                   
         }
 
@@ -26962,16 +26824,16 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b39", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b39", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b39", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_b39", "join_tab_7", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_7", "Склад");
                   
         }
 
@@ -27517,16 +27379,16 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b42", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b42", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b42", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_b42", "join_tab_7", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_7", "Склад");
                   
         }
 
@@ -28072,16 +27934,16 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b47", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b47", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b47", "join_tab_4", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_4", "Пакування");
                   
                       /* pointer */
-                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_b47", "join_tab_7", "Склад");
+                      Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, $"{TABLE}", "join_tab_7", "Склад");
                   
         }
 
@@ -28623,19 +28485,19 @@ namespace GeneratedCode.Документи
             }
             
                       /* pointer */
-                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b50", "join_tab_2", "Номенклатура");
+                      Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, $"{TABLE}", "join_tab_2", "Номенклатура");
                   
                       /* pointer */
-                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b50", "join_tab_3", "ХарактеристикаНоменклатури");
+                      Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, $"{TABLE}", "join_tab_3", "ХарактеристикаНоменклатури");
                   
                       /* pointer */
-                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_b50", "join_tab_4", "Серія");
+                      Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, $"{TABLE}", "join_tab_4", "Серія");
                   
                       /* pointer */
-                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b50", "join_tab_5", "Пакування");
+                      Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, $"{TABLE}", "join_tab_5", "Пакування");
                   
                       /* pointer */
-                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, "tab_b50", "join_tab_11", "ВидЦіни");
+                      Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, ВидЦіни, $"{TABLE}", "join_tab_11", "ВидЦіни");
                   
         }
 
@@ -28827,6 +28689,7 @@ namespace GeneratedCode.РегістриВідомостей
     #region REGISTER "ЦіниНоменклатури"
     public static class ЦіниНоменклатури_Const
     {
+        public const string TYPENAME = "РегістриВідомостей.ЦіниНоменклатури";
         public const string FULLNAME = "Ціни номенклатури";
         public const string TABLE = "tab_a40";
         
@@ -28869,6 +28732,9 @@ namespace GeneratedCode.РегістриВідомостей
                       /* pointer */
                       Довідники.Валюти_Pointer.GetJoin(QuerySelect, ЦіниНоменклатури_Const.Валюта, ЦіниНоменклатури_Const.TABLE, "join_tab_6", "Валюта");
                   
+
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ЦіниНоменклатури_Const.TABLE}.owner, {ЦіниНоменклатури_Const.TABLE}.ownertype)", "OwnerName"));
         }
 
         public async ValueTask Read()
@@ -28893,16 +28759,17 @@ namespace GeneratedCode.РегістриВідомостей
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
                     record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
                         record.ВидЦіни.Name = ItemValue["ВидЦіни"];
                         record.Пакування.Name = ItemValue["Пакування"];
                         record.Валюта.Name = ItemValue["Валюта"];
                         
-                  }
+                }
                 
             }
             base.BaseClear();
@@ -29050,6 +28917,7 @@ namespace GeneratedCode.РегістриВідомостей
     #region REGISTER "КурсиВалют"
     public static class КурсиВалют_Const
     {
+        public const string TYPENAME = "РегістриВідомостей.КурсиВалют";
         public const string FULLNAME = "Курси валют";
         public const string TABLE = "tab_a59";
         
@@ -29077,6 +28945,9 @@ namespace GeneratedCode.РегістриВідомостей
                       /* pointer */
                       Довідники.Валюти_Pointer.GetJoin(QuerySelect, КурсиВалют_Const.Валюта, КурсиВалют_Const.TABLE, "join_tab_1", "Валюта");
                   
+
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({КурсиВалют_Const.TABLE}.owner, {КурсиВалют_Const.TABLE}.ownertype)", "OwnerName"));
         }
 
         public async ValueTask Read()
@@ -29098,12 +28969,13 @@ namespace GeneratedCode.РегістриВідомостей
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
                     record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Валюта.Name = ItemValue["Валюта"];
                         
-                  }
+                }
                 
             }
             base.BaseClear();
@@ -29233,6 +29105,7 @@ namespace GeneratedCode.РегістриВідомостей
     #region REGISTER "ШтрихкодиНоменклатури"
     public static class ШтрихкодиНоменклатури_Const
     {
+        public const string TYPENAME = "РегістриВідомостей.ШтрихкодиНоменклатури";
         public const string FULLNAME = "Штрихкоди";
         public const string TABLE = "tab_b17";
         
@@ -29267,6 +29140,9 @@ namespace GeneratedCode.РегістриВідомостей
                       /* pointer */
                       Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, ШтрихкодиНоменклатури_Const.Пакування, ШтрихкодиНоменклатури_Const.TABLE, "join_tab_4", "Пакування");
                   
+
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ШтрихкодиНоменклатури_Const.TABLE}.owner, {ШтрихкодиНоменклатури_Const.TABLE}.ownertype)", "OwnerName"));
         }
 
         public async ValueTask Read()
@@ -29289,14 +29165,15 @@ namespace GeneratedCode.РегістриВідомостей
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
                     record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
                         record.Пакування.Name = ItemValue["Пакування"];
                         
-                  }
+                }
                 
             }
             base.BaseClear();
@@ -29432,6 +29309,7 @@ namespace GeneratedCode.РегістриВідомостей
     #region REGISTER "ФайлиДокументів"
     public static class ФайлиДокументів_Const
     {
+        public const string TYPENAME = "РегістриВідомостей.ФайлиДокументів";
         public const string FULLNAME = "Файли документів";
         public const string TABLE = "tab_b23";
         
@@ -29457,6 +29335,9 @@ namespace GeneratedCode.РегістриВідомостей
                       /* pointer */
                       Довідники.Файли_Pointer.GetJoin(QuerySelect, ФайлиДокументів_Const.Файл, ФайлиДокументів_Const.TABLE, "join_tab_1", "Файл");
                   
+
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ФайлиДокументів_Const.TABLE}.owner, {ФайлиДокументів_Const.TABLE}.ownertype)", "OwnerName"));
         }
 
         public async ValueTask Read()
@@ -29476,12 +29357,13 @@ namespace GeneratedCode.РегістриВідомостей
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
                     record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Файл.Name = ItemValue["Файл"];
                         
-                  }
+                }
                 
             }
             base.BaseClear();
@@ -29599,6 +29481,7 @@ namespace GeneratedCode.РегістриВідомостей
     #region REGISTER "РозміщенняНоменклатуриПоКоміркамНаСкладі"
     public static class РозміщенняНоменклатуриПоКоміркамНаСкладі_Const
     {
+        public const string TYPENAME = "РегістриВідомостей.РозміщенняНоменклатуриПоКоміркамНаСкладі";
         public const string FULLNAME = "Розміщення номенклатури";
         public const string TABLE = "tab_a74";
         
@@ -29636,6 +29519,9 @@ namespace GeneratedCode.РегістриВідомостей
                       /* pointer */
                       Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Комірка, РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE, "join_tab_4", "Комірка");
                   
+
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE}.owner, {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE}.ownertype)", "OwnerName"));
         }
 
         public async ValueTask Read()
@@ -29658,15 +29544,16 @@ namespace GeneratedCode.РегістриВідомостей
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
                     record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.Склад.Name = ItemValue["Склад"];
                         record.Приміщення.Name = ItemValue["Приміщення"];
                         record.Комірка.Name = ItemValue["Комірка"];
                         
-                  }
+                }
                 
             }
             base.BaseClear();
@@ -30160,7 +30047,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -30182,8 +30069,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, ТовариНаСкладах_Const.Серія, ТовариНаСкладах_Const.TABLE, "join_tab_4", "Серія");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ТовариНаСкладах_Const.TABLE}.owner, {ТовариНаСкладах_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} WHEN join_doc_9.uid IS NOT NULL THEN join_doc_9.{Документи.ЧекККМ_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -30191,7 +30081,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in ТовариНаСкладах_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a38", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -30221,7 +30111,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
                         record.Склад.Name = ItemValue["Склад"];
@@ -30619,7 +30509,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -30641,8 +30531,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Склади_Pointer.GetJoin(QuerySelect, ЗамовленняКлієнтів_Const.Склад, ЗамовленняКлієнтів_Const.TABLE, "join_tab_4", "Склад");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ЗамовленняКлієнтів_Const.TABLE}.owner, {ЗамовленняКлієнтів_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ЗамовленняКлієнта_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ЗакриттяЗамовленняКлієнта_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -30650,7 +30543,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in ЗамовленняКлієнтів_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a55", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -30680,7 +30573,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.ЗамовленняКлієнта.Name = ItemValue["ЗамовленняКлієнта"];
                         record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
@@ -30861,7 +30754,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -30877,8 +30770,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, РозрахункиЗКлієнтами_Const.Контрагент, РозрахункиЗКлієнтами_Const.TABLE, "join_tab_2", "Контрагент");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({РозрахункиЗКлієнтами_Const.TABLE}.owner, {РозрахункиЗКлієнтами_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПрихіднийКасовийОрдер_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РозхіднийКасовийОрдер_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.АктВиконанихРобіт_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.КорегуванняБоргу_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -30886,7 +30782,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in РозрахункиЗКлієнтами_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a56", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -30913,7 +30809,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Валюта.Name = ItemValue["Валюта"];
                         record.Контрагент.Name = ItemValue["Контрагент"];
                         
@@ -31177,7 +31073,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -31205,8 +31101,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, Закупівлі_Const.ХарактеристикаНоменклатури, Закупівлі_Const.TABLE, "join_tab_6", "ХарактеристикаНоменклатури");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({Закупівлі_Const.TABLE}.owner, {Закупівлі_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -31214,7 +31113,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in Закупівлі_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a57", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -31247,7 +31146,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Організація.Name = ItemValue["Організація"];
                         record.Склад.Name = ItemValue["Склад"];
                         record.Контрагент.Name = ItemValue["Контрагент"];
@@ -31452,7 +31351,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -31471,8 +31370,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Склади_Pointer.GetJoin(QuerySelect, ВільніЗалишки_Const.Склад, ВільніЗалишки_Const.TABLE, "join_tab_3", "Склад");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ВільніЗалишки_Const.TABLE}.owner, {ВільніЗалишки_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ЗамовленняКлієнта_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_9.uid IS NOT NULL THEN join_doc_9.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} WHEN join_doc_10.uid IS NOT NULL THEN join_doc_10.{Документи.РахунокФактура_Const.Назва} WHEN join_doc_11.uid IS NOT NULL THEN join_doc_11.{Документи.ЗакриттяЗамовленняКлієнта_Const.Назва} WHEN join_doc_12.uid IS NOT NULL THEN join_doc_12.{Документи.ЗакриттяРахункуФактури_Const.Назва} WHEN join_doc_13.uid IS NOT NULL THEN join_doc_13.{Документи.ЧекККМ_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -31480,7 +31382,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in ВільніЗалишки_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a58", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -31511,7 +31413,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
                         record.Склад.Name = ItemValue["Склад"];
@@ -31792,7 +31694,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -31814,8 +31716,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Склади_Pointer.GetJoin(QuerySelect, ЗамовленняПостачальникам_Const.Склад, ЗамовленняПостачальникам_Const.TABLE, "join_tab_4", "Склад");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ЗамовленняПостачальникам_Const.TABLE}.owner, {ЗамовленняПостачальникам_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ЗамовленняПостачальнику_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ЗакриттяЗамовленняПостачальнику_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -31823,7 +31728,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in ЗамовленняПостачальникам_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a60", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -31852,7 +31757,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.ЗамовленняПостачальнику.Name = ItemValue["ЗамовленняПостачальнику"];
                         record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
@@ -32027,7 +31932,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -32043,8 +31948,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Валюти_Pointer.GetJoin(QuerySelect, РозрахункиЗПостачальниками_Const.Валюта, РозрахункиЗПостачальниками_Const.TABLE, "join_tab_2", "Валюта");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({РозрахункиЗПостачальниками_Const.TABLE}.owner, {РозрахункиЗПостачальниками_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПрихіднийКасовийОрдер_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РозхіднийКасовийОрдер_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.КорегуванняБоргу_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -32052,7 +31960,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in РозрахункиЗПостачальниками_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a61", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -32079,7 +31987,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Контрагент.Name = ItemValue["Контрагент"];
                         record.Валюта.Name = ItemValue["Валюта"];
                         
@@ -32338,7 +32246,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -32357,8 +32265,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Валюти_Pointer.GetJoin(QuerySelect, РухКоштів_Const.Валюта, РухКоштів_Const.TABLE, "join_tab_3", "Валюта");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({РухКоштів_Const.TABLE}.owner, {РухКоштів_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПрихіднийКасовийОрдер_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РозхіднийКасовийОрдер_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ВведенняЗалишків_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -32366,7 +32277,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in РухКоштів_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a78", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -32394,7 +32305,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Організація.Name = ItemValue["Організація"];
                         record.Каса.Name = ItemValue["Каса"];
                         record.Валюта.Name = ItemValue["Валюта"];
@@ -32759,7 +32670,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -32787,8 +32698,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Склади_Pointer.GetJoin(QuerySelect, ПартіїТоварів_Const.Склад, ПартіїТоварів_Const.TABLE, "join_tab_6", "Склад");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ПартіїТоварів_Const.TABLE}.owner, {ПартіїТоварів_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -32796,7 +32710,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in ПартіїТоварів_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a79", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -32830,7 +32744,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Організація.Name = ItemValue["Організація"];
                         record.ПартіяТоварівКомпозит.Name = ItemValue["ПартіяТоварівКомпозит"];
                         record.Номенклатура.Name = ItemValue["Номенклатура"];
@@ -33270,7 +33184,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -33298,8 +33212,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, Продажі_Const.ХарактеристикаНоменклатури, Продажі_Const.TABLE, "join_tab_6", "ХарактеристикаНоменклатури");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({Продажі_Const.TABLE}.owner, {Продажі_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.АктВиконанихРобіт_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -33307,7 +33224,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in Продажі_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_a66", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -33341,7 +33258,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Організація.Name = ItemValue["Організація"];
                         record.Склад.Name = ItemValue["Склад"];
                         record.Контрагент.Name = ItemValue["Контрагент"];
@@ -33551,7 +33468,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -33576,8 +33493,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, ТовариВКомірках_Const.Серія, ТовариВКомірках_Const.TABLE, "join_tab_5", "Серія");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({ТовариВКомірках_Const.TABLE}.owner, {ТовариВКомірках_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.РозміщенняТоварівНаСкладі_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПереміщенняТоварівНаСкладі_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ЗбіркаТоварівНаСкладі_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -33585,7 +33505,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in ТовариВКомірках_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_b01", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -33615,7 +33535,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Номенклатура.Name = ItemValue["Номенклатура"];
                         record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
                         record.Пакування.Name = ItemValue["Пакування"];
@@ -34004,7 +33924,7 @@ namespace GeneratedCode.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
-        public void FillJoin(string[]? orderFields = null, bool docname_required = true)
+        public void FillJoin(string[]? orderFields = null)
         {
             QuerySelect.Clear();
 
@@ -34023,8 +33943,11 @@ namespace GeneratedCode.РегістриНакопичення
                       Довідники.Валюти_Pointer.GetJoin(QuerySelect, РухКоштівККМ_Const.Валюта, РухКоштівККМ_Const.TABLE, "join_tab_3", "Валюта");
                   
 
+            /* Назва власника */
+            QuerySelect.FieldAndAlias.Add(new ValueName<string>($"{SpecialFunc.CompisitePresentation}({РухКоштівККМ_Const.TABLE}.owner, {РухКоштівККМ_Const.TABLE}.ownertype)", "OwnerName"));
+
             //Назва документу
-            if (docname_required)
+            /*if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ЧекККМ_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
@@ -34032,7 +33955,7 @@ namespace GeneratedCode.РегістриНакопичення
               int i = 0;
               foreach (string table in РухКоштівККМ_Const.AllowDocumentSpendTable)
                   QuerySelect.Joins.Add(new Join(table, "owner", "tab_b53", $"join_doc_{++i}"));
-            }
+            }*/
         }
 
         public async ValueTask Read()
@@ -34060,7 +33983,7 @@ namespace GeneratedCode.РегістриНакопичення
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
                     record.JoinItemValue = ItemValue;
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    if (ItemValue.TryGetValue("OwnerName", out var ownerName)) record.OwnerName = ownerName;
                     record.Організація.Name = ItemValue["Організація"];
                         record.КасаККМ.Name = ItemValue["КасаККМ"];
                         record.Валюта.Name = ItemValue["Валюта"];

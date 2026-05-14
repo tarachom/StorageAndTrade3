@@ -990,7 +990,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
     public class <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/> : ТабличнийСписок
     {
         string ID = "";
-        string Період = "";
+        string Period = "";
+        string OwnerName = "";
         <xsl:for-each select="Fields/Field">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
@@ -1000,7 +1001,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             [
                 InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
-                Період,
+                Period, 
+                OwnerName,
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text><xsl:value-of select="Name"/>,
                 </xsl:for-each> 
@@ -1013,7 +1015,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             [
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
-                /*Період*/ typeof(string),
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),
                 </xsl:for-each>
@@ -1022,11 +1025,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 3));
             /* */
             <xsl:for-each select="Fields/Field">
               <xsl:text>treeView.AppendColumn(new TreeViewColumn("</xsl:text><xsl:value-of select="normalize-space(Caption)"/>
-              <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text><xsl:value-of select="position() + 2"/>
-              <xsl:text>) { MinWidth = 20, Resizable = true, SortColumnId = </xsl:text><xsl:value-of select="position() + 2"/>
+              <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text><xsl:value-of select="position() + 3"/>
+              <xsl:text>) { MinWidth = 20, Resizable = true, SortColumnId = </xsl:text><xsl:value-of select="position() + 3"/>
               <xsl:if test="Size != '0'"><xsl:value-of select="concat(', FixedWidth = ', Size)"/></xsl:if> } ); /*<xsl:value-of select="Name"/>*/
             </xsl:for-each>
             //Пустишка
@@ -1067,7 +1071,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/> row = new <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/>
                 {
                     ID = record.UID.ToString(),
-                    Період = record.Period.ToString(),
+                    Period = record.Period.ToString(),
+                    OwnerName = record.OwnerName,
                     <xsl:for-each select="Fields/Field">
                       <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
                       <xsl:choose>
@@ -1189,13 +1194,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.<xsl:value-of select="$RegisterName"/>_RecordsSet <xsl:value-of select="$RegisterName"/>_RecordsSet = new РегістриНакопичення.<xsl:value-of select="$RegisterName"/>_RecordsSet();
-            <xsl:value-of select="$RegisterName"/>_RecordsSet.FillJoin(["period"], docname_required);
+            <xsl:value-of select="$RegisterName"/>_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];

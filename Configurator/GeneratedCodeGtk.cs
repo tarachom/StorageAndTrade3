@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 12.05.2026 15:09:35
+ * Дата конфігурації: 14.05.2026 16:37:07
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -22213,7 +22213,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
     public class ЦіниНоменклатури_Записи : ТабличнийСписок
     {
         string ID = "";
-        string Період = "";
+        string Period = "";
+        string OwnerName = "";
         
         string Номенклатура = "";
         string ХарактеристикаНоменклатури = "";
@@ -22228,7 +22229,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
-                Період,
+                Period, 
+                OwnerName,
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
                 /*ВидЦіни*/ ВидЦіни,
@@ -22245,7 +22247,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
-                /*Період*/ typeof(string),
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
                 /*ВидЦіни*/ typeof(string),
@@ -22258,13 +22261,14 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 3));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("ВидЦіни", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ВидЦіни*/
-            treeView.AppendColumn(new TreeViewColumn("Ціна", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Ціна*/
-            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Пакування*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("ВидЦіни", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ВидЦіни*/
+            treeView.AppendColumn(new TreeViewColumn("Ціна", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Ціна*/
+            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Пакування*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Валюта*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -22304,7 +22308,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
                 ЦіниНоменклатури_Записи row = new ЦіниНоменклатури_Записи
                 {
                     ID = record.UID.ToString(),
-                    Період = record.Period.ToString(),
+                    Period = record.Period.ToString(),
+                    OwnerName = record.OwnerName,
                     Номенклатура = record.Номенклатура.Назва,
                         ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
                         ВидЦіни = record.ВидЦіни.Назва,
@@ -22333,7 +22338,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
     public class КурсиВалют_Записи : ТабличнийСписок
     {
         string ID = "";
-        string Період = "";
+        string Period = "";
+        string OwnerName = "";
         
         string Валюта = "";
         string Курс = "";
@@ -22345,7 +22351,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
-                Період,
+                Period, 
+                OwnerName,
                 /*Валюта*/ Валюта,
                 /*Курс*/ Курс,
                 /*Кратність*/ Кратність,
@@ -22359,7 +22366,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
-                /*Період*/ typeof(string),
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
                 /*Валюта*/ typeof(string),
                 /*Курс*/ typeof(string),
                 /*Кратність*/ typeof(string),
@@ -22369,10 +22377,11 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 3));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Курс", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Курс*/
-            treeView.AppendColumn(new TreeViewColumn("Кратність", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Кратність*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Курс", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Курс*/
+            treeView.AppendColumn(new TreeViewColumn("Кратність", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Кратність*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -22412,7 +22421,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
                 КурсиВалют_Записи row = new КурсиВалют_Записи
                 {
                     ID = record.UID.ToString(),
-                    Період = record.Period.ToString(),
+                    Period = record.Period.ToString(),
+                    OwnerName = record.OwnerName,
                     Валюта = record.Валюта.Назва,
                         Курс = record.Курс.ToString() ?? "",
                         Кратність = record.Кратність.ToString() ?? "",
@@ -22438,7 +22448,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
     public class ШтрихкодиНоменклатури_Записи : ТабличнийСписок
     {
         string ID = "";
-        string Період = "";
+        string Period = "";
+        string OwnerName = "";
         
         string Штрихкод = "";
         string Номенклатура = "";
@@ -22451,7 +22462,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
-                Період,
+                Period, 
+                OwnerName,
                 /*Штрихкод*/ Штрихкод,
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
@@ -22466,7 +22478,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
-                /*Період*/ typeof(string),
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
                 /*Штрихкод*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
@@ -22477,11 +22490,12 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 3));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Штрихкод", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Штрихкод*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Пакування*/
+            treeView.AppendColumn(new TreeViewColumn("Штрихкод", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Штрихкод*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Пакування*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -22521,7 +22535,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
                 ШтрихкодиНоменклатури_Записи row = new ШтрихкодиНоменклатури_Записи
                 {
                     ID = record.UID.ToString(),
-                    Період = record.Period.ToString(),
+                    Period = record.Period.ToString(),
+                    OwnerName = record.OwnerName,
                     Штрихкод = record.Штрихкод.ToString() ?? "",
                         Номенклатура = record.Номенклатура.Назва,
                         ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
@@ -22548,7 +22563,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
     public class ФайлиДокументів_Записи : ТабличнийСписок
     {
         string ID = "";
-        string Період = "";
+        string Period = "";
+        string OwnerName = "";
         
         string Файл = "";
 
@@ -22558,7 +22574,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
-                Період,
+                Period, 
+                OwnerName,
                 /*Файл*/ Файл,
                  
             ];
@@ -22570,7 +22587,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
-                /*Період*/ typeof(string),
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
                 /*Файл*/ typeof(string),
                 
             ]);
@@ -22578,8 +22596,9 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 3));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Файл", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Файл*/
+            treeView.AppendColumn(new TreeViewColumn("Файл", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Файл*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -22619,7 +22638,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
                 ФайлиДокументів_Записи row = new ФайлиДокументів_Записи
                 {
                     ID = record.UID.ToString(),
-                    Період = record.Period.ToString(),
+                    Period = record.Period.ToString(),
+                    OwnerName = record.OwnerName,
                     Файл = record.Файл.Назва,
                         
                 };
@@ -22643,7 +22663,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
     public class РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи : ТабличнийСписок
     {
         string ID = "";
-        string Період = "";
+        string Period = "";
+        string OwnerName = "";
         
         string Номенклатура = "";
         string Склад = "";
@@ -22656,7 +22677,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
-                Період,
+                Period, 
+                OwnerName,
                 /*Номенклатура*/ Номенклатура,
                 /*Склад*/ Склад,
                 /*Приміщення*/ Приміщення,
@@ -22671,7 +22693,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             [
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
-                /*Період*/ typeof(string),
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*Склад*/ typeof(string),
                 /*Приміщення*/ typeof(string),
@@ -22682,11 +22705,12 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 3));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Приміщення*/
-            treeView.AppendColumn(new TreeViewColumn("Комірка", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Комірка*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Приміщення*/
+            treeView.AppendColumn(new TreeViewColumn("Комірка", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Комірка*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -22726,7 +22750,8 @@ namespace GeneratedCode.РегістриВідомостей.ТабличніС�
                 РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи row = new РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи
                 {
                     ID = record.UID.ToString(),
-                    Період = record.Period.ToString(),
+                    Period = record.Period.ToString(),
+                    OwnerName = record.OwnerName,
                     Номенклатура = record.Номенклатура.Назва,
                         Склад = record.Склад.Назва,
                         Приміщення = record.Приміщення.Назва,
@@ -22837,13 +22862,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_RecordsSet = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            ТовариНаСкладах_RecordsSet.FillJoin(["period"], docname_required);
+            ТовариНаСкладах_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -22984,13 +23009,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_RecordsSet = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-            ЗамовленняКлієнтів_RecordsSet.FillJoin(["period"], docname_required);
+            ЗамовленняКлієнтів_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -23120,13 +23145,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_RecordsSet = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            РозрахункиЗКлієнтами_RecordsSet.FillJoin(["period"], docname_required);
+            РозрахункиЗКлієнтами_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -23277,13 +23302,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_RecordsSet = new РегістриНакопичення.Закупівлі_RecordsSet();
-            Закупівлі_RecordsSet.FillJoin(["period"], docname_required);
+            Закупівлі_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -23428,13 +23453,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_RecordsSet = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            ВільніЗалишки_RecordsSet.FillJoin(["period"], docname_required);
+            ВільніЗалишки_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -23572,13 +23597,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_RecordsSet = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-            ЗамовленняПостачальникам_RecordsSet.FillJoin(["period"], docname_required);
+            ЗамовленняПостачальникам_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -23707,13 +23732,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_RecordsSet = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-            РозрахункиЗПостачальниками_RecordsSet.FillJoin(["period"], docname_required);
+            РозрахункиЗПостачальниками_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -23844,13 +23869,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_RecordsSet = new РегістриНакопичення.РухКоштів_RecordsSet();
-            РухКоштів_RecordsSet.FillJoin(["period"], docname_required);
+            РухКоштів_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -24006,13 +24031,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_RecordsSet = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            ПартіїТоварів_RecordsSet.FillJoin(["period"], docname_required);
+            ПартіїТоварів_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -24174,13 +24199,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.Продажі_RecordsSet Продажі_RecordsSet = new РегістриНакопичення.Продажі_RecordsSet();
-            Продажі_RecordsSet.FillJoin(["period"], docname_required);
+            Продажі_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -24326,13 +24351,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_RecordsSet = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-            ТовариВКомірках_RecordsSet.FillJoin(["period"], docname_required);
+            ТовариВКомірках_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -24466,13 +24491,13 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UniqueID? selectPointerItem = null, bool position_last = true)
         {
             TreePath? SelectPath = null, CurrentPath = null;
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.РухКоштівККМ_RecordsSet РухКоштівККМ_RecordsSet = new РегістриНакопичення.РухКоштівККМ_RecordsSet();
-            РухКоштівККМ_RecordsSet.FillJoin(["period"], docname_required);
+            РухКоштівККМ_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];

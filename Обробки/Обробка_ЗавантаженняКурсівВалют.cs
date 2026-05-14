@@ -172,6 +172,8 @@ LIMIT 1
                         КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest
                         {
                             Period = ДатаКурсу,
+                            Owner = валюти_Pointer.UniqueID.UGuid,
+                            OwnerType = валюти_Pointer.GetBasis().GetNameAndText(),
                             Валюта = валюти_Pointer,
                             Кратність = 1,
                             Курс = Курс
@@ -203,7 +205,7 @@ LIMIT 1
 
             Лог.CreateEmptyMsg();
             Лог.CreateMessage("Готово!");
-            
+
             await Task.Delay(1000);
             Лог.CreateEmptyMsg();
         }

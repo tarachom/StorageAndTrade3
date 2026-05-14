@@ -264,7 +264,7 @@ limitations under the License.
                     LabelTablePartCell? cell = (LabelTablePartCell?)listItem.Child;
                     <xsl:value-of select="$RowType"/>? row = (<xsl:value-of select="$RowType"/>?)listItem.Item;
                     if (cell != null &amp;&amp; row != null)
-                        cell.SetText(row.OwnerType?.ToString());
+                        cell.SetText(row.OwnerType);
                 };
                 ColumnViewColumn column = ColumnViewColumn.New("Тип власника", factory);
                 form.Grid.AppendColumn(column);
@@ -287,7 +287,7 @@ limitations under the License.
                     LabelTablePartCell? cell = (LabelTablePartCell?)listItem.Child;
                     <xsl:value-of select="$RowType"/>? row = (<xsl:value-of select="$RowType"/>?)listItem.Item;
                     if (cell != null &amp;&amp; row != null)
-                        cell.SetText(row.OwnerName.ToString());
+                        cell.SetText(row.OwnerName);
                 };
                 ColumnViewColumn column = ColumnViewColumn.New("Назва власника", factory);
                 form.Grid.AppendColumn(column);
@@ -500,16 +500,15 @@ limitations under the License.
                         </xsl:when>
                         <xsl:when test="Type = 'composite_pointer'">
                             /* Приєднання composite_pointer */
-                            <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.FieldAndAlias.Add(new ValueName&lt;string&gt;("join_tab_<xsl:value-of select="position()"/>.name", "<xsl:value-of select="Name"/>"));
-                            <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.Joins.Add(new Join("view_special_presentation", <xsl:value-of select="$ConfTypeName"/>_Const.<xsl:value-of select="Name"/>, <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.Table, "join_tab_<xsl:value-of select="position()"/>"));
+                            <xsl:value-of select="$ConfTypeName"/>_Select.QuerySelect.FieldAndAlias.Add(new ValueName&lt;string&gt;($"{SpecialFunc.CompisitePresentation}({<xsl:value-of select="$ConfTypeGroup"/>.<xsl:value-of select="$ConfTypeName"/>_Const.<xsl:value-of select="Name"/>})", "<xsl:value-of select="Name"/>"));
                         </xsl:when>
                     </xsl:choose>
                 </xsl:for-each>
             </xsl:if>
 
-            <xsl:if test="$ConfTypeGroup = 'РегістриНакопичення'"><!-- Для регістрів накопичення -->
+            <xsl:if test="$ConfTypeGroup = 'РегістриНакопичення' or $ConfTypeGroup = 'РегістриВідомостей'"><!-- Для регістрів -->
                 /* Приєднання */
-                <xsl:value-of select="$ConfTypeName"/>_Select.FillJoin(["period"]);
+                <xsl:value-of select="$ConfTypeName"/>_Select.FillJoin(["period", "owner"<xsl:if test="$ConfTypeGroup = 'РегістриНакопичення'">, "ownerlinenum"</xsl:if>]);
             </xsl:if>
 
             <!-- Додаткові поля -->
@@ -1017,6 +1016,108 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         }
     }
         </xsl:for-each>
+    #endregion
+    </xsl:for-each>
+}
+
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.РегістриВідомостей.ТабличніСписки
+{
+    <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
+      <xsl:variable name="RegisterName" select="Name"/>
+      <xsl:variable name="SelectType">RecordsSet</xsl:variable>
+    #region REGISTER "<xsl:value-of select="$RegisterName"/>"
+    
+      <xsl:for-each select="TabularLists/TabularList">
+        <xsl:variable name="TabularListName" select="Name"/>
+    public static class <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/>
+    {
+        public static void AddColumn(RegisterInformationFormJournalBase form)
+        {
+            <xsl:call-template name="AddColumnPeriod">
+                <xsl:with-param name="RowType">RegisterInformationRowJournal</xsl:with-param>
+            </xsl:call-template>
+            <xsl:call-template name="AddColumnOwner">
+                <xsl:with-param name="RowType">RegisterInformationRowJournal</xsl:with-param>
+            </xsl:call-template>
+            <xsl:call-template name="AddColumnOwnerType">
+                <xsl:with-param name="RowType">RegisterInformationRowJournal</xsl:with-param>
+            </xsl:call-template>
+            <xsl:call-template name="AddColumnOwnerName">
+                <xsl:with-param name="RowType">RegisterInformationRowJournal</xsl:with-param>
+            </xsl:call-template>
+            
+            <xsl:call-template name="AddColumnLabel">
+                <xsl:with-param name="ConfTypeName"><xsl:value-of select="$RegisterName"/></xsl:with-param>
+                <xsl:with-param name="RowType">RegisterInformationRowJournal</xsl:with-param>
+                <xsl:with-param name="Fields" select="Fields/Field" />
+            </xsl:call-template>
+
+            <xsl:call-template name="AddColumnLabel">
+                <xsl:with-param name="ConfTypeName"><xsl:value-of select="$RegisterName"/></xsl:with-param>
+                <xsl:with-param name="RowType">RegisterInformationRowJournal</xsl:with-param>
+                <xsl:with-param name="Fields" select="Fields/AdditionalField[Visible = 'True']" />
+            </xsl:call-template>
+
+            <xsl:call-template name="AddColumnEmpty" />
+        }
+
+        public static void CreateFilter(RegisterInformationFormJournalBase form)
+        {
+            <xsl:call-template name="CreateFilter">
+                <xsl:with-param name="ConfTypeName"><xsl:value-of select="$RegisterName"/></xsl:with-param>
+            </xsl:call-template>
+        }
+
+        public static async ValueTask LoadRecords(RegisterInformationFormJournalBase form)
+        {
+            form.BeforeLoadRecords();
+            UniqueID? unigueIDSelect = form.SelectPointerItem;
+
+            /* Вибірка */
+            <xsl:call-template name="Select">
+                <xsl:with-param name="ConfTypeGroup">РегістриВідомостей</xsl:with-param>
+                <xsl:with-param name="ConfTypeName"><xsl:value-of select="$RegisterName"/></xsl:with-param>
+                <xsl:with-param name="SelectType"><xsl:value-of select="$SelectType"/></xsl:with-param>
+            </xsl:call-template>
+
+            /* Відбори */
+            if (form.WhereList != null) <xsl:value-of select="$RegisterName"/>_Select.QuerySelect.Where.AddRange(form.WhereList);
+
+            /* Відбір за період */
+            if (form.TypeWhereState == InterfaceGtk4.FormJournal.TypeWhere.Standart || (form.TypeWhereState == InterfaceGtk4.FormJournal.TypeWhere.Filter &amp;&amp; form.Filter.IsUsePeriod))
+            {
+                Where? where = InterfaceGtk4.PeriodForJournal.SelectionByPeriod("period", form.Period.Period, form.Period.DateStart, form.Period.DateStop);
+                if (where != null) <xsl:value-of select="$RegisterName"/>_Select.QuerySelect.Where.Add(where);
+            }
+
+            /* Cторінки */
+            await form.SplitPages(<xsl:value-of select="$RegisterName"/>_Select.SplitSelectToPages, <xsl:value-of select="$RegisterName"/>_Select.QuerySelect, unigueIDSelect);
+
+            <!-- Вибрати дані -->
+            await <xsl:value-of select="$RegisterName"/>_Select.Read();
+            if (form.Store.GetNItems() &gt; 0) form.Store.RemoveAll();
+            uint selectPosition = 0;
+            foreach (<xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$SelectType"/>.Record record in <xsl:value-of select="$RegisterName"/>_Select.Records)
+            {
+                RegisterInformationRowJournal row = RegisterInformationRowJournal.New();
+                row.UniqueID = new UniqueID(record.UID);
+                row.Period = record.Period;
+                row.Owner = record.Owner;
+                row.OwnerType = record.OwnerType;
+                row.OwnerName = record.OwnerName;
+                <xsl:for-each select="Fields/Field">
+                    <xsl:text>row.Fields.Add("</xsl:text><xsl:value-of select="Name"/>", <xsl:call-template name="FieldValueReg"><xsl:with-param name="VarName">record</xsl:with-param></xsl:call-template>);
+                </xsl:for-each>
+                <xsl:for-each select="Fields/AdditionalField[Visible = 'True']">
+                    <xsl:text>row.Fields.Add("</xsl:text><xsl:value-of select="Name"/>", record.JoinItemValue["<xsl:value-of select="Name"/>"].ToString() ?? "");
+                </xsl:for-each>
+                form.Store.Append(row);
+                if (row.UniqueID.Equals(unigueIDSelect)) selectPosition = form.Store.GetNItems();
+            }
+            form.AfterLoadRecords(selectPosition);
+        }
+    }
+	    </xsl:for-each>
     #endregion
     </xsl:for-each>
 }
