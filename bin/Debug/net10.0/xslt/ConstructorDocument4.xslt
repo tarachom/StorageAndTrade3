@@ -276,6 +276,20 @@ static class <xsl:value-of select="$DocumentName"/>_Функції
             return null;
         }
     }
+
+    public static async ValueTask SpendTheDocument(UniqueID uniqueID, bool spendDoc)
+    {
+        <xsl:value-of select="$DocumentName"/>_Objest? Обєкт = await new <xsl:value-of select="$DocumentName"/>_Pointer(uniqueID).GetDocumentObject(true);
+        if (Обєкт == null) return;
+
+        if (spendDoc)
+        {
+            if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UniqueID);
+        }
+        else
+            await Обєкт.ClearSpendTheDocument();
+    }
 }
     </xsl:template>
 
@@ -656,7 +670,7 @@ partial class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFo
         }
         catch (Exception ex)
         {
-            //ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+            ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
         }
         return isSaved;
     }
@@ -666,7 +680,7 @@ partial class <xsl:value-of select="$DocumentName"/>_Елемент : DocumentFo
         if (spendDoc)
         {
             bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
-            //if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UniqueID);
+            if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UniqueID);
             return isSpend;
         }
         else
@@ -785,7 +799,8 @@ public partial class <xsl:value-of select="$DocumentName"/>_Список : Docum
 
     protected override async ValueTask SpendTheDocument(UniqueID[] uniqueID, bool spendDoc)
     {
-
+        foreach (var uid in uniqueID)
+            await Функції.SpendTheDocument(uid, spendDoc);
     }
 
     protected override void ReportSpendTheDocument(UniqueID[] uniqueID)
@@ -903,7 +918,8 @@ public partial class <xsl:value-of select="$DocumentName"/>_ШвидкийВиб
 
     protected override async ValueTask SpendTheDocument(UniqueID[] uniqueID, bool spendDoc)
     {
-
+        foreach (var uid in uniqueID)
+            await Функції.SpendTheDocument(uid, spendDoc);
     }
 
     protected override void ReportSpendTheDocument(UniqueID[] uniqueID)

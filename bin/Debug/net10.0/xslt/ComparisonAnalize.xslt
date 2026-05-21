@@ -658,6 +658,7 @@
                   <xsl:text>income bool NOT NULL, </xsl:text>
                   <xsl:text>owner uuid NOT NULL, </xsl:text>
                   <xsl:text>ownertype nametext NOT NULL, </xsl:text>
+                  <xsl:text>ownerlinenum integer NOT NULL, </xsl:text>
                 </xsl:if>
                 <xsl:for-each select="FieldCreate">
                   <xsl:text> "</xsl:text>

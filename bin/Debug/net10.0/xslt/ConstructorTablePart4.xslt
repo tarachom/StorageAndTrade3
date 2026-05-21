@@ -509,7 +509,7 @@ partial class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина
         <xsl:if test="$OwnerType != 'Constants'">}</xsl:if><!-- закриття if -->
     }
 
-    public override bool NewRecord()
+    public override async ValueTask&lt;bool&gt; NewRecord()
     {
         Store.Append(ItemRow.New());
         return true;
